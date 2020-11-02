@@ -6,7 +6,6 @@ import javafx.scene.text.Text;
 
 public class ProductPane {
     Pane pane;
-
     ProductPane(Item item){
         this.pane = new Pane();
         this.pane.setPrefWidth(127);

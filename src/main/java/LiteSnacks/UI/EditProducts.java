@@ -1,69 +1,28 @@
-package LiteSnacks.UI;
-
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Control;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Products {
+public class EditProducts {
     Scene scene;
     Stage stage;
     List<Button> menu;
-    static ScrollPane productsPane;
+    ScrollPane productsPane;
     List<Pane> menuPane;
+    EditProducts(double width, double height,Stage stage){
 
-    Products(double width, double height,Stage stage){
         this.stage = stage;
         Pane root = new Pane();
 
-
-        Pane craft = new Pane();
-
-
-
-        //label
-        Label label = new Label("Craft");
-        label.setLayoutX(14);
-        label.setLayoutY(14);
-        label.setFont(new Font(25));
-
-        //cancel button
-        Button cancelButton = createButton("Cancel",93,14,25,70);
-
-
-        //checkout button
-        Button checkoutButton = createButton("Check Out",18,329,25,127);
-
-
-        //Log out button
-
-        Button logoutButton = createButton("Log Out",18,359,25,127);
-
-
-        // total price
-        Text totalPrice = new Text();
-        totalPrice.setText("Total Price : "); // please fill text here
-        totalPrice.setLayoutX(14);
-        totalPrice.setLayoutY(319);
-
-        craft.getChildren().addAll(label,cancelButton,checkoutButton,logoutButton,totalPrice);
-        craft.setLayoutX(436);
-        craft.setPrefWidth(164);
-        craft.setPrefHeight(400);
-
-        craft.setStyle("-fx-background-color: #d9d9d9;");
-
-
         // menu
         List<String> stringForbutton = new ArrayList<>();
-        stringForbutton.add("Last Five");
         stringForbutton.add("Drinks");
         stringForbutton.add("Chocolates");
         stringForbutton.add("Chips");
@@ -72,7 +31,7 @@ public class Products {
         List<Button> buttons = new ArrayList<Button>();
         menu  = buttons;
         int x = 10;
-        for (int i=0; i<5 ; i++){
+        for (int i=0; i<4 ; i++){
             Button each  = createButton(stringForbutton.get(i),x,10,27,81);
             int finalI = i;
             each.setOnAction(event -> {menuHandler(stringForbutton.get(finalI));});
@@ -84,7 +43,7 @@ public class Products {
 
 
         //products pane (scroll)
-        // Item item = new Item(0);
+        Item item = new Item(0);
         //for test     itegrate area
         List<Item> lastfive = new ArrayList<Item>(Arrays.asList(new Item(0),new Item(1)));
         List<Item> drinks = new ArrayList<Item>(Arrays.asList(new Item(0),new Item(1),new Item(1),new Item(8),new Item(1),new Item(10),new Item(1)));
@@ -106,8 +65,8 @@ public class Products {
 
         ScrollPane products = new ScrollPane();
         products.setPrefHeight(304);
-        products.setPrefWidth(418);
-        products.setLayoutX(4);
+        products.setPrefWidth(580);
+        products.setLayoutX(10);
         products.setLayoutY(77);
 
         productsPane = products;
@@ -115,18 +74,10 @@ public class Products {
 
 
 
-        root.getChildren().addAll(craft,products);
+        root.getChildren().addAll(products);
         root.getChildren().addAll(buttons);
         scene = new Scene(root,width,height);
-
-
-        //
     }
-
-    public void setScene() {
-        stage.setScene(scene);
-    }
-
     public Button createButton(String text, int x, int y, int h, int w){
         Button button = new Button(text);
         this.setXY(button,x,y);
@@ -137,7 +88,7 @@ public class Products {
 
 
     }
-    public void setXY(Control node,double x,double y){
+    public void setXY(Control node, double x, double y){
         node.setLayoutX(x);
         node.setLayoutY(y);
     }
@@ -145,7 +96,6 @@ public class Products {
         node.setPrefHeight(h);
         node.setPrefWidth(w);
     }
-
     public  Pane getProductsPane(List<Item> items){
         Pane box = new Pane();
         int row = 0;
@@ -153,35 +103,35 @@ public class Products {
 
         for (Item item : items){
             Pane each = new ProductPane(item).getPane();
-            each.setLayoutX(135*row);
-            each.setLayoutY(150*column);
+            each.setLayoutX(140*row);
+            each.setLayoutY(160*column);
             box.getChildren().add(each);
             row = row +1;
-            if (row == 3){
+            if (row == 4){
                 column = column+1;
                 row = 0;
             }
 
         }
 
+
+
+
         return box;
         //return ;
 
 
     }
-
     public void menuHandler(String menu){
         int index = 0;
-        if (menu.equals("Last Five")){
-
-        }else if (menu.equals("Drinks")){
-            index = 1;
+        if (menu.equals("Drinks")){
+            index = 0;
         }else if (menu.equals("Chocolates")){
-            index = 2;
+            index = 1;
         }else if(menu.equals("Chips")){
-            index = 3;
+            index = 2;
         }else if(menu.equals("Candies")){
-            index = 4;
+            index = 3;
         }
         for (Button b: this.menu){
             b.setStyle("-fx-background-color: black");
@@ -189,6 +139,8 @@ public class Products {
         productsPane.setContent(menuPane.get(index));
         this.menu.get(index).setStyle("-fx-background-color: red;");
     }
+
+    public void setScene(){stage.setScene(scene);}
 
 
 }
