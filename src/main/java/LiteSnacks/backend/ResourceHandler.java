@@ -75,8 +75,4 @@ public class ResourceHandler {
         return Thread.currentThread().getStackTrace()[2].getLineNumber();
     }
 
-    public static void main(String[] args) {
-        initProducts();
-        System.out.println(ResourceHandler.class.getSimpleName() + " " + getLineNumber());
-    }
 }
