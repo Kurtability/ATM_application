@@ -24,12 +24,12 @@ public class Products {
         Pane root = new Pane();
 
 
-        Pane craft = new Pane();
+        Pane cart = new Pane();
 
 
 
         //label
-        Label label = new Label("Craft");
+        Label label = new Label("Cart");
         label.setLayoutX(14);
         label.setLayoutY(14);
         label.setFont(new Font(25));
@@ -45,7 +45,7 @@ public class Products {
         //Log out button
 
         Button logoutButton = createButton("Log Out",18,359,25,127);
-
+        logoutButton.setOnAction(event -> {new LoginScene(width,height,stage).setScene();});
 
         // total price
         Text totalPrice = new Text();
@@ -53,12 +53,12 @@ public class Products {
         totalPrice.setLayoutX(14);
         totalPrice.setLayoutY(319);
 
-        craft.getChildren().addAll(label,cancelButton,checkoutButton,logoutButton,totalPrice);
-        craft.setLayoutX(436);
-        craft.setPrefWidth(164);
-        craft.setPrefHeight(400);
+        cart.getChildren().addAll(label,cancelButton,checkoutButton,logoutButton,totalPrice);
+        cart.setLayoutX(436);
+        cart.setPrefWidth(164);
+        cart.setPrefHeight(400);
 
-        craft.setStyle("-fx-background-color: #d9d9d9;");
+        cart.setStyle("-fx-background-color: #d9d9d9;");
 
 
         // menu
@@ -96,7 +96,7 @@ public class Products {
                 getProductsPane(lastfive),
                 getProductsPane(drinks),
                 getProductsPane(chocolates),
-                getProductsPane(chocolates),
+                getProductsPane(chips),
                 getProductsPane(candies)
 
 
@@ -115,7 +115,7 @@ public class Products {
 
 
 
-        root.getChildren().addAll(craft,products);
+        root.getChildren().addAll(cart,products);
         root.getChildren().addAll(buttons);
         scene = new Scene(root,width,height);
 
