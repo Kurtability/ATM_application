@@ -3,15 +3,23 @@
  */
 package LiteSnacks;
 
-import LiteSnacks.backend.ResourceHandler;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class App {
-    public String getGreeting() {
-        return "Hello world.";
+import LiteSnacks.UI.LoginScene;
+
+public class App extends Application{
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        primaryStage.setTitle("Vending machine");
+        LoginScene loginScene = new LoginScene(600,400,primaryStage);
+        loginScene.setScene();
+        primaryStage.show();
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-        ResourceHandler.getProducts();
+        launch(args);
     }
 }
