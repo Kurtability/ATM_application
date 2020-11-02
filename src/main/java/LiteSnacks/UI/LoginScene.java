@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 package LiteSnacks.UI;
 
-=======
->>>>>>> d2b296169ffd209d0cac0d182b8b39fbd977f87a
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
