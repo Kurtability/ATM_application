@@ -68,3 +68,9 @@ jacocoTestReport {
         csv.enabled = true
     }
 }
+
+jar {
+    manifest {
+        attributes "Main-Class": "$mainClassName"
+    }
+}
