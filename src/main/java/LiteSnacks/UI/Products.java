@@ -25,12 +25,15 @@ public class Products {
     List<Button> menu;
     static ScrollPane productsPane;
     List<Pane> menuPane;
+    List<String> stringForButton;
     public static ComboBox<Item> itemsComboBox;
 
 
     public Products(double width, double height, Stage stage){
         this.stage = stage;
         Pane root = new Pane();
+
+        stringForButton = new ArrayList<>();
 
 
 // cart view
@@ -133,40 +136,20 @@ public class Products {
 
 
 
-
-
-        // menu
-        List<String> stringForbutton = new ArrayList<>();
-        stringForbutton.add("Last Five");
-        stringForbutton.add("Drinks");
-        stringForbutton.add("Chocolates");
-        stringForbutton.add("Chips");
-        stringForbutton.add("Candies");
-
-        List<Button> buttons = new ArrayList<Button>();
-        menu  = buttons;
-        int x = 10;
-        for (int i=0; i<5 ; i++){
-            Button each  = createButton(stringForbutton.get(i),x,10,27,81);
-            int finalI = i;
-            each.setOnAction(event -> {menuHandler(stringForbutton.get(finalI));});
-            buttons.add(each);
-            x=x+81;
-        }
-        menu.get(0).setStyle("-fx-background-color: red");
-
-
-
         //products pane (scroll)
         // Item item = new Item(0);
         //for test     itegrate area
-        List<Item> lastfive = new ArrayList<Item>(Arrays.asList(new Item("generic puhtaytoe chips", 4, 1.25), new Item("cheet toes", 1, 2.0)));
+        // List<Item> lastfive = new ArrayList<Item>(Arrays.asList(new Item("generic puhtaytoe chips", 4, 1.25), new Item("cheet toes", 1, 2.0)));
         
-        Map<String, List<Item>> items = new ProductsHandler().getAllItems();
+        ProductsHandler productsHandler = new ProductsHandler();
+        Map<String, List<Item>> items = productsHandler.getAllItems();
 
         List<Pane> productPanes = new ArrayList<>();
-        productPanes.add(getProductsPane(lastfive));
-        items.keySet().forEach(key -> { productPanes.add(getProductsPane(items.get(key))); });
+        menu = new ArrayList<>();
+        productsHandler.getCategories().forEach(cat -> {
+            stringForButton.add(cat);
+            productPanes.add(getProductsPane(items.get(cat)));
+        });
         menuPane = productPanes;
 
 
@@ -178,6 +161,21 @@ public class Products {
 
         productsPane = products;
         products.setContent(menuPane.get(0));
+
+        // menu
+        List<Button> buttons = new ArrayList<Button>();
+        menu  = buttons;
+        int x = 10;
+        for (int i=0; i<5 ; i++){
+            Button each  = createButton(stringForButton.get(i),x,10,27,81);
+            int finalI = i;
+            each.setOnAction(event -> {menuHandler(stringForButton.get(finalI));});
+            buttons.add(each);
+            x=x+81;
+        }
+        menu.get(0).setStyle("-fx-background-color: red");
+
+
 
 
         //cancel button
@@ -240,24 +238,11 @@ public class Products {
         }
 
         return box;
-        //return ;
-
-
     }
 
     public void menuHandler(String menu){
         int index = 0;
-        if (menu.equals("Last Five")){
-
-        }else if (menu.equals("Drinks")){
-            index = 1;
-        }else if (menu.equals("Chocolates")){
-            index = 2;
-        }else if(menu.equals("Chips")){
-            index = 3;
-        }else if(menu.equals("Candies")){
-            index = 4;
-        }
+        index = stringForButton.indexOf(menu);
         for (Button b: this.menu){
             b.setStyle("-fx-background-color: black");
         }
