@@ -3,20 +3,71 @@
  */
 package LiteSnacks;
 
+import LiteSnacks.UI.LoginScene;
+import LiteSnacks.UI.Products;
+import LiteSnacks.backend.CartModel;
+import LiteSnacks.backend.Item;
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.ObjectBinding;
 import javafx.stage.Stage;
 
-import LiteSnacks.UI.LoginScene;
-
 public class App extends Application{
+
+    CartModel model = new CartModel();
+    Products productScene;
+
+//    ObjectBinding<Item> itemBinding = new ObjectBinding<>() {
+//        {
+//            super.bind(productScene.itemsComboBox.valueProperty());
+//        }
+//        @Override
+//        protected Item computeValue() {
+//            if (productScene.itemsComboBox.getSelectionModel().getSelectedIndex() >=0){
+//                return productScene.itemsComboBox.getSelectionModel().getSelectedItem();
+//            }return new Item();
+//        }
+//    };
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
+        CartModel.loadData();
         primaryStage.setTitle("Vending machine");
-        LoginScene loginScene = new LoginScene(600,400,primaryStage);
-        loginScene.setScene();
+
+        //********
+        //LoginScene loginScene = new LoginScene(1200,600,primaryStage);
+
+        this.productScene = new Products(1200,600,primaryStage);
+        setupActions();
+        productScene.setScene();
+        //loginScene.setScene();
+        //********
+
         primaryStage.show();
+    }
+
+    public void setupActions(){
+        // bind itemsComboBox with data
+        productScene.itemsComboBox.setItems(model.itemsObservableList);
+
+        // attach a listener to itemsComboBox to display unit quantity and price labels and set the quantitySlider back to 0
+        productScene.itemsComboBox.valueProperty().addListener((observable,oldValue,newValue)->{
+            if (productScene.itemsComboBox.getSelectionModel().getSelectedIndex() >= 0) {
+
+                productScene.unitValueLabel.setText(String.valueOf(newValue.unitQuantity));
+                productScene.unitPriceValueLabel.setText(String.format("$ %.2f",newValue.unitPrice));
+                productScene.quantitySlider.setValue(0);
+            }
+        });
+
+//        //
+//        productScene.unitValueLabel.textProperty().bind(Bindings.select(itemBinding,"unitQuantity"));
+//        productScene.unitPriceValueLabel.textProperty().bind(Bindings.select(itemBinding,"unitPrice"));
+
+        // bind purchase units label with slider value
+        productScene.purchasedUnitsValueLabel.textProperty().bind(Bindings.format("%.0f", productScene.quantitySlider.valueProperty()));
+
     }
 
     public static void main(String[] args) {

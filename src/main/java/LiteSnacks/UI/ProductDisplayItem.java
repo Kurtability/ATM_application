@@ -1,12 +1,12 @@
 package LiteSnacks.UI;
 
-public class Item {
+public class ProductDisplayItem {
     public int qty;
     public int price;
     public String product_name;
     public String path;
 
-    Item(int qty){
+    ProductDisplayItem(int qty){
         this.qty = qty;
         this.price = 100;
         this.product_name = "coca";

@@ -1,24 +1,16 @@
-_
-Drinks
-Mineral Water,7
-Sprite,7
-Coca cola,7
-Pepsi,7
-Juice,7
-_
-Chocolates
-Mars,7
-M&M,7
-Bounty,7
-Snickers,7
-_
-Chips
-Smiths,7
-Pringles,7
-Kettle,7
-Thins,7
-_
-Candies
-Mentos,7
-Sour Patch,7
-Skittles,7
+Mineral Water,7,1
+Sprite,7,2
+Coca cola,7,2
+Pepsi,7,2
+Juice,7,3
+Mars,7,2
+M&M,7,2
+Bounty,7,2
+Snickers,7,2
+Smiths,7,2
+Pringles,7,2
+Kettle,7,2
+Thins,7,2
+Mentos,7,3
+Sour Patch,7,3
+Skittles,7,3

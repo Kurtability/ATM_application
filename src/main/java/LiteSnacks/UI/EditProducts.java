@@ -45,13 +45,13 @@ public class EditProducts {
 
 
         //products pane (scroll)
-        Item item = new Item(0);
+        ProductDisplayItem productDisplayItem = new ProductDisplayItem(0);
         //for test     itegrate area
-        List<Item> lastfive = new ArrayList<Item>(Arrays.asList(new Item(0),new Item(1)));
-        List<Item> drinks = new ArrayList<Item>(Arrays.asList(new Item(0),new Item(1),new Item(1),new Item(8),new Item(1),new Item(10),new Item(1)));
-        List<Item> chocolates = new ArrayList<Item>(Arrays.asList(new Item(0),new Item(1),new Item(1),new Item(8),new Item(1)));
-        List<Item> chips = new ArrayList<Item>(Arrays.asList(new Item(0),new Item(1),new Item(1),new Item(8),new Item(1),new Item(10),new Item(1)));
-        List<Item> candies = new ArrayList<Item>(Arrays.asList(new Item(0),new Item(1),new Item(1),new Item(8),new Item(1)));
+        List<ProductDisplayItem> lastfive = new ArrayList<ProductDisplayItem>(Arrays.asList(new ProductDisplayItem(0),new ProductDisplayItem(1)));
+        List<ProductDisplayItem> drinks = new ArrayList<ProductDisplayItem>(Arrays.asList(new ProductDisplayItem(0),new ProductDisplayItem(1),new ProductDisplayItem(1),new ProductDisplayItem(8),new ProductDisplayItem(1),new ProductDisplayItem(10),new ProductDisplayItem(1)));
+        List<ProductDisplayItem> chocolates = new ArrayList<ProductDisplayItem>(Arrays.asList(new ProductDisplayItem(0),new ProductDisplayItem(1),new ProductDisplayItem(1),new ProductDisplayItem(8),new ProductDisplayItem(1)));
+        List<ProductDisplayItem> chips = new ArrayList<ProductDisplayItem>(Arrays.asList(new ProductDisplayItem(0),new ProductDisplayItem(1),new ProductDisplayItem(1),new ProductDisplayItem(8),new ProductDisplayItem(1),new ProductDisplayItem(10),new ProductDisplayItem(1)));
+        List<ProductDisplayItem> candies = new ArrayList<ProductDisplayItem>(Arrays.asList(new ProductDisplayItem(0),new ProductDisplayItem(1),new ProductDisplayItem(1),new ProductDisplayItem(8),new ProductDisplayItem(1)));
 
         menuPane = new ArrayList<Pane>(Arrays.asList(
                 getProductsPane(lastfive),
@@ -98,13 +98,13 @@ public class EditProducts {
         node.setPrefHeight(h);
         node.setPrefWidth(w);
     }
-    public  Pane getProductsPane(List<Item> items){
+    public  Pane getProductsPane(List<ProductDisplayItem> productDisplayItems){
         Pane box = new Pane();
         int row = 0;
         int column = 0;
 
-        for (Item item : items){
-            Pane each = new ProductPane(item).getPane();
+        for (ProductDisplayItem productDisplayItem : productDisplayItems){
+            Pane each = new ProductPane(productDisplayItem).getPane();
             each.setLayoutX(140*row);
             each.setLayoutY(160*column);
             box.getChildren().add(each);
