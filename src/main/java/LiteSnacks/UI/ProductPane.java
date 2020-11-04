@@ -1,5 +1,6 @@
 package LiteSnacks.UI;
 
+import LiteSnacks.UI.ShoppingCart.Cart;
 import LiteSnacks.backend.Item;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -9,7 +10,7 @@ import javafx.scene.text.Text;
 public class ProductPane {
     private Pane pane;
 
-    ProductPane(Item productDisplayItem) {
+    ProductPane(Item productDisplayItem, Cart cart) {
         this.pane = new Pane();
         this.pane.setPrefWidth(127);
         this.pane.setPrefHeight(143);
@@ -32,6 +33,10 @@ public class ProductPane {
         name.setLayoutY(105);
 
         Button addButton = new Button("Add");
+        addButton.setOnAction(e -> {
+            cart.addProduct(productDisplayItem.name, productDisplayItem.getUnitPrice());
+        });
+        
         addButton.setLayoutX(80);
         addButton.setLayoutY(112);
 

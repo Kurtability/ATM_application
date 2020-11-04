@@ -71,8 +71,4 @@ public class ProductsHandler {
         return items;
     }
 
-    public static void main(String[] args) {
-        System.out.println(new ProductsHandler().getAllItems());
-    }
-
 }
