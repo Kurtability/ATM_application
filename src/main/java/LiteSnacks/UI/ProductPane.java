@@ -1,12 +1,14 @@
 package LiteSnacks.UI;
 
+import LiteSnacks.backend.Item;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class ProductPane {
-    Pane pane;
-    ProductPane(ProductDisplayItem productDisplayItem){
+    private Pane pane;
+
+    ProductPane(Item productDisplayItem) {
         this.pane = new Pane();
         this.pane.setPrefWidth(127);
         this.pane.setPrefHeight(143);
@@ -19,26 +21,19 @@ public class ProductPane {
 //        qtymdfier.setLayoutY(110);
 
         //price
-//        Text price = new Text("$ "+String.valueOf(productDisplayItem.price));
-//        price.setLayoutX(4);
-//        price.setLayoutY(128);
+        Text price = new Text("$ "+String.valueOf(productDisplayItem.getUnitPrice()));
+        price.setLayoutX(4);
+        price.setLayoutY(128);
 
         //product name
-        Text name = new Text(productDisplayItem.product_name);
+        Text name = new Text(productDisplayItem.name);
         name.setLayoutX(31);
         name.setLayoutY(105);
 
-        //image
-        ImageView image = new ImageView(productDisplayItem.path);
-
-        image.setFitHeight(85);
-        image.setFitWidth(85);
-        image.setLayoutX(21);
-        image.setLayoutY(4);
-
-        this.pane.getChildren().addAll(name,image);
+        this.pane.getChildren().addAll(name, price);
     }
-    public Pane getPane(){
+
+	public Pane getPane() {
         return this.pane;
     }
 }

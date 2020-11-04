@@ -3,13 +3,10 @@
  */
 package LiteSnacks;
 
-import LiteSnacks.UI.LoginScene;
 import LiteSnacks.UI.Products;
 import LiteSnacks.backend.CartModel;
-import LiteSnacks.backend.Item;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
-import javafx.beans.binding.ObjectBinding;
 import javafx.stage.Stage;
 
 public class App extends Application{
@@ -55,8 +52,8 @@ public class App extends Application{
         productScene.itemsComboBox.valueProperty().addListener((observable,oldValue,newValue)->{
             if (productScene.itemsComboBox.getSelectionModel().getSelectedIndex() >= 0) {
 
-                productScene.unitValueLabel.setText(String.valueOf(newValue.unitQuantity));
-                productScene.unitPriceValueLabel.setText(String.format("$ %.2f",newValue.unitPrice));
+                productScene.unitValueLabel.setText(String.valueOf(newValue.getQuantity()));
+                productScene.unitPriceValueLabel.setText(String.format("$ %.2f",newValue.getUnitPrice()));
                 productScene.quantitySlider.setValue(0);
             }
         });

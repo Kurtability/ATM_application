@@ -1,22 +1,25 @@
 package LiteSnacks.backend;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 public class Item {
     public String name;
-    public double unitQuantity;
-    public double unitPrice;
+    protected int quantity;
+    protected double unitPrice;
 
-    Item(String name, double unitQuantity, double unitPrice){
+    public Item(String name, int quantity, double unitPrice){
         this.name = name;
-        this.unitQuantity = unitQuantity;
+        this.quantity = quantity;
         this.unitPrice= unitPrice;
     }
 
     public String toString(){
         return name;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
     }
 }

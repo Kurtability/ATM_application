@@ -1,19 +1,16 @@
 package LiteSnacks.UI;
 
-public class ProductDisplayItem {
-    public int qty;
-    public int price;
-    public String product_name;
-    public String path;
+import LiteSnacks.backend.Item;
 
-    ProductDisplayItem(int qty){
-        this.qty = qty;
-        this.price = 100;
-        this.product_name = "coca";
+public class ProductDisplayItem extends Item {
+    private String path;
+
+    ProductDisplayItem(String name, int qty, double unitPrice) {
+        super(name, qty, unitPrice);
         this.path = "coca.jpeg";
 
     }
     public void modifyqty( int gap){
-        qty = qty+(gap);
+        super.quantity = super.quantity + gap;
     }
 }

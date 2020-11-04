@@ -11,6 +11,10 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+
+import LiteSnacks.backend.Item;
+import LiteSnacks.backend.ProductsHandler;
 
 public class EditProducts {
     Scene scene;
@@ -45,23 +49,14 @@ public class EditProducts {
 
 
         //products pane (scroll)
-        ProductDisplayItem productDisplayItem = new ProductDisplayItem(0);
         //for test     itegrate area
-        List<ProductDisplayItem> lastfive = new ArrayList<ProductDisplayItem>(Arrays.asList(new ProductDisplayItem(0),new ProductDisplayItem(1)));
-        List<ProductDisplayItem> drinks = new ArrayList<ProductDisplayItem>(Arrays.asList(new ProductDisplayItem(0),new ProductDisplayItem(1),new ProductDisplayItem(1),new ProductDisplayItem(8),new ProductDisplayItem(1),new ProductDisplayItem(10),new ProductDisplayItem(1)));
-        List<ProductDisplayItem> chocolates = new ArrayList<ProductDisplayItem>(Arrays.asList(new ProductDisplayItem(0),new ProductDisplayItem(1),new ProductDisplayItem(1),new ProductDisplayItem(8),new ProductDisplayItem(1)));
-        List<ProductDisplayItem> chips = new ArrayList<ProductDisplayItem>(Arrays.asList(new ProductDisplayItem(0),new ProductDisplayItem(1),new ProductDisplayItem(1),new ProductDisplayItem(8),new ProductDisplayItem(1),new ProductDisplayItem(10),new ProductDisplayItem(1)));
-        List<ProductDisplayItem> candies = new ArrayList<ProductDisplayItem>(Arrays.asList(new ProductDisplayItem(0),new ProductDisplayItem(1),new ProductDisplayItem(1),new ProductDisplayItem(8),new ProductDisplayItem(1)));
-
-        menuPane = new ArrayList<Pane>(Arrays.asList(
-                getProductsPane(lastfive),
-                getProductsPane(drinks),
-                getProductsPane(chocolates),
-                getProductsPane(chocolates),
-                getProductsPane(candies)
-
-
-        ));
+        List<Item> lastfive = new ArrayList<Item>(Arrays.asList(new Item("generic puhtaytoe chips", 4, 1.25), new Item("cheet toes", 1, 2.0)));
+        
+        Map<String, List<Item>> items = new ProductsHandler().getAllItems();
+        List<Pane> productPanes = new ArrayList<>();
+        productPanes.add(getProductsPane(lastfive));
+        items.keySet().forEach(key -> { productPanes.add(getProductsPane(items.get(key))); });
+        menuPane = productPanes;
 
 
 
@@ -98,12 +93,12 @@ public class EditProducts {
         node.setPrefHeight(h);
         node.setPrefWidth(w);
     }
-    public  Pane getProductsPane(List<ProductDisplayItem> productDisplayItems){
+    public Pane getProductsPane(List<Item> productDisplayItems){
         Pane box = new Pane();
         int row = 0;
         int column = 0;
 
-        for (ProductDisplayItem productDisplayItem : productDisplayItems){
+        for (Item productDisplayItem : productDisplayItems){
             Pane each = new ProductPane(productDisplayItem).getPane();
             each.setLayoutX(140*row);
             each.setLayoutY(160*column);
