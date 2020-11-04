@@ -40,6 +40,7 @@ public class Products {
 
         //checkout button
         Button checkoutButton = createButton("Check Out",18,329,25,127);
+        checkoutButton.setOnAction(event -> {new Checkout(width,height,stage).setScene();});
 
 
         //Log out button
