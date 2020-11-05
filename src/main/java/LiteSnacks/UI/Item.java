@@ -24,7 +24,7 @@ public class Item {
         CANDIES
     }
     public boolean modifyqty( int gap){
-        if (qty + gap <0){
+        if (qty + gap <0 || qty+gap>15){
             return false;
         }else{
             this.qty = qty + (gap);
