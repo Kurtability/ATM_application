@@ -77,7 +77,7 @@ public class EditProducts {
         back.setFont(new Font(20));
         back.setOnAction(e -> {new SellerMainScene(width,height,stage).setScene();});
         back.setLayoutX(500);
-        back.setLayoutY(10);
+        back.setLayoutY(2);
 
         //SUBMIT BUTTON
         Button submit = createButton("submit",500,370,27,81);
@@ -95,8 +95,8 @@ public class EditProducts {
 
 
 
-        root.getChildren().addAll(productsPane,invalid,valid,codetext,nametext,pricetext,categorytext,qtytext,label,comments,back);
-        root.getChildren().add(submit);
+        root.getChildren().addAll(productsPane,invalid,valid,codetext,nametext,pricetext,categorytext,qtytext,label,comments);
+        root.getChildren().addAll(submit,back);
         scene = new Scene(root,width,height);
     }
 
