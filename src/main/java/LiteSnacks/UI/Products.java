@@ -19,7 +19,7 @@ public class Products {
     static ScrollPane productsPane;
     List<Pane> menuPane;
 
-    Products(double width, double height,Stage stage){
+    public Products(double width, double height, Stage stage){
         this.stage = stage;
         Pane root = new Pane();
 
@@ -86,11 +86,11 @@ public class Products {
         //products pane (scroll)
         // Item item = new Item(0);
         //for test     itegrate area
-        List<Item> lastfive = new ArrayList<Item>(Arrays.asList(new Item(0),new Item(1)));
-        List<Item> drinks = new ArrayList<Item>(Arrays.asList(new Item(0),new Item(1),new Item(1),new Item(8),new Item(1),new Item(10),new Item(1)));
-        List<Item> chocolates = new ArrayList<Item>(Arrays.asList(new Item(0),new Item(1),new Item(1),new Item(8),new Item(1)));
-        List<Item> chips = new ArrayList<Item>(Arrays.asList(new Item(0),new Item(1),new Item(1),new Item(8),new Item(1),new Item(10),new Item(1)));
-        List<Item> candies = new ArrayList<Item>(Arrays.asList(new Item(0),new Item(1),new Item(1),new Item(8),new Item(1)));
+        List<Item> lastfive = new ArrayList<Item>();
+        List<Item> drinks = new ArrayList<Item>();
+        List<Item> chocolates = new ArrayList<Item>();
+        List<Item> chips = new ArrayList<Item>();
+        List<Item> candies = new ArrayList<Item>();
 
         menuPane = new ArrayList<Pane>(Arrays.asList(
                 getProductsPane(lastfive),
