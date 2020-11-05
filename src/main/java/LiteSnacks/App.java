@@ -3,6 +3,10 @@
  */
 package LiteSnacks;
 
+import LiteSnacks.UI.Cashier.CashierMainScene;
+import LiteSnacks.UI.Seller.SellerMainScene;
+import LiteSnacks.UI.Seller.EditProducts;
+import LiteSnacks.backend.CashHandler;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -15,7 +19,13 @@ public class App extends Application{
 
         primaryStage.setTitle("Vending machine");
         LoginScene loginScene = new LoginScene(600,400,primaryStage);
-        loginScene.setScene();
+
+        EditProducts edi = new EditProducts(600,400,primaryStage);
+        CashierMainScene cash = new CashierMainScene(600,400,primaryStage);
+        SellerMainScene seller = new SellerMainScene(600,400,primaryStage);
+        cash.setScene();
+        CashHandler hj = new CashHandler();
+        hj.readFile();
         primaryStage.show();
     }
 
