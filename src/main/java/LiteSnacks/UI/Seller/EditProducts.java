@@ -53,6 +53,12 @@ public class EditProducts {
         Text label = new Text("Edit Products");
         setXY(label,10,20);
         label.setFont(new Font(20));
+        Text comments = new Text("Please make sure each row should not be null ," +"\n"+
+                "    and also price should be integer or double.");
+        comments.setFill(Color.rgb(160,0,0));
+
+
+        setXY(comments,3,370);
         label.setFill(Color.rgb(0,66,127));
         Text codetext = new Text("Code");
         setXY(codetext,150,50);
@@ -72,18 +78,18 @@ public class EditProducts {
         submit.setOnAction(event -> {sumbit();});
 
         //invalid text to indicate invalid save
-        invalid.setLayoutX(520);
-        invalid.setLayoutY(360);
-        valid.setLayoutX(470);
-        valid.setLayoutY(360);
-        invalid.setFill(Color.RED);
+
+        setXY(invalid,520,360);
+        setXY(valid,470,360);
+
+        invalid.setFill(Color.rgb(160,0,0));
         valid.setFill(Color.rgb(160,0,0));
         invalid.setVisible(false);
         valid.setVisible(false);
 
 
 
-        root.getChildren().addAll(productsPane,invalid,valid,codetext,nametext,pricetext,categorytext,qtytext,label);
+        root.getChildren().addAll(productsPane,invalid,valid,codetext,nametext,pricetext,categorytext,qtytext,label,comments);
         root.getChildren().add(submit);
         scene = new Scene(root,width,height);
     }
@@ -96,8 +102,6 @@ public class EditProducts {
         button.setStyle( "-fx-background-color: #000000;");
         button.setTextFill(Color.WHITE);
         return button;
-
-
     }
 
 
