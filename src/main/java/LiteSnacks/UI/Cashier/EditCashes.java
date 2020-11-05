@@ -1,6 +1,7 @@
 package LiteSnacks.UI.Cashier;
 
 import LiteSnacks.UI.Cash;
+import LiteSnacks.UI.Seller.SellerMainScene;
 import LiteSnacks.backend.CashHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -49,7 +50,15 @@ public class EditCashes {
         Button submit1 = createButton("submit",500,360,27,81);
         submit1.setOnAction(e->{submit();});
 
-        root.getChildren().addAll(CashPane,cashWholePane,label);
+        //back
+        Button back = new Button(">back");
+        back.setStyle("-fx-background-color: transparent;");
+        back.setFont(new Font(20));
+        back.setOnAction(e -> {new SellerMainScene(width,height,stage).setScene();});
+        back.setLayoutX(500);
+        back.setLayoutY(1);
+
+        root.getChildren().addAll(CashPane,cashWholePane,label,back);
         root.getChildren().add(submit1);
         this.scene = new Scene(root,width,height);
     }
