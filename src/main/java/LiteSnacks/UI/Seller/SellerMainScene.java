@@ -40,7 +40,7 @@ public class SellerMainScene {
         reportsButton.setPrefWidth(150);
         reportsButton.setStyle("-fx-background-color: #000000");
         reportsButton.setTextFill(Color.WHITE);
-        reportsButton.setOnAction(event -> {new Products(width,height,stage).setScene();});
+        reportsButton.setOnAction(event -> {new SellerReportsScene(width,height,stage).setScene();});
 
 
         //register button
