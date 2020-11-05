@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -20,8 +21,6 @@ public class Products {
     static ScrollPane productsPane;
     List<Pane> menuPane;
     List<String> stringForButton;
-    public static ComboBox<Item> itemsComboBox;
-
     private Cart cart;
 
 
@@ -77,7 +76,17 @@ public class Products {
         logoutButton.setOnAction(event -> {new LoginScene(width,height,stage).setScene();});
 
 
-        root.getChildren().addAll(logoutButton, products, cart.getPane());
+        Button seeTotalPrice = createButton("See Total Price",270,390,25,127);
+        seeTotalPrice.setOnAction(e -> {
+            Text displayTotalPrice = new Text("Total Price $ "+ cart.CalculateCartTotalPrice() +"\n");
+            displayTotalPrice.setLayoutX(4);
+            displayTotalPrice.setLayoutY(128);
+            cart.getPane().getChildren().add(displayTotalPrice);
+            System.out.println(cart.CalculateCartTotalPrice());
+        });
+
+
+        root.getChildren().addAll(logoutButton,seeTotalPrice, products, cart.getPane());
         root.getChildren().addAll(buttons);
         scene = new Scene(root,width,height);
 

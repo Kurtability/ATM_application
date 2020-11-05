@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class ProductsHandler {
     private File productsFile;
 
+    // getting the product file from resoruce handler
     public ProductsHandler() {
         productsFile = ResourceHandler.getProducts();
     }
@@ -36,8 +37,10 @@ public class ProductsHandler {
         return categories;
     }
 
+
+    //different categories have different lists
     public List<Item> getItemsForCategory(String category) {
-        List<Item> items = new ArrayList<>();
+        List<Item> items = new ArrayList<>();// list of all items in the same category
         Scanner sc;
         try {
             sc = new Scanner(this.productsFile);
@@ -59,6 +62,7 @@ public class ProductsHandler {
 
         return items;
     }
+
 
     public Map<String, List<Item>> getAllItems() {
 

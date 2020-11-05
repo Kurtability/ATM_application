@@ -9,9 +9,11 @@ import java.io.InputStreamReader;
 
 public class ResourceHandler {
     private static File productFile;
-    private final static String home = System.getProperty("user.home");
+    private final static String home = System.getProperty("user.home");// returns the absolute path of home directory
     final static String root = home + File.separator + ".litesnacks" + File.separator;
 
+
+    // copy a file from a jar resorce to a file in the project directory
     static void copyfiles(InputStream from, File to) throws FileNotFoundException, IOException {
         
         InputStreamReader in = new InputStreamReader(from);
@@ -28,6 +30,7 @@ public class ResourceHandler {
         }
     }
 
+    //
     private static boolean initProducts() {
         String path = home + File.separator + ".litesnacks" + File.separator + "products.csv";
         System.out.println(path);
@@ -55,7 +58,7 @@ public class ResourceHandler {
             
         }
         return true;
-        
+
     }
 
     /**
