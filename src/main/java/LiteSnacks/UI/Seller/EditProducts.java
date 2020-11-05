@@ -71,7 +71,13 @@ public class EditProducts {
         Text qtytext = new Text("Qty");
         setXY(qtytext,510,50);
 
-
+        //back
+        Button back = new Button(">back");
+        back.setStyle("-fx-background-color: transparent;");
+        back.setFont(new Font(20));
+        back.setOnAction(e -> {new SellerMainScene(width,height,stage).setScene();});
+        back.setLayoutX(500);
+        back.setLayoutY(10);
 
         //SUBMIT BUTTON
         Button submit = createButton("submit",500,370,27,81);
@@ -89,7 +95,7 @@ public class EditProducts {
 
 
 
-        root.getChildren().addAll(productsPane,invalid,valid,codetext,nametext,pricetext,categorytext,qtytext,label,comments);
+        root.getChildren().addAll(productsPane,invalid,valid,codetext,nametext,pricetext,categorytext,qtytext,label,comments,back);
         root.getChildren().add(submit);
         scene = new Scene(root,width,height);
     }

@@ -97,6 +97,7 @@ public class EditProductPane {
     public void RedTextField(TextField field){
         field.setStyle("-fx-text-box-border: #B22222;");
     }
+
     public void NoramlTextField(TextField field){
         field.setStyle("-fx-text-box-border: #ffffff;");
     }
@@ -105,7 +106,6 @@ public class EditProductPane {
         if (price.length() == 0){
             System.out.println("Price can not be null");
             is_valid = false;
-
             RedTextField(this.price);
         }else{
             NoramlTextField(this.price);
