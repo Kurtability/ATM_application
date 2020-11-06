@@ -20,12 +20,13 @@ public class App extends Application{
         primaryStage.setTitle("Vending machine");
         LoginScene loginScene = new LoginScene(600,400,primaryStage);
 
-        EditProducts edi = new EditProducts(600,400,primaryStage);
+        /*EditProducts edi = new EditProducts(600,400,primaryStage);
         CashierMainScene cash = new CashierMainScene(600,400,primaryStage);
         SellerMainScene seller = new SellerMainScene(600,400,primaryStage);
-        cash.setScene();
+        cash.setScene();*/
         CashHandler hj = new CashHandler();
         hj.readFile();
+        loginScene.setScene();
         primaryStage.show();
     }
 
