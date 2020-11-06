@@ -32,6 +32,7 @@ public class Products {
         stringForButton = new ArrayList<>();
 
 
+<<<<<<< HEAD
         //products pane (scroll)
         // Item item = new Item(0);
         //for test     itegrate area
@@ -39,6 +40,17 @@ public class Products {
         
         ProductsHandler productsHandler = new ProductsHandler();
         Map<String, List<Item>> items = productsHandler.getAllItems();
+=======
+        //checkout button
+        Button checkoutButton = createButton("Check Out",18,329,25,127);
+        checkoutButton.setOnAction(event -> {new Checkout(width,height,stage).setScene();});
+
+
+        //Log out button
+
+        Button logoutButton = createButton("Log Out",18,359,25,127);
+        logoutButton.setOnAction(event -> {new LoginScene(width,height,stage).setScene();});
+>>>>>>> checkout
 
         List<Pane> productPanes = new ArrayList<>();
         menu = new ArrayList<>();
