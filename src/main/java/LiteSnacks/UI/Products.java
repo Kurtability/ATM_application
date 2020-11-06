@@ -32,7 +32,6 @@ public class Products {
         stringForButton = new ArrayList<>();
 
 
-<<<<<<< HEAD
         //products pane (scroll)
         // Item item = new Item(0);
         //for test     itegrate area
@@ -40,17 +39,8 @@ public class Products {
         
         ProductsHandler productsHandler = new ProductsHandler();
         Map<String, List<Item>> items = productsHandler.getAllItems();
-=======
-        //checkout button
-        Button checkoutButton = createButton("Check Out",18,329,25,127);
-        checkoutButton.setOnAction(event -> {new Checkout(width,height,stage).setScene();});
 
-
-        //Log out button
-
-        Button logoutButton = createButton("Log Out",18,359,25,127);
-        logoutButton.setOnAction(event -> {new LoginScene(width,height,stage).setScene();});
->>>>>>> checkout
+        
 
         List<Pane> productPanes = new ArrayList<>();
         menu = new ArrayList<>();
@@ -84,11 +74,15 @@ public class Products {
         menu.get(0).setStyle("-fx-background-color: red");
 
 
-        Button logoutButton = createButton("Log Out",18,390,25,127);
+        Button logoutButton = createButton("Log Out",18,390,25,100);
         logoutButton.setOnAction(event -> {new LoginScene(width,height,stage).setScene();});
 
+        //checkout button
+        Button checkoutButton = createButton("Check Out",150,390,25,100);
+        checkoutButton.setOnAction(event -> {new Checkout(width,height,stage).setScene();});
 
-        Button seeTotalPrice = createButton("See Total Price",270,390,25,127);
+
+        Button seeTotalPrice = createButton("See Total Price",270,390,25,100);
         seeTotalPrice.setOnAction(e -> {
             Text displayTotalPrice = new Text("Total Price $ "+ cart.CalculateCartTotalPrice() +"\n");
             displayTotalPrice.setLayoutX(4);
@@ -98,7 +92,7 @@ public class Products {
         });
 
 
-        root.getChildren().addAll(logoutButton,seeTotalPrice, products, cart.getPane());
+        root.getChildren().addAll(checkoutButton, logoutButton,seeTotalPrice, products, cart.getPane());
         root.getChildren().addAll(buttons);
         scene = new Scene(root,width,height);
 

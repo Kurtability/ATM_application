@@ -13,6 +13,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
+import LiteSnacks.UI.ShoppingCart.Cart;
+
 
 
 
@@ -26,10 +28,14 @@ public class Checkout {
 
         Pane root = new Pane();
         //lable
-        Label label = new Label("Total Price: $13");
+        Cart cart = new Cart();
+        Label label = new Label("Total Price: $" + Double.toString(cart.CalculateCartTotalPrice()));
         label.setLayoutX(400);
         label.setLayoutY(150);
         label.setFont(new Font("Arial", 20));
+
+
+        
 
         Label label2 = new Label("ChEcKouT");
         label2.setLayoutX(400);
