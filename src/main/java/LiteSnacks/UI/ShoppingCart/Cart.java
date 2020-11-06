@@ -33,11 +33,12 @@ public class Cart {
         return cartPane;
     }
 
-    public void addProduct(String product, double cost) {
+    public void addProduct(String product, String category, int id, double cost) {
         if (this.selectedProducts.containsKey(product)) {
             this.selectedProducts.get(product).add();
         } else {
-            CartItem newItem = new CartItem(product, cost, 1, this);
+            CartItem newItem = new CartItem(product, category, id, cost, 1, this);
+
             this.selectedProducts.put(product, newItem);
             this.cartPane.getChildren().add(newItem.cartItemPane);
         }

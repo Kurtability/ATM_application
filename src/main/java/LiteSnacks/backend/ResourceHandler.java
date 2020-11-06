@@ -8,14 +8,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class ResourceHandler {
-    private static File productFile;
-    private final static String home = System.getProperty("user.home");// returns the absolute path of home directory
+
+    private final static String home = System.getProperty("user.home"); // the absolute path of home directory
     final static String root = home + File.separator + ".litesnacks" + File.separator;
 
+    private static File productFile;
+    private static File cashFile;
 
     // copy a file from a jar resorce to a file in the project directory
     static void copyfiles(InputStream from, File to) throws FileNotFoundException, IOException {
-        
+
         InputStreamReader in = new InputStreamReader(from);
         FileOutputStream out = new FileOutputStream(to);
 
@@ -31,47 +33,56 @@ public class ResourceHandler {
     }
 
     //
-    private static boolean initProducts() {
-        String path = home + File.separator + ".litesnacks" + File.separator + "products.csv";
+    private static File initFile(String file) {
+        String path = root + file;
         System.out.println(path);
-        productFile = new File(path);
-        if (!productFile.exists()) {
+        File curFile = new File(path);
+        if (!curFile.exists()) {
             try {
-                productFile.createNewFile();
+                curFile.createNewFile();
             } catch (IOException e) {
                 System.out.println("creating folder");
-                if(new File(root).mkdir() == false) {
+                if (new File(root).mkdir() == false) {
                     System.out.println("issues creating folder");
-                    return false;
+                    return null;
                 }
             }
             try {
-                copyfiles(ResourceHandler.class.getResourceAsStream("/products.csv"), productFile);
+                copyfiles(ResourceHandler.class.getResourceAsStream("/" + file), curFile);
             } catch (FileNotFoundException e) {
-                System.out.println(ResourceHandler.class.getSimpleName() + " " + getLineNumber() + ": File Not Found error");
-                return false;
+                System.out.println(
+                        ResourceHandler.class.getSimpleName() + " " + getLineNumber() + ": File Not Found error");
+                return null;
             } catch (IOException e) {
                 System.out.println(ResourceHandler.class.getSimpleName() + " " + getLineNumber() + ": IO error");
-                return false;
+                return null;
             }
             System.out.println("created new file with default data");
-            
+
         }
-        return true;
+        return curFile;
 
     }
 
     /**
-     * This is the getter for the File object for the products.csv file.
-     * It creates the required files and directories and fills them with
-     * the default data if not already present.
+     * This is the getter for the File object for the products.csv file. It creates
+     * the required files and directories and fills them with the default data if
+     * not already present.
+     * 
      * @return The file object for the products.csv file
      */
     public static File getProducts() {
         if (productFile == null) {
-            initProducts();
+            productFile = initFile("products.csv");
         }
         return productFile;
+    }
+
+    public static File getCashFile() {
+        if (cashFile == null) {
+            cashFile = initFile("cashes.json");
+        }
+        return cashFile;
     }
 
     private static int getLineNumber() {

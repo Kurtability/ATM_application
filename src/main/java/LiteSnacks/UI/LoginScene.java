@@ -12,13 +12,13 @@ import javafx.stage.Stage;
 public class LoginScene {
     Scene scene;
     Stage stage;
-    
-    public LoginScene(double width, double height,Stage stage){
+
+    public LoginScene(double width, double height, Stage stage) {
         this.stage = stage;
 
         Pane root = new Pane();
         Pane loginpane = new Pane();
-        //lable
+        // lable
         Label label = new Label("Log In");
         label.setLayoutX(41);
         label.setLayoutY(30);
@@ -37,38 +37,36 @@ public class LoginScene {
         password.setPrefHeight(38);
         password.setPrefWidth(207);
 
-
-
-
-
-        //log in button
+        // log in button
         Button loginButton = new Button("Login");
         loginButton.setLayoutX(111);
         loginButton.setLayoutY(222);
         loginButton.setStyle("-fx-background-color: #000000");
         loginButton.setTextFill(Color.WHITE);
-        loginButton.setOnAction(event -> {new Products(width,height,stage).setScene();});
+        loginButton.setOnAction(event -> {
+            new Products(width, height, stage).setScene();
+        });
 
-
-        //register button
+        // register button
         Button registerButton = new Button("Register");
         registerButton.setLayoutX(180);
         registerButton.setLayoutY(35);
         registerButton.setStyle("-fx-background-color: #000000");
         registerButton.setTextFill(Color.WHITE);
-        registerButton.setOnAction(event -> {new RegisterScene(width,height,stage).setScene();});
+        registerButton.setOnAction(event -> {
+            new RegisterScene(width, height, stage).setScene();
+        });
 
-        loginpane.getChildren().addAll(loginButton,password,username,label,registerButton);
+        loginpane.getChildren().addAll(loginButton, password, username, label, registerButton);
         loginpane.setLayoutX(156);
         loginpane.setLayoutY(51);
         loginpane.setPrefHeight(299);
         loginpane.setPrefWidth(289);
         loginpane.setStyle("-fx-background-color: #d9d9d9");
 
-
         root.getChildren().add(loginpane);
 
-        scene = new Scene(root,width,height);
+        scene = new Scene(root, width, height);
     }
 
     public void setScene() {

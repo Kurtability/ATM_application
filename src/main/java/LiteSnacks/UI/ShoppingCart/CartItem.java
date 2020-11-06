@@ -15,8 +15,8 @@ public class CartItem extends Item {
 
     private Cart cart;
 
-    CartItem(String name, double unitPrice, int quantity, Cart cart) {
-        super(name, quantity, unitPrice);
+    CartItem(String name, String category, int id, double unitPrice, int quantity, Cart cart) {
+        super(name, category, id, quantity, unitPrice);
         this.cart = cart;
         makePane();
     }
