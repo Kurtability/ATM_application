@@ -7,16 +7,21 @@ import javafx.scene.text.Text;
 
 public class QuantityModifier {
     Pane pane;
-    public QuantityModifier(Item item){
-        //item is object that store qty refrence
+
+    public QuantityModifier(Item item) {
+        // item is object that store qty refrence
         Text qtylabel = new Text(String.valueOf(item.qty));
 
         Button addQty = new Button("+");
         addQty.setTextFill(Color.WHITE);
-        addQty.setOnAction(event -> {modifyQty(item,qtylabel,1);});
+        addQty.setOnAction(event -> {
+            modifyQty(item, qtylabel, 1);
+        });
         Button subQty = new Button("-");
         subQty.setTextFill(Color.WHITE);
-        subQty.setOnAction(event -> {modifyQty(item,qtylabel,-1);});
+        subQty.setOnAction(event -> {
+            modifyQty(item, qtylabel, -1);
+        });
 
         this.pane = new Pane();
         this.pane.setPrefHeight(28);
@@ -36,18 +41,23 @@ public class QuantityModifier {
         subQty.setStyle("-fx-background-color: #000000;");
 
         this.pane.setStyle("-fx-background-color: #ffffff;");
-        this.pane.getChildren().addAll(addQty,qtylabel,subQty);
+        this.pane.getChildren().addAll(addQty, qtylabel, subQty);
     }
-    public QuantityModifier(Cash item){
-        //item is object that store qty refrence
+
+    public QuantityModifier(Cash item) {
+        // item is object that store qty refrence
         Text qtylabel = new Text(String.valueOf(item.qty));
 
         Button addQty = new Button("+");
         addQty.setTextFill(Color.WHITE);
-        addQty.setOnAction(event -> {modifyQty(item,qtylabel,1);});
+        addQty.setOnAction(event -> {
+            modifyQty(item, qtylabel, 1);
+        });
         Button subQty = new Button("-");
         subQty.setTextFill(Color.WHITE);
-        subQty.setOnAction(event -> {modifyQty(item,qtylabel,-1);});
+        subQty.setOnAction(event -> {
+            modifyQty(item, qtylabel, -1);
+        });
 
         this.pane = new Pane();
         this.pane.setPrefHeight(28);
@@ -67,16 +77,19 @@ public class QuantityModifier {
         subQty.setStyle("-fx-background-color: #000000;");
 
         this.pane.setStyle("-fx-background-color: #ffffff;");
-        this.pane.getChildren().addAll(addQty,qtylabel,subQty);
+        this.pane.getChildren().addAll(addQty, qtylabel, subQty);
     }
-    public Pane getPane(){
+
+    public Pane getPane() {
         return this.pane;
     }
-    public void modifyQty(Item item,Text label,int gap){
+
+    public void modifyQty(Item item, Text label, int gap) {
         item.modifyqty(gap);
         label.setText(String.valueOf(item.qty));
     }
-    public void modifyQty(Cash item,Text label,int gap){
+
+    public void modifyQty(Cash item, Text label, int gap) {
 
         item.modifyqty(gap);
         label.setText(String.valueOf(item.qty));

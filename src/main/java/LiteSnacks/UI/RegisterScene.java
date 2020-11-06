@@ -12,13 +12,13 @@ import javafx.stage.Stage;
 public class RegisterScene {
     Scene scene;
     Stage stage;
-    
-    RegisterScene(double width, double height,Stage stage){
+
+    RegisterScene(double width, double height, Stage stage) {
 
         this.stage = stage;
         Pane root = new Pane();
         Pane loginpane = new Pane();
-        //lable
+        // lable
         Label label = new Label("Register");
         label.setLayoutX(41);
         label.setLayoutY(30);
@@ -37,29 +37,24 @@ public class RegisterScene {
         password.setPrefHeight(38);
         password.setPrefWidth(207);
 
-
-
-
-
-        //log in button
+        // log in button
         Button loginButton = new Button("Log In");
         loginButton.setLayoutX(180);
         loginButton.setLayoutY(35);
         loginButton.setStyle("-fx-background-color: #000000");
         loginButton.setTextFill(Color.WHITE);
-        loginButton.setOnAction(event -> {new LoginScene(width,height,stage).setScene();});
+        loginButton.setOnAction(event -> {
+            new LoginScene(width, height, stage).setScene();
+        });
 
-
-        //register button
+        // register button
         Button registerButton = new Button("Register");
         registerButton.setLayoutX(111);
         registerButton.setLayoutY(222);
         registerButton.setStyle("-fx-background-color: #000000");
         registerButton.setTextFill(Color.WHITE);
 
-
-
-        loginpane.getChildren().addAll(loginButton,password,username,label,registerButton);
+        loginpane.getChildren().addAll(loginButton, password, username, label, registerButton);
         loginpane.setLayoutX(156);
         loginpane.setLayoutY(51);
         loginpane.setPrefHeight(299);
@@ -68,7 +63,7 @@ public class RegisterScene {
 
         root.getChildren().add(loginpane);
 
-        scene = new Scene(root,width,height);
+        scene = new Scene(root, width, height);
     }
 
     public void setScene() {

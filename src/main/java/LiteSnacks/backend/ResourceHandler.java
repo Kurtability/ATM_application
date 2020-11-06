@@ -13,7 +13,7 @@ public class ResourceHandler {
     final static String root = home + File.separator + ".litesnacks" + File.separator;
 
     static void copyfiles(InputStream from, File to) throws FileNotFoundException, IOException {
-        
+
         InputStreamReader in = new InputStreamReader(from);
         FileOutputStream out = new FileOutputStream(to);
 
@@ -37,7 +37,7 @@ public class ResourceHandler {
                 productFile.createNewFile();
             } catch (IOException e) {
                 System.out.println("creating folder");
-                if(new File(root).mkdir() == false) {
+                if (new File(root).mkdir() == false) {
                     System.out.println("issues creating folder");
                     return false;
                 }
@@ -45,23 +45,25 @@ public class ResourceHandler {
             try {
                 copyfiles(ResourceHandler.class.getResourceAsStream("/products.csv"), productFile);
             } catch (FileNotFoundException e) {
-                System.out.println(ResourceHandler.class.getSimpleName() + " " + getLineNumber() + ": File Not Found error");
+                System.out.println(
+                        ResourceHandler.class.getSimpleName() + " " + getLineNumber() + ": File Not Found error");
                 return false;
             } catch (IOException e) {
                 System.out.println(ResourceHandler.class.getSimpleName() + " " + getLineNumber() + ": IO error");
                 return false;
             }
             System.out.println("created new file with default data");
-            
+
         }
         return true;
-        
+
     }
 
     /**
-     * This is the getter for the File object for the products.csv file.
-     * It creates the required files and directories and fills them with
-     * the default data if not already present.
+     * This is the getter for the File object for the products.csv file. It creates
+     * the required files and directories and fills them with the default data if
+     * not already present.
+     * 
      * @return The file object for the products.csv file
      */
     public static File getProducts() {
@@ -70,9 +72,6 @@ public class ResourceHandler {
         }
         return productFile;
     }
-
-
-
 
     private static int getLineNumber() {
         return Thread.currentThread().getStackTrace()[2].getLineNumber();

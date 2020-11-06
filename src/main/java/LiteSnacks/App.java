@@ -3,27 +3,25 @@
  */
 package LiteSnacks;
 
-import LiteSnacks.UI.Cashier.CashierMainScene;
-import LiteSnacks.UI.Seller.SellerMainScene;
-import LiteSnacks.UI.Seller.EditProducts;
 import LiteSnacks.backend.CashHandler;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 import LiteSnacks.UI.LoginScene;
 
-public class App extends Application{
+public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         primaryStage.setTitle("Vending machine");
-        LoginScene loginScene = new LoginScene(600,400,primaryStage);
+        LoginScene loginScene = new LoginScene(600, 400, primaryStage);
 
-        /*EditProducts edi = new EditProducts(600,400,primaryStage);
-        CashierMainScene cash = new CashierMainScene(600,400,primaryStage);
-        SellerMainScene seller = new SellerMainScene(600,400,primaryStage);
-        cash.setScene();*/
+        /*
+         * EditProducts edi = new EditProducts(600,400,primaryStage); CashierMainScene
+         * cash = new CashierMainScene(600,400,primaryStage); SellerMainScene seller =
+         * new SellerMainScene(600,400,primaryStage); cash.setScene();
+         */
         CashHandler hj = new CashHandler();
         hj.readFile();
         loginScene.setScene();
