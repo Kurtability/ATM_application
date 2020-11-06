@@ -16,9 +16,6 @@ import javafx.geometry.*;
 import LiteSnacks.UI.ShoppingCart.Cart;
 
 
-
-
-
 public class Checkout {
     Scene scene;
     Stage stage;
@@ -71,12 +68,6 @@ public class Checkout {
         VBox box = new VBox(items);
         box.setPadding(new Insets(40, 25, 25, 25));;
         
-        
-        
-
-
-        
-
 
         Button card = new Button("Card");
         card.setLayoutX(475);
