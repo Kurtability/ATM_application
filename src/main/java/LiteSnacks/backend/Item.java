@@ -15,6 +15,10 @@ public class Item {
         return name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getQuantity() {
         return quantity;
     }

@@ -1,6 +1,7 @@
 package LiteSnacks.UI;
 
 import LiteSnacks.UI.ShoppingCart.Cart;
+import LiteSnacks.UI.ShoppingCart.Checkout;
 import LiteSnacks.backend.Item;
 import LiteSnacks.backend.ProductsHandler;
 import javafx.scene.Scene;
@@ -23,24 +24,21 @@ public class Products {
     List<String> stringForButton;
     private Cart cart;
 
-
-    public Products(double width, double height, Stage stage){
+    public Products(double width, double height, Stage stage) {
         this.stage = stage;
         Pane root = new Pane();
 
         cart = new Cart();
         stringForButton = new ArrayList<>();
 
-
-        //products pane (scroll)
+        // products pane (scroll)
         // Item item = new Item(0);
-        //for test     itegrate area
-        // List<Item> lastfive = new ArrayList<Item>(Arrays.asList(new Item("generic puhtaytoe chips", 4, 1.25), new Item("cheet toes", 1, 2.0)));
-        
+        // for test itegrate area
+        // List<Item> lastfive = new ArrayList<Item>(Arrays.asList(new Item("generic
+        // puhtaytoe chips", 4, 1.25), new Item("cheet toes", 1, 2.0)));
+
         ProductsHandler productsHandler = new ProductsHandler();
         Map<String, List<Item>> items = productsHandler.getAllItems();
-
-        
 
         List<Pane> productPanes = new ArrayList<>();
         menu = new ArrayList<>();
@@ -49,7 +47,6 @@ public class Products {
             productPanes.add(getProductsPane(items.get(cat)));
         });
         menuPane = productPanes;
-
 
         ScrollPane products = new ScrollPane();
         products.setPrefHeight(304);
@@ -64,37 +61,40 @@ public class Products {
         List<Button> buttons = new ArrayList<Button>();
         menu = buttons;
         int x = 10;
-        for (int i=0; i<5 ; i++){
-            Button each  = createButton(stringForButton.get(i),x,10,27,81);
+        for (int i = 0; i < 5; i++) {
+            Button each = createButton(stringForButton.get(i), x, 10, 27, 81);
             int finalI = i;
-            each.setOnAction(event -> {menuHandler(stringForButton.get(finalI));});
+            each.setOnAction(event -> {
+                menuHandler(stringForButton.get(finalI));
+            });
             buttons.add(each);
-            x=x+81;
+            x = x + 81;
         }
         menu.get(0).setStyle("-fx-background-color: red");
 
+        Button logoutButton = createButton("Log Out", 18, 390, 25, 100);
+        logoutButton.setOnAction(event -> {
+            new LoginScene(width, height, stage).setScene();
+        });
 
-        Button logoutButton = createButton("Log Out",18,390,25,100);
-        logoutButton.setOnAction(event -> {new LoginScene(width,height,stage).setScene();});
+        // checkout button
+        Button checkoutButton = createButton("Check Out", 150, 390, 25, 100);
+        checkoutButton.setOnAction(event -> {
+            new Checkout(width, height, stage, cart).setScene();
+        });
 
-        //checkout button
-        Button checkoutButton = createButton("Check Out",150,390,25,100);
-        checkoutButton.setOnAction(event -> {new Checkout(width,height,stage).setScene();});
-
-
-        Button seeTotalPrice = createButton("See Total Price",270,390,25,100);
+        Button seeTotalPrice = createButton("See Total Price", 270, 390, 25, 100);
         seeTotalPrice.setOnAction(e -> {
-            Text displayTotalPrice = new Text("Total Price $ "+ cart.CalculateCartTotalPrice() +"\n");
+            Text displayTotalPrice = new Text("Total Price $ " + cart.calculateCartTotalPrice() + "\n");
             displayTotalPrice.setLayoutX(4);
             displayTotalPrice.setLayoutY(128);
             cart.getPane().getChildren().add(displayTotalPrice);
-            System.out.println(cart.CalculateCartTotalPrice());
+            System.out.println(cart.calculateCartTotalPrice());
         });
 
-
-        root.getChildren().addAll(checkoutButton, logoutButton,seeTotalPrice, products, cart.getPane());
+        root.getChildren().addAll(checkoutButton, logoutButton, seeTotalPrice, products, cart.getPane());
         root.getChildren().addAll(buttons);
-        scene = new Scene(root,width,height);
+        scene = new Scene(root, width, height);
 
     }
 
@@ -102,39 +102,39 @@ public class Products {
         stage.setScene(scene);
     }
 
-    public Button createButton(String text, int x, int y, int h, int w){
+    public Button createButton(String text, int x, int y, int h, int w) {
         Button button = new Button(text);
-        this.setXY(button,x,y);
-        this.setHW(button,h,w);
-        button.setStyle( "-fx-background-color: #000000;");
+        this.setXY(button, x, y);
+        this.setHW(button, h, w);
+        button.setStyle("-fx-background-color: #000000;");
         button.setTextFill(Color.WHITE);
         return button;
 
     }
 
-    public void setXY(Control node,double x,double y){
+    public void setXY(Control node, double x, double y) {
         node.setLayoutX(x);
         node.setLayoutY(y);
     }
 
-    public void setHW(Control node,double h,double w){
+    public void setHW(Control node, double h, double w) {
         node.setPrefHeight(h);
         node.setPrefWidth(w);
     }
 
-    public Pane getProductsPane(List<Item> productDisplayItems){
+    public Pane getProductsPane(List<Item> productDisplayItems) {
         Pane box = new Pane();
         int row = 0;
         int column = 0;
 
-        for (Item productDisplayItem : productDisplayItems){
+        for (Item productDisplayItem : productDisplayItems) {
             Pane each = new ProductPane(productDisplayItem, cart).getPane();
-            each.setLayoutX(135*row);
-            each.setLayoutY(150*column);
+            each.setLayoutX(135 * row);
+            each.setLayoutY(150 * column);
             box.getChildren().add(each);
-            row = row +1;
-            if (row == 3){
-                column = column+1;
+            row = row + 1;
+            if (row == 3) {
+                column = column + 1;
                 row = 0;
             }
 
@@ -143,10 +143,10 @@ public class Products {
         return box;
     }
 
-    public void menuHandler(String menu){
+    public void menuHandler(String menu) {
         int index = 0;
         index = stringForButton.indexOf(menu);
-        for (Button b: this.menu){
+        for (Button b : this.menu) {
             b.setStyle("-fx-background-color: black");
         }
         productsPane.setContent(menuPane.get(index));
