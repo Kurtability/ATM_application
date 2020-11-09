@@ -1,9 +1,8 @@
-package LiteSnacks.UI.Casherpage;
+package LiteSnacks.UI.Cashierpage;
 
 import LiteSnacks.UI.Cashier.CashierReportsScene;
 import javafx.stage.Stage;
 import org.junit.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class CashierReportsTest {
     @Test

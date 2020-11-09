@@ -1,4 +1,4 @@
-package LiteSnacks.UI.Casherpage;
+package LiteSnacks.UI.Cashierpage;
 import LiteSnacks.UI.Cash;
 import LiteSnacks.UI.Cashier.EditCashPane;
 import LiteSnacks.UI.Cashier.EditCashes;
