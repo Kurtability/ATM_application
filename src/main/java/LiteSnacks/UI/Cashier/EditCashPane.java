@@ -40,4 +40,5 @@ public class EditCashPane {
     public Pane getPane() {
         return this.pane;
     }
+    public Cash getCash() {return this.cash;}
 }

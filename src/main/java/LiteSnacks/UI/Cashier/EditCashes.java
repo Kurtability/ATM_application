@@ -125,4 +125,7 @@ public class EditCashes {
     public void setScene() {
         stage.setScene(scene);
     }
+    public Scene getScene(){
+        return this.scene;
+    }
 }

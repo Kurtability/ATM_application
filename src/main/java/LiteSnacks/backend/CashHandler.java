@@ -2,10 +2,8 @@ package LiteSnacks.backend;
 
 import LiteSnacks.UI.Cash;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,9 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CashHandler {
+    private File cashesFile;
     List<Cash> cashes;
 
     public CashHandler() {
+        cashesFile = ResourceHandler.getCashFile();
         this.cashes = readFile();
     }
 
@@ -80,7 +80,7 @@ public class CashHandler {
             array.add(eachobject);
         }
         try {
-            FileWriter file = new FileWriter("src/main/resources/cashes.json");
+            FileWriter file = new FileWriter(cashesFile);
             file.write(array.toJSONString());
             file.flush();
             file.close();
