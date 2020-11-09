@@ -2,8 +2,6 @@ package LiteSnacks.backend;
 
 import org.junit.Test;
 
-import LiteSnacks.backend.Cash;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CashTest {
@@ -22,7 +20,7 @@ public class CashTest {
         Cash object = new Cash(1, 10, "not_picture");
         assertEquals(1, object.getValue());
         assertEquals(10, object.getQty());
-        assertEquals("not_pic", object.getImg());
+        assertEquals("not_picture", object.getImg());
     }
 
     @Test
