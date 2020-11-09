@@ -45,20 +45,33 @@ public class QuantityModifier {
         this.pane.getChildren().addAll(addQty, qtylabel, subQty);
     }
 
-    public QuantityModifier(Cash item) {
+    public QuantityModifier(Cash item,boolean is_edit) {
         // item is object that store qty refrence
-        Text qtylabel = new Text(String.valueOf(item.qty));
+        Text qtylabel = new Text();
 
         Button addQty = new Button("+");
         addQty.setTextFill(Color.WHITE);
-        addQty.setOnAction(event -> {
-            modifyQty(item, qtylabel, 1);
-        });
         Button subQty = new Button("-");
         subQty.setTextFill(Color.WHITE);
-        subQty.setOnAction(event -> {
-            modifyQty(item, qtylabel, -1);
-        });
+        if (is_edit){
+            qtylabel.setText(String.valueOf(item.qty));
+            addQty.setOnAction(event -> {
+                modifyQty(item, qtylabel, 1);
+            });
+            subQty.setOnAction(event -> {
+                modifyQty(item, qtylabel, -1);
+            });
+        }else{
+            qtylabel.setText(String.valueOf(item.input));
+            addQty.setOnAction(event -> {
+                modifyCashInput(item, qtylabel, 1);
+            });
+            subQty.setOnAction(event -> {
+                modifyCashInput(item, qtylabel, -1);
+            });
+
+        }
+
 
         this.pane = new Pane();
         this.pane.setPrefHeight(28);
@@ -94,5 +107,10 @@ public class QuantityModifier {
 
         item.modifyqty(gap);
         label.setText(String.valueOf(item.getQty()));
+    }
+    public void modifyCashInput(Cash item, Text label, int gap) {
+
+        item.modifyInput(gap);
+        label.setText(String.valueOf(item.input));
     }
 }
