@@ -1,27 +1,22 @@
 package LiteSnacks.UI.ShoppingCart;
 
-import LiteSnacks.UI.Products;
+import LiteSnacks.backend.Item;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class CartItem {
+public class CartItem extends Item {
 
-    private String name;
-    public double cost;
-    public int quantity;
     private Label qty;
 
     Pane cartItemPane;
 
     private Cart cart;
 
-    CartItem(String name, double cost, int quantity, Cart cart) {
-        this.name = name;
-        this.cost = cost;
-        this.quantity = quantity;
+    CartItem(String name, String category, int id, double unitPrice, int quantity, Cart cart) {
+        super(name, category, id, quantity, unitPrice);
         this.cart = cart;
         makePane();
     }
@@ -39,7 +34,7 @@ public class CartItem {
         qty = new Label(Integer.toString(this.quantity));
         GridPane.setConstraints(qty, 3, 0);
 
-        Label cost = new Label(Double.toString(this.cost));
+        Label cost = new Label(Double.toString(this.unitPrice));
         GridPane.setConstraints(cost, 0, 1);
 
         Button remove = new Button("Remove");

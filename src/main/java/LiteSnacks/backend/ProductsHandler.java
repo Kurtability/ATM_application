@@ -33,12 +33,11 @@ public class ProductsHandler {
             }
         }
         sc.close();
-        
+
         return categories;
     }
 
-
-    //different categories have different lists
+    // different categories have different lists
     public List<Item> getItemsForCategory(String category) {
         List<Item> items = new ArrayList<>();// list of all items in the same category
         Scanner sc;
@@ -53,7 +52,8 @@ public class ProductsHandler {
                 String nextItem;
                 while (sc.hasNextLine() && !(nextItem = sc.nextLine()).equals("_")) {
                     String[] splitItem = nextItem.split(",");
-                    items.add(new Item(splitItem[0], Integer.parseInt(splitItem[1]), Double.parseDouble(splitItem[2])));
+                    items.add(new Item(splitItem[0], category, Integer.parseInt(splitItem[3]),
+                            Integer.parseInt(splitItem[1]), Double.parseDouble(splitItem[2])));
                 }
             }
         }
@@ -63,12 +63,11 @@ public class ProductsHandler {
         return items;
     }
 
-
     public Map<String, List<Item>> getAllItems() {
 
         Map<String, List<Item>> items = new HashMap<>();
 
-        for (String category: this.getCategories()) {
+        for (String category : this.getCategories()) {
             items.put(category, this.getItemsForCategory(category));
         }
 

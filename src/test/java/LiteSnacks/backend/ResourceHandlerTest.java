@@ -59,6 +59,16 @@ class ResourceHandlerTest {
             deleteDirectory(rootDir);
         }
         assertNotNull(ResourceHandler.getProducts());
+        deleteDirectory(rootDir);
+    }
+
+    @Test void getCashTest() {
+        File rootDir = new File(ResourceHandler.root);
+        if (rootDir.exists()) {
+            deleteDirectory(rootDir);
+        }
+        assertNotNull(ResourceHandler.getCashFile());
+        deleteDirectory(rootDir);
     }
 
     /**
