@@ -1,10 +1,7 @@
-package LiteSnacks.UI.Cashes;
-import LiteSnacks.App;
-import LiteSnacks.Main;
+package LiteSnacks.UI.Casherpage;
 import LiteSnacks.UI.Cash;
 import LiteSnacks.UI.Cashier.EditCashPane;
 import LiteSnacks.UI.Cashier.EditCashes;
-import javafx.application.Application;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -12,10 +9,6 @@ import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
