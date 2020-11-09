@@ -1,30 +1,21 @@
 package LiteSnacks.backend.UserAccount;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UserAccount {
 
     private String userName;
     private String password;
 
-    private List<String> roles;
+    private String role;
     private boolean isLoggedIn;
 
     public UserAccount() {
 
     }
 
-    public UserAccount(String userName, String password, String gender, List<String> roles) {
+    public UserAccount(String userName, String password, String role) {
         this.userName = userName;
         this.password = password;
-
-        this.roles = new ArrayList<String>();
-        if (roles != null) {
-            for (String r : roles) {
-                this.roles.add(r);
-            }
-        }
+        this.role = role;
     }
 
     public boolean getLoggedInStatus(){
@@ -51,11 +42,11 @@ public class UserAccount {
         this.password = password;
     }
 
-    public List<String> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = this.role;
     }
 }
