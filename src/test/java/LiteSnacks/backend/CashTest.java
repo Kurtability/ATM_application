@@ -1,18 +1,13 @@
 package LiteSnacks.backend;
 
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CashTest {
     @Test
     public void CashObjectTest() {
-        try {
-            Cash object = new Cash(1, 10, "not_picture");
-        } catch (Exception e) {
-            System.out.println("construct failed");
-        }
-
+        Cash object = new Cash(1, 10, "not_picture");
+        assertNotNull(object);
     }
 
     @Test
