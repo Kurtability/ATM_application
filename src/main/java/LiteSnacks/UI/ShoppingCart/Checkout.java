@@ -24,7 +24,7 @@ public class Checkout {
 
         Pane root = new Pane();
         // lable
-        Label label = new Label("Total Price: $" + Double.toString(cart.calculateCartTotalPrice()));
+        Label label = new Label("Total Price: $" + Double.toString(cart.getTotal()));
         label.setLayoutX(400);
         label.setLayoutY(150);
         label.setFont(new Font("Arial", 20));

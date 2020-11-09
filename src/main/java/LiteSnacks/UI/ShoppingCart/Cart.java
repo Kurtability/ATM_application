@@ -5,32 +5,44 @@ import java.util.Map;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 public class Cart {
 
-    public Pane cartPane;
+    private Pane pane;
+    private VBox cartPane;
     private Map<String, CartItem> selectedProducts;// <coke, maps-to the cart-item>
+    private Label total;
+    private double total_cost;
 
     public Cart() {
         Label shoppingCart = new Label("Shopping Cart \n");
         shoppingCart.setFont(new Font(20));
         shoppingCart.setAlignment(Pos.CENTER);
+        shoppingCart.setLayoutX(100);
 
-        cartPane = new VBox(shoppingCart);
+        total = new Label("Total cost: $ 0.0");
+        total.setFont(new Font(20));
+        total.setLayoutX(100);
+        total.setLayoutY(400);
+        
+        cartPane = new VBox(shoppingCart, total);
         cartPane.setStyle("-fx-background-color: #d9d9d9;");
         cartPane.setMinWidth(190);
-        cartPane.setMinHeight(480 - 20);
-        cartPane.setLayoutX(440);
-        cartPane.setLayoutY(10);
+        cartPane.setMinHeight(480 - 40);
+
+        pane = new BorderPane(cartPane, null, null, total, null);
+        pane.setLayoutX(440);
+        pane.setLayoutY(10);
 
         selectedProducts = new HashMap<>();
     }
 
     public Pane getPane() {
-        return cartPane;
+        return pane;
     }
 
     public void addProduct(String product, String category, int id, double cost) {
@@ -42,10 +54,12 @@ public class Cart {
             this.selectedProducts.put(product, newItem);
             this.cartPane.getChildren().add(newItem.cartItemPane);
         }
+        this.total_cost += cost;
+        this.updateTotal();
     }
 
     public double calculateCartTotalPrice() {
-        double cartTotalPrice = 0;
+        double cartTotalPrice = 0.0;
         for (String name : selectedProducts.keySet()) {
 
             String key = name;
@@ -59,14 +73,29 @@ public class Cart {
 
     }
 
-    public void decreaseQuantityOfProduct(String product, double cost) {
+    public void decreaseQuantityOfProduct(String product) {
         if (this.selectedProducts.containsKey(product)) {
             this.selectedProducts.get(product).decrease();
+            this.total_cost -= this.selectedProducts.get(product).getUnitPrice();
+            this.updateTotal();
         }
     }
 
     public void removeProduct(String product) {
-        this.cartPane.getChildren().remove(this.selectedProducts.remove(product).cartItemPane);
+        CartItem removedItem = this.selectedProducts.remove(product);
+        this.cartPane.getChildren().remove(removedItem.cartItemPane);
+        if(this.total_cost - removedItem.getUnitPrice() * removedItem.getQuantity() >= 0.0) {
+            this.total_cost -= removedItem.getUnitPrice() * removedItem.getQuantity();
+            this.updateTotal();
+        }
+    }
+
+    private void updateTotal() {
+        this.total.setText("Total cost: $ " + (Math.round(this.total_cost*100)/100.0));
+    }
+
+    public double getTotal() {
+        return this.total_cost;
     }
 
     public Map<String, CartItem> getItems() {

@@ -5,7 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 
 public class CartItem extends Item {
 
@@ -40,12 +39,8 @@ public class CartItem extends Item {
         Button remove = new Button("Remove");
         remove.setOnAction(e -> {
             this.cart.removeProduct(this.name);
-
-            Text displayTotalPrice = new Text("Pls click 'See Total Price' button again \n");
-            displayTotalPrice.setLayoutX(4);
-            displayTotalPrice.setLayoutY(128);
-            cart.getPane().getChildren().add(displayTotalPrice);
         });
+
         GridPane.setConstraints(remove, 3, 1);
 
         cartItemPane.getChildren().addAll(product, qty, cost, remove);

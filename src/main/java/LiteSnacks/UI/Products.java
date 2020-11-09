@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -83,16 +82,7 @@ public class Products {
             new Checkout(width, height, stage, cart).setScene();
         });
 
-        Button seeTotalPrice = createButton("See Total Price", 270, 390, 25, 100);
-        seeTotalPrice.setOnAction(e -> {
-            Text displayTotalPrice = new Text("Total Price $ " + cart.calculateCartTotalPrice() + "\n");
-            displayTotalPrice.setLayoutX(4);
-            displayTotalPrice.setLayoutY(128);
-            cart.getPane().getChildren().add(displayTotalPrice);
-            System.out.println(cart.calculateCartTotalPrice());
-        });
-
-        root.getChildren().addAll(checkoutButton, logoutButton, seeTotalPrice, products, cart.getPane());
+        root.getChildren().addAll(checkoutButton, logoutButton, products, cart.getPane());
         root.getChildren().addAll(buttons);
         scene = new Scene(root, width, height);
 
