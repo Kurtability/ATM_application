@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
 
+//import LiteSnacks.UI.Products;
 import LiteSnacks.backend.Item;
 
 public class Checkout {
@@ -83,7 +84,7 @@ public class Checkout {
         cancel.setLayoutY(400);
         cancel.setStyle("-fx-background-color: #DC143C");
         cancel.setTextFill(Color.WHITE);
-        cancel.setOnAction(event -> {new Products(width,height,stage).setScene();});
+        //cancel.setOnAction(event -> {new Products(width,height,stage).setScene();});
 
         Pane specs = new Pane();
         specs.getChildren().addAll(card, cancel, cash, label, label2);
