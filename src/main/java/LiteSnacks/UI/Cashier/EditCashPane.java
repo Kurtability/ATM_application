@@ -1,6 +1,6 @@
 package LiteSnacks.UI.Cashier;
 
-import LiteSnacks.UI.Cash;
+import LiteSnacks.backend.Cash;
 import LiteSnacks.UI.QuantityModifier;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;

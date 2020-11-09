@@ -6,11 +6,11 @@ import org.junit.Test;
 
 public class CashierReportsTest {
     @Test
-    public void ObjectTest(){
-        try{
-            CashierReportsScene scene = new CashierReportsScene(640,500,new Stage());
+    public void ObjectTest() {
+        try {
+            CashierReportsScene scene = new CashierReportsScene(640, 500, new Stage());
             scene.setScene();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("cashierReportScene construct failed");
         }
     }

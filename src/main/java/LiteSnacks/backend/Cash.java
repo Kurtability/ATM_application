@@ -1,4 +1,4 @@
-package LiteSnacks.UI;
+package LiteSnacks.backend;
 
 public class Cash {
     int qty;
@@ -24,6 +24,10 @@ public class Cash {
         return this.image;
     }
 
+    public int getInput() {
+        return this.input;
+    }
+
     public boolean modifyqty(int gap) {
         if (qty + gap < 0) {
             return false;
@@ -32,7 +36,8 @@ public class Cash {
         }
         return true;
     }
-    public boolean modifyInput(int gap){
+
+    public boolean modifyInput(int gap) {
         if (input + gap < 0) {
             return false;
         } else {

@@ -1,5 +1,6 @@
 package LiteSnacks.UI;
 
+import LiteSnacks.backend.Cash;
 import LiteSnacks.backend.Item;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
@@ -45,7 +46,7 @@ public class QuantityModifier {
         this.pane.getChildren().addAll(addQty, qtylabel, subQty);
     }
 
-    public QuantityModifier(Cash item,boolean is_edit) {
+    public QuantityModifier(Cash item, boolean is_edit) {
         // item is object that store qty refrence
         Text qtylabel = new Text();
 
@@ -53,16 +54,16 @@ public class QuantityModifier {
         addQty.setTextFill(Color.WHITE);
         Button subQty = new Button("-");
         subQty.setTextFill(Color.WHITE);
-        if (is_edit){
-            qtylabel.setText(String.valueOf(item.qty));
+        if (is_edit) {
+            qtylabel.setText(String.valueOf(item.getQty()));
             addQty.setOnAction(event -> {
                 modifyQty(item, qtylabel, 1);
             });
             subQty.setOnAction(event -> {
                 modifyQty(item, qtylabel, -1);
             });
-        }else{
-            qtylabel.setText(String.valueOf(item.input));
+        } else {
+            qtylabel.setText(String.valueOf(item.getInput()));
             addQty.setOnAction(event -> {
                 modifyCashInput(item, qtylabel, 1);
             });
@@ -71,7 +72,6 @@ public class QuantityModifier {
             });
 
         }
-
 
         this.pane = new Pane();
         this.pane.setPrefHeight(28);
@@ -108,9 +108,10 @@ public class QuantityModifier {
         item.modifyqty(gap);
         label.setText(String.valueOf(item.getQty()));
     }
+
     public void modifyCashInput(Cash item, Text label, int gap) {
 
         item.modifyInput(gap);
-        label.setText(String.valueOf(item.input));
+        label.setText(String.valueOf(item.getInput()));
     }
 }

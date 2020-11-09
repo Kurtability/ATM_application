@@ -1,7 +1,7 @@
 package LiteSnacks.UI.Cashier;
 
-import LiteSnacks.UI.Cash;
 import LiteSnacks.UI.Seller.SellerMainScene;
+import LiteSnacks.backend.Cash;
 import LiteSnacks.backend.CashHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;

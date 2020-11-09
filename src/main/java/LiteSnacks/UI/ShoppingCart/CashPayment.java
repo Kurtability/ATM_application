@@ -1,6 +1,6 @@
 package LiteSnacks.UI.ShoppingCart;
 
-import LiteSnacks.UI.Cash;
+import LiteSnacks.backend.Cash;
 import LiteSnacks.UI.Cashier.EditCashPane;
 import LiteSnacks.UI.Seller.SellerMainScene;
 import LiteSnacks.backend.CashHandler;
