@@ -2,6 +2,7 @@ package LiteSnacks.UI;
 
 public class Cash {
     int qty;
+    int input = 0;
     double value;
     String image;
 
@@ -28,6 +29,14 @@ public class Cash {
             return false;
         } else {
             this.qty = qty + (gap);
+        }
+        return true;
+    }
+    public boolean modifyInput(int gap){
+        if (input + gap < 0) {
+            return false;
+        } else {
+            this.input = input + (gap);
         }
         return true;
     }
