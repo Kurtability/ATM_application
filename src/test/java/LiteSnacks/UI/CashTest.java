@@ -1,4 +1,4 @@
-package LiteSnacks.UI.Casherpage;
+package LiteSnacks.UI;
 
 import LiteSnacks.UI.Cash;
 import org.junit.Test;
