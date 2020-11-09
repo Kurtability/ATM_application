@@ -1,6 +1,6 @@
 package LiteSnacks.UI.Cashierpage;
 
-import LiteSnacks.UI.Cash;
+import LiteSnacks.backend.Cash;
 import LiteSnacks.UI.Cashier.EditCashPane;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.Test;

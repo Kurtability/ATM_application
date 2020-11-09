@@ -1,5 +1,6 @@
 package LiteSnacks.UI;
 
+import LiteSnacks.backend.Cash;
 import LiteSnacks.backend.Item;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
@@ -47,7 +48,7 @@ public class QuantityModifier {
 
     public QuantityModifier(Cash item) {
         // item is object that store qty refrence
-        Text qtylabel = new Text(String.valueOf(item.qty));
+        Text qtylabel = new Text(String.valueOf(item.getQty()));
 
         Button addQty = new Button("+");
         addQty.setTextFill(Color.WHITE);

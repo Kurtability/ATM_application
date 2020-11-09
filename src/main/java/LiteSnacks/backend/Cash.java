@@ -1,4 +1,4 @@
-package LiteSnacks.UI;
+package LiteSnacks.backend;
 
 public class Cash {
     int qty;
