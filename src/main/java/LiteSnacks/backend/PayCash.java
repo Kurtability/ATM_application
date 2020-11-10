@@ -44,6 +44,7 @@ public class PayCash {
         else {
             setCashReserves(copy);
         }
+        c.Submit(cashReserves);
         return change;
     }
 
