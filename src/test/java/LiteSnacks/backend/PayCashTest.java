@@ -12,21 +12,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class PayCashTest {
-    PayCash pc = new PayCash();
 
     @Test
     void calculateAddChangeTest() {
         double[][] sufficientCash = {{50.0, 5}, {20.0, 5}, {10, 5}, {5, 5}, {2, 5}, {1, 5}, {0.5, 5}, {0.2, 5}, {0.1, 5}, {0.05, 5}};
-        pc.setCashReserves(toList(sufficientCash));
+        PayCash.setCashReserves(toList(sufficientCash));
 
         double[][] toAdd = {{50, 1}};
 
-        assertTrue(pc.addCash(toList(toAdd)));
+        assertTrue(PayCash.addCash(toList(toAdd)));
 
         Cash cashObj = null;
         boolean found = false;
-        for(int i=0; !found && i<pc.getCashReserves().size(); i++){
-            cashObj = pc.getCashReserves().get(i);
+        for(int i=0; !found && i<PayCash.getCashReserves().size(); i++){
+            cashObj = PayCash.getCashReserves().get(i);
             if(cashObj.getValue() == 50.0)
                 found = true;
         }
@@ -38,10 +37,10 @@ public class PayCashTest {
 
         double[][] anotherToAdd = {{50, 1}, {20, 3}};
 
-        assertTrue(pc.addCash(toList(anotherToAdd)));
+        assertTrue(PayCash.addCash(toList(anotherToAdd)));
 
-        for(int i=0; i<pc.getCashReserves().size(); i++){
-            cashObj = pc.getCashReserves().get(i);
+        for(int i=0; i<PayCash.getCashReserves().size(); i++){
+            cashObj = PayCash.getCashReserves().get(i);
             if(cashObj.getValue() == 50.0)
                 assertEquals(7, cashObj.getQty());
             else if(cashObj.getValue() == 20)
@@ -50,11 +49,11 @@ public class PayCashTest {
 
         double[][] failToAdd = { {-1, -1} };
 
-        assertFalse(pc.addCash(toList(failToAdd)));
+        assertFalse(PayCash.addCash(toList(failToAdd)));
 
         found = false;
-        for(int i=0; !found && i<pc.getCashReserves().size(); i++){
-            cashObj = pc.getCashReserves().get(i);
+        for(int i=0; !found && i<PayCash.getCashReserves().size(); i++){
+            cashObj = PayCash.getCashReserves().get(i);
             if(cashObj.getValue() == -1)
                 found = true;
         }
@@ -66,41 +65,41 @@ public class PayCashTest {
 
         // Bountiful money
         double[][] sufficientCash = {{50.0, 5}, {20.0, 5}, {10, 5}, {5, 5}, {2, 5}, {1, 5}, {0.5, 5}, {0.2, 5}, {0.1, 5}, {0.05, 5}};
-        pc.setCashReserves(toList(sufficientCash));
+        PayCash.setCashReserves(toList(sufficientCash));
 
         double[] passRequiredChange = {0, 1, 3, 4, 1.10, 1.05, 0.05, 0.2, 0.25};
         String[] passResults = {"$0", "$1.0", "$2.0 $1.0", "$2.0 $2.0", "$1.0 $0.1", "$1.0 $0.05", "$0.05", "$0.2", "$0.2 $0.05"};
 
         for(int i = 0; i < passRequiredChange.length; i++) {
-            assertEquals(passResults[i], pc.calculateChange(passRequiredChange[i]));
+            assertEquals(passResults[i], PayCash.calculateChange(passRequiredChange[i]));
         }
 
         // Sparse cash
         double[][] sparseCash = {{50.0, 1}, {20.0, 1}, {10, 2}, {5, 1}, {2, 1}, {1, 1}, {0.5, 1}, {0.2, 1}, {0.1, 1}, {0.05, 1}};
-        pc.setCashReserves(toList(sparseCash));
+        PayCash.setCashReserves(toList(sparseCash));
         double[] passSparseChange = { 1, 0.15, 40};
         String[] passSparseResults = { "$1.0", "$0.1 $0.05", "$20.0 $10.0 $10.0" };
         for(int i = 0; i < passSparseChange.length; i++) {
-            assertEquals(passSparseResults[i], pc.calculateChange(passSparseChange[i]));
+            assertEquals(passSparseResults[i], PayCash.calculateChange(passSparseChange[i]));
         }
 
         // Fail cases
         double[] failures = { -1, 0.21 };
         for(int i=0; i<failures.length; i++)
-            assertEquals("Insufficient Change. Please try another payment method", pc.calculateChange(failures[i]));
+            assertEquals("Insufficient Change. Please try another payment method", PayCash.calculateChange(failures[i]));
     }
 
     @Test
     public void submitPaymentTest() {
         double[][] sufficientCash = {{50.0, 5}, {20.0, 5}, {10, 5}, {5, 5}, {2, 5}, {1, 5}, {0.5, 5}, {0.2, 5}, {0.1, 5}, {0.05, 5}};
-        pc.setCashReserves(toList(sufficientCash));
+        PayCash.setCashReserves(toList(sufficientCash));
 
         double[][] customerPayment = {{20, 1}};
-        assertEquals("$2.0", pc.submitPayment(toList(customerPayment), 18));
-        assertEquals("Insufficient Change. Please try another payment method", pc.submitPayment((toList(customerPayment)), 21));
+        assertEquals("$2.0", PayCash.submitPayment(toList(customerPayment), 18));
+        assertEquals("Insufficient Change. Please try another payment method", PayCash.submitPayment((toList(customerPayment)), 21));
 
         customerPayment = new double[][] {{-1, 2}};
-        assertEquals("Something went wrong with 'addCash()", pc.submitPayment((toList(customerPayment)), 20));
+        assertEquals("Something went wrong with 'addCash()", PayCash.submitPayment((toList(customerPayment)), 20));
     }
 
     private List<Cash> toList(double[][] newFile) {

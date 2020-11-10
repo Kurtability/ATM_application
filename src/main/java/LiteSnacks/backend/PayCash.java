@@ -6,18 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PayCash {
-    private List<Cash> cashReserves;
-    private final CashHandler c = new CashHandler();
+    private static List<Cash> cashReserves;
+    private static final CashHandler c = new CashHandler();
 
     public PayCash() {
         this.cashReserves = c.getcashes();
     }
 
-    public void setCashReserves(List<Cash> newValues) {
-        this.cashReserves = newValues;
+    public static void setCashReserves(List<Cash> newValues) {
+        cashReserves = newValues;
     }
 
-    public List<Cash> getCashReserves() {
+    public static List<Cash> getCashReserves() {
         return cashReserves;
     }
 
@@ -26,7 +26,7 @@ public class PayCash {
     price: total price of goods
     change: change given by the vending machine as a string
      */
-    public String submitPayment(List<Cash> customerCash, double price){
+    public static String submitPayment(List<Cash> customerCash, double price){
         String change = "Something went wrong with 'addCash()";
         List<Cash> copy = clone(cashReserves);
 
@@ -51,7 +51,7 @@ public class PayCash {
     /*
     The customer will give cash to the vending machine. This cash will be added to the vending machines total
      */
-    public boolean addCash(List<Cash> customerCash) {
+    public static boolean addCash(List<Cash> customerCash) {
         boolean success = false;
         if(verifyAllQPos(customerCash)) {
             int successes = 0;
@@ -75,7 +75,7 @@ public class PayCash {
     }
 
     // Returns true if each cash.qty >= 0
-    private boolean verifyAllQPos(List<Cash> cash) {
+    private static boolean verifyAllQPos(List<Cash> cash) {
         boolean verified = true;
         Cash cashObj;
         for(int i=0; i<cash.size() && verified; i++) {
@@ -86,7 +86,7 @@ public class PayCash {
         return verified;
     }
 
-    public String calculateChange(double change) {
+    public static String calculateChange(double change) {
         // Convert "change" to integers to avoid floating-point errors
         int intChange = (int)(change*100);
 
@@ -119,7 +119,7 @@ public class PayCash {
     return sb.toString().trim();
     }
 
-    public List<Cash> clone(List<Cash> sweetCash) {
+    public static List<Cash> clone(List<Cash> sweetCash) {
         List<Cash> copy = new ArrayList<>(sweetCash.size());
         Cash newCash;
         for(Cash c : sweetCash) {
