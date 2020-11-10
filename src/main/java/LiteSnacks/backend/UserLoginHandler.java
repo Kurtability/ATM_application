@@ -104,6 +104,53 @@ public class UserLoginHandler {
     }
 
 
+    public  boolean checkUser(String username, String password) {
+        List<UserAccount> user = getUsers();
+        for (int i = 0; i < user.size(); i++) {
+            String nme = user.get(i).getUserName();
+            String pass = user.get(i).getUserName();
+            if (nme.equals(username) && pass.equals(password)) {
+                return true;
+            }
+        }
+        for (int i = 0; i < user.size(); i++) {
+            String nme = user.get(i).getUserName();
+            String pass = user.get(i).getUserName();
+            if (nme.equals(username)) {
+                System.out.println("Wrong Password");
+                return false;
+            }else if (i == user.size() - 1) {
+                System.out.println("Account does not exist");
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public boolean addUser (String name, String pass, String role){
+        try{
+            PrintWriter writer= new PrintWriter(this.userFile);
+            for(int i=0; i<users.size(); i++){
+                if(users.get(i).getUserName().equals(name)){
+                    System.out.println("Account already Exists. Please change username");
+                    return false;
+                }else if(i==users.size()-1){
+                    users.add(new UserAccount(name,pass, role));
+                    writer.println(name+","+ pass+","+ role);
+                }
+
+            }
+        }catch( FileNotFoundException e){
+            e.printStackTrace();
+            return false;
+        }
+        return false;
+
+    }
+
+
+
+
 
 
 //    /*Method to veriy User exists
