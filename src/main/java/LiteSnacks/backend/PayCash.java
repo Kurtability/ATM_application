@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PayCash {
-    private static List<Cash> cashReserves;
     private static final CashHandler c = new CashHandler();
+    private static List<Cash> cashReserves = c.getcashes();
 
     public PayCash() {
         this.cashReserves = c.getcashes();
