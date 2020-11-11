@@ -24,6 +24,7 @@ public class Cash {
         return this.image;
     }
 
+
     public int getInput() {
         return this.input;
     }
@@ -36,6 +37,7 @@ public class Cash {
         }
         return true;
     }
+
 
     public boolean modifyInput(int gap) {
         if (input + gap < 0) {
