@@ -9,10 +9,6 @@ public class PayCash {
     private static final CashHandler c = new CashHandler();
     private static List<Cash> cashReserves = c.getcashes();
 
-    public PayCash() {
-        this.cashReserves = c.getcashes();
-    }
-
     public static void setCashReserves(List<Cash> newValues) {
         cashReserves = newValues;
     }
@@ -101,7 +97,7 @@ public class PayCash {
             if(intChange >= cashObjectValue && cashObject.getQty() > 0) {
                 intChange = intChange - cashObjectValue;
                 cashObject.modifyqty(-1);
-                sb.append("$" + cashObject.getValue());
+                sb.append("$").append(cashObject.getValue());
                 sb.append(" ");
             }
             else {
