@@ -1,30 +1,33 @@
-package LiteSnacks.UI.Cashier;
+package LiteSnacks.UI.ShoppingCart;
 
 import LiteSnacks.backend.Cash;
 import LiteSnacks.UI.QuantityModifier;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class EditCashPane {
+public class CashPane {
     Pane pane;
     Cash cash;
 
-    public EditCashPane(Cash cash) {
+    public CashPane(Cash cash,CashPayment cashPayment) {
         this.cash = cash;
         this.pane = new Pane();
         this.pane.setPrefWidth(100);
         this.pane.setPrefHeight(120);
         this.pane.setStyle("-fx-background-color: #d9d9d9;");
 
-        Pane qtymdfier = new QuantityModifier(cash).getPane();
+        Pane qtymdfier = new QuantityModifier(cash,cashPayment).getPane();
         qtymdfier.setLayoutX(13);
         qtymdfier.setLayoutY(90);
 
         // price
         Text value = new Text("$ " + cash.getValue());
-        value.setLayoutX(31);
-        value.setLayoutY(85);
+        value.setFont(new Font(20));
+        value.setLayoutX(20);
+        value.setLayoutY(65);
 
         ImageView image = new ImageView(cash.getImg());
 
@@ -41,4 +44,6 @@ public class EditCashPane {
         return this.pane;
     }
     public Cash getCash() {return this.cash;}
+
+
 }

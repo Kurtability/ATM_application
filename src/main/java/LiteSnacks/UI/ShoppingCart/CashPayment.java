@@ -1,10 +1,12 @@
-package LiteSnacks.UI.Cashier;
+package LiteSnacks.UI.ShoppingCart;
 
-import LiteSnacks.UI.Seller.SellerMainScene;
 import LiteSnacks.backend.Cash;
+import LiteSnacks.UI.Cashier.EditCashPane;
+import LiteSnacks.UI.Seller.SellerMainScene;
 import LiteSnacks.backend.CashHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -14,13 +16,14 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditCashes {
+public class CashPayment {
     Scene scene;
     Stage stage;
-    List<EditCashPane> editCashPanes;
+    List<CashPane> CashPanes;
     List<Cash> cashes;
+    Text input;
 
-    public EditCashes(double width, double height, Stage stage) {
+    public CashPayment(double width, double height, Stage stage) {
         Pane root = new Pane();
         this.stage = stage;
 
@@ -29,27 +32,43 @@ public class EditCashes {
          ***/
         CashHandler ch = new CashHandler();
         cashes = ch.getcashes();
-        this.editCashPanes = getEditCashPanes(cashes);
-        Pane cashWholePane = getPaneForCashes(this.editCashPanes);
+        this.CashPanes = getCashPanes(cashes);
+        Pane cashWholePane = getPaneForCashes(this.CashPanes);
 
         // Pane for cashes
         Pane CashPane = new Pane();
         cashWholePane.setPrefHeight(304);
         cashWholePane.setPrefWidth(580);
+       // cashWholePane.setStyle("-fx-background-color: black;");
         cashWholePane.setLayoutX(10);
-        cashWholePane.setLayoutY(25);
+        cashWholePane.setLayoutY(60);
 
         // label
-        Text label = new Text("Edit Cashes");
+        Text label = new Text("Please Input Cash");
         label.setLayoutX(10);
         label.setLayoutY(20);
         label.setFont(new Font(20));
         label.setFill(Color.rgb(0, 66, 127));
 
+
+        //input
+        Text price = new Text("Total price : ");
+        price.setLayoutX(10);
+        price.setLayoutY(350);
+        price.setFont(new Font(20));
+        price.setFill(Color.rgb(0, 66, 127));
+
+        //input
+        this.input = new Text("Total Input : 0");
+        input.setLayoutX(10);
+        input.setLayoutY(400);
+        input.setFont(new Font(20));
+        input.setFill(Color.rgb(0, 66, 127));
+
         // SUBMIT BUTTON
-        Button submit1 = createButton("submit", 500, 360, 27, 81);
+        Button submit1 = createButton("Pay Now", 500, 400, 27, 81);
         submit1.setOnAction(e -> {
-            submit();
+            pay();
         });
 
         // back
@@ -57,12 +76,12 @@ public class EditCashes {
         back.setStyle("-fx-background-color: transparent;");
         back.setFont(new Font(20));
         back.setOnAction(e -> {
-            new CashierMainScene(width, height, stage).setScene();
+            /***transaction object***/
         });
         back.setLayoutX(500);
         back.setLayoutY(1);
 
-        root.getChildren().addAll(CashPane, cashWholePane, label, back);
+        root.getChildren().addAll(CashPane, cashWholePane, label, back,input,price);
         root.getChildren().add(submit1);
         this.scene = new Scene(root, width, height);
     }
@@ -77,28 +96,26 @@ public class EditCashes {
 
     }
 
-    public void submit() {
-        System.out.println(1);
-        CashHandler ch = new CashHandler();
-        ch.Submit(this.cashes);
+    public void pay() {
+        /**some backend for that page**/
     }
 
-    public List<EditCashPane> getEditCashPanes(List<Cash> cashes) {
-        List<EditCashPane> panes = new ArrayList<EditCashPane>();
+    public List<CashPane> getCashPanes(List<Cash> cashes) {
+        List<CashPane> panes = new ArrayList<CashPane>();
         for (Cash each : cashes) {
-            EditCashPane pane = new EditCashPane(each);
+            CashPane pane = new CashPane(each,this);
             panes.add(pane);
         }
         return panes;
     }
 
-    public Pane getPaneForCashes(List<EditCashPane> panes) {
+    public Pane getPaneForCashes(List<CashPane> panes) {
         Pane box = new Pane();
         int row = 0;
         int column = 0;
 
-        for (EditCashPane editProductPane : panes) {
-            Pane each = editProductPane.getPane();
+        for (CashPane cashPane : panes) {
+            Pane each = cashPane.getPane();
             each.setLayoutX(120 * row);
             each.setLayoutY(130 * column);
             box.getChildren().add(each);
@@ -127,5 +144,15 @@ public class EditCashes {
     }
     public Scene getScene(){
         return this.scene;
+    }
+    public List<Cash> getCashes(){return this.cashes;}
+    public void updateInput(){
+        double total = 0;
+
+        for (Cash cash : getCashes()){
+
+            total = Math.round((total + (Math.round(cash.getValue()*100.0)/100.0)*cash.getInput())*100.0)/100.0;
+        }
+        this.input.setText("Total Input : "+total);
     }
 }
