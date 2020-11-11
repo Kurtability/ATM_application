@@ -1,7 +1,5 @@
 package LiteSnacks.backend;
 
-import LiteSnacks.UI.Cash;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +45,7 @@ public class PayCash {
     /*
     The customer will give cash to the vending machine. This cash will be added to the vending machines total
      */
-    public static boolean addCash(List<Cash> customerCash) {
+    private static boolean addCash(List<Cash> customerCash) {
         boolean success = false;
         if(verifyAllQPos(customerCash)) {
             int successes = 0;
@@ -82,7 +80,7 @@ public class PayCash {
         return verified;
     }
 
-    public static String calculateChange(double change) {
+    private static String calculateChange(double change) {
         // Convert "change" to integers to avoid floating-point errors
         int intChange = (int)(change*100);
 
@@ -115,7 +113,7 @@ public class PayCash {
     return sb.toString().trim();
     }
 
-    public static List<Cash> clone(List<Cash> sweetCash) {
+    private static List<Cash> clone(List<Cash> sweetCash) {
         List<Cash> copy = new ArrayList<>(sweetCash.size());
         Cash newCash;
         for(Cash c : sweetCash) {
