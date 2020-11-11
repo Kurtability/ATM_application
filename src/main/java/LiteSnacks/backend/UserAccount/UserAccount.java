@@ -18,6 +18,10 @@ public class UserAccount {
         this.role = role;
     }
 
+    public String toString(){
+        return "Username: " + userName + ", " + "Password: " + password + ", " + "Role: " + role;
+    }
+
 //    public boolean getLoggedInStatus(){
 //        return isLoggedIn;
 //    }

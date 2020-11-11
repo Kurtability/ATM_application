@@ -17,10 +17,11 @@ public class UserLoginHandler {
 
     public UserLoginHandler() {
         this.userFile = ResourceHandler.getUserFile();
+        System.out.println(userFile);
     }
 
 
-    public List<String> getUsername(){
+    public List<String> getUsernames(){
 
         Scanner sc;
         try {
@@ -36,7 +37,6 @@ public class UserLoginHandler {
             String line = sc.nextLine();
             String[] details;
             details = line.split(",");
-
             usernames.add(details[0]);
         }
         sc.close();
@@ -61,7 +61,8 @@ public class UserLoginHandler {
             String[] details;
             details = line.split(",");
 
-            password = details[1];
+
+            password = details[1].strip();
             passwords.add(password);
         }
         sc.close();
@@ -84,7 +85,7 @@ public class UserLoginHandler {
             String[] details;
             details = line.split(",");
 
-            role = details[2];
+            role = details[2].strip();
             roles.add(role);
         }
         sc.close();
@@ -93,33 +94,35 @@ public class UserLoginHandler {
 
 
     public List<UserAccount> getUsers(){
-        List<UserAccount> users = new ArrayList<>();
-
+        users = new ArrayList<>();
         int i = 0;
-        while (i <getUsername().size()){
-            user = new UserAccount(getUsername().get(i), getPasswords().get(i), getRoles().get(i));
+        while (i < getUsernames().size() && i <getPasswords().size() && i< getRoles().size()){
+            user = new UserAccount(getUsernames().get(i), getPasswords().get(i), getRoles().get(i));
             users.add(user);
+            i ++;
         }
         return users;
     }
 
 
+
     public  boolean checkUser(String username, String password) {
-        List<UserAccount> user = getUsers();
-        for (int i = 0; i < user.size(); i++) {
-            String nme = user.get(i).getUserName();
-            String pass = user.get(i).getUserName();
+       users = getUsers();
+
+        for (int i = 0; i < users.size(); i++) {
+            String nme = users.get(i).getUserName();
+            String pass = users.get(i).getPassword();
             if (nme.equals(username) && pass.equals(password)) {
                 return true;
             }
         }
-        for (int i = 0; i < user.size(); i++) {
-            String nme = user.get(i).getUserName();
-            String pass = user.get(i).getUserName();
-            if (nme.equals(username)) {
+        for (int i = 0; i < users.size(); i++) {
+            String nme = users.get(i).getUserName();
+            String pass = users.get(i).getPassword();
+            if (nme.equals(username) && ! pass.equals(password)) {
                 System.out.println("Wrong Password");
                 return false;
-            }else if (i == user.size() - 1) {
+            }else if (i == users.size() - 1) {
                 System.out.println("Account does not exist");
                 return false;
             }
@@ -127,87 +130,33 @@ public class UserLoginHandler {
         return false;
     }
 
-    public boolean addUser (String name, String pass, String role){
+
+
+    public void addUser (String name, String pass, String role){
+
+        users = getUsers();
+        System.out.println(users);
+
         try{
             PrintWriter writer= new PrintWriter(this.userFile);
+
             for(int i=0; i<users.size(); i++){
+
                 if(users.get(i).getUserName().equals(name)){
+
                     System.out.println("Account already Exists. Please change username");
-                    return false;
+                    //return false;
                 }else if(i==users.size()-1){
                     users.add(new UserAccount(name,pass, role));
-                    writer.println(name+","+ pass+","+ role);
+                    writer.println(name+", "+ pass+", "+ role);
                 }
 
             }
         }catch( FileNotFoundException e){
             e.printStackTrace();
-            return false;
+            //return false;
         }
-        return false;
+        //return false;
 
     }
-
-
-
-
-
-
-//    /*Method to veriy User exists
-//    * Looks into User.txt to see if the username and password exists
-//    * Finds if the User is Seller/ Cashier/ Customer
-//    * */
-//    public static boolean checkUser(String username, String password){
-//         boolean selllerAccess=false;
-//         boolean customerAccess=false;
-//         boolean CashierAccess=false;
-//        try{
-//            Scanner scan =new Scanner(new File(fle));
-//            String[] details=null;
-//            String AccessRights=null;
-//            while (scan.hasNextLine()){
-//                String line=scan.nextLine();
-//                if(line.contains(username) && line.contains(password) ){
-//                    details=line.split(",");
-//                    if(details[1].equals(username) && details[2].equals(password)){
-//                        if(details[0].equals("Seller")){selllerAccess=true;}
-//                        else if (details[0].equals("Customer")){customerAccess=true;}
-//                        else if (details[0].equals("Cashier")){CashierAccess=true;}
-//                        return true;
-//                    }
-//                }
-//            }
-//
-//        }
-//        catch(FileNotFoundException e){
-//            System.out.println("An error occured");
-//        }
-//
-//        return false;
-//    }
-//
-//
-//    /*
-//    * writes to the User.txt new Users username and Password
-//    *  */
-//
-//    public static boolean addUser (String name, String pass){
-//        try{
-//            FileWriter writer= new FileWriter(new File(fle));
-//            if(checkUser(name, pass)==false){
-//                writer.write(name+","+"pass");
-//                return true;
-//            }else{
-//                System.out.println("User already exists");
-//            }
-//        }
-//        catch(FileNotFoundException e){
-//            System.out.println("An error occured");
-//        }
-//        catch(IOException e){
-//            System.out.println("An error Occured");
-//        }
-//        return false;
-//    }
-
 }

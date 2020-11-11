@@ -4,12 +4,15 @@
 package LiteSnacks;
 
 import LiteSnacks.UI.Products;
+import LiteSnacks.backend.UserLoginHandler;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class App extends Application{
 
     Products productScene;
+
+    UserLoginHandler handler;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -24,6 +27,12 @@ public class App extends Application{
         //********
 
         primaryStage.show();
+
+        handler = new UserLoginHandler();
+        //System.out.println(handler.getUsers());
+
+        System.out.println(handler.checkUser("Adam","1234"));
+        //handler.addUser("KP","1234","KingPin");
     }
 
     public static void main(String[] args) {
