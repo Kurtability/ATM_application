@@ -14,11 +14,9 @@ public class CreditCardHandler {
 
     public static boolean checkCard(String name, String creditCardNumber) {
         boolean verified = false;
-        if(name != null && creditCardNumber != null && !name.isEmpty() && !creditCardNumber.isEmpty()) {
-            HashMap<String, String> creditCards = getCards();
-            if(creditCards.containsKey(creditCardNumber)) {
-                verified = creditCards.get(creditCardNumber).equals(name);
-            }
+        HashMap<String, String> creditCards = getCards();
+        if(creditCards.containsKey(creditCardNumber)) {
+            verified = creditCards.get(creditCardNumber).equals(name);
         }
         return verified;
     }
