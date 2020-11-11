@@ -57,7 +57,7 @@ public class EditCashes {
         back.setStyle("-fx-background-color: transparent;");
         back.setFont(new Font(20));
         back.setOnAction(e -> {
-            new SellerMainScene(width, height, stage).setScene();
+            new CashierMainScene(width, height, stage).setScene();
         });
         back.setLayoutX(500);
         back.setLayoutY(1);

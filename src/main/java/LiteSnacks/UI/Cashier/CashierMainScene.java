@@ -19,7 +19,7 @@ public class CashierMainScene {
         Pane root = new Pane();
         Pane loginpane = new Pane();
         // lable
-        Label label = new Label("Welcome Seller");
+        Label label = new Label("Welcome Cashier");
         label.setLayoutX(41);
         label.setLayoutY(30);
         label.setFont(new Font("Arial", 30));

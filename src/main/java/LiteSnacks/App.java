@@ -3,7 +3,10 @@
  */
 package LiteSnacks;
 
+import LiteSnacks.UI.Cashier.CashierMainScene;
 import LiteSnacks.UI.Products;
+import LiteSnacks.UI.Seller.SellerMainScene;
+import LiteSnacks.UI.ShoppingCart.CashPayment;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -19,8 +22,8 @@ public class App extends Application{
         //LoginScene loginScene = new LoginScene(1200,600,primaryStage);
 
         this.productScene = new Products(640,480,primaryStage);
-        //CashPayment scene = new CashPayment(640,480,primaryStage);
-        productScene.setScene();
+        CashPayment scene = new CashPayment(640,480,primaryStage);
+        scene.setScene();
         //loginScene.setScene();
         //********
 
