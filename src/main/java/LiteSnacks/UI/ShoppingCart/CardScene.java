@@ -68,6 +68,16 @@ public class CardScene {
         number.setLayoutX(275);
         number.setLayoutY(225);
 
+        // back
+        Button back = new Button("Back");
+        back.setStyle("-fx-background-color: #DC143C");
+        back.setTextFill(Color.WHITE);
+        back.setOnAction(e -> {
+            new Checkout(width,height,stage,cart).setScene();
+        });
+        back.setLayoutX(500);
+        back.setLayoutY(430);
+
         Button pay = new Button("Pay Now");
         pay.setLayoutX(240);
         pay.setLayoutY(335);
@@ -90,7 +100,7 @@ public class CardScene {
         cancel.setTextFill(Color.WHITE);
         cancel.setOnAction(event -> {new Products(width,height,stage).setScene();});
 
-        root.getChildren().addAll(name, givenName, cardLabel, cancel, title2, pay, price, title, number, fail);
+        root.getChildren().addAll(name, givenName, cardLabel, cancel, title2, pay, price, title, number, fail, back);
 
         scene = new Scene(root, width, height);
     }
