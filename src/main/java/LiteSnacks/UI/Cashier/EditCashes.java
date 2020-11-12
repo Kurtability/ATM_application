@@ -37,7 +37,7 @@ public class EditCashes {
         cashWholePane.setPrefHeight(304);
         cashWholePane.setPrefWidth(580);
         cashWholePane.setLayoutX(10);
-        cashWholePane.setLayoutY(25);
+        cashWholePane.setLayoutY(45);
 
         // label
         Text label = new Text("Edit Cashes");
@@ -46,10 +46,18 @@ public class EditCashes {
         label.setFont(new Font(20));
         label.setFill(Color.rgb(0, 66, 127));
 
+        //all done
+        Text alldone = new Text("All done!");
+        alldone.setVisible(false);
+        alldone.setFill(Color.rgb(230,0,0));
+        alldone.setLayoutX(510);
+        alldone.setLayoutY(350);
+
         // SUBMIT BUTTON
         Button submit1 = createButton("submit", 500, 360, 27, 81);
         submit1.setOnAction(e -> {
            CashHandler.Submit(this.cashes);
+           alldone.setVisible(true);
         });
 
         // back
@@ -62,7 +70,7 @@ public class EditCashes {
         back.setLayoutX(500);
         back.setLayoutY(1);
 
-        root.getChildren().addAll(CashPane, cashWholePane, label, back);
+        root.getChildren().addAll(CashPane, cashWholePane, label, back,alldone);
         root.getChildren().add(submit1);
         this.scene = new Scene(root, width, height);
     }

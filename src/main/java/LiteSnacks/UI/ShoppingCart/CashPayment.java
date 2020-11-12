@@ -39,11 +39,9 @@ public class CashPayment {
          ***/
         CashHandler ch = new CashHandler();
         cashes = ch.getcashes();
-
         for (Cash each : cashes){
             each.setQty(0);
         }
-
         this.CashPanes = getCashPanes(cashes);
         Pane cashWholePane = getPaneForCashes(this.CashPanes);
 
@@ -51,7 +49,6 @@ public class CashPayment {
         Pane CashPane = new Pane();
         cashWholePane.setPrefHeight(304);
         cashWholePane.setPrefWidth(580);
-       // cashWholePane.setStyle("-fx-background-color: black;");
         cashWholePane.setLayoutX(10);
         cashWholePane.setLayoutY(60);
 
@@ -63,9 +60,8 @@ public class CashPayment {
         label.setFill(Color.rgb(0, 66, 127));
 
 
-        //input
-        Text price = new Text("Total price : "+totalPrice);
-
+        //total cost
+        Text price = new Text("Total cost : "+totalPrice);
         price.setLayoutX(10);
         price.setLayoutY(350);
         price.setFont(new Font(20));
@@ -73,7 +69,6 @@ public class CashPayment {
 
         //input
         this.input = new Text("Total Input : ");
-
         input.setLayoutX(10);
         input.setLayoutY(400);
         input.setFont(new Font(20));
@@ -84,6 +79,7 @@ public class CashPayment {
         submit1.setOnAction(e -> {
 
             System.out.println(PayCash.submitPayment(cashes,cart.getTotal()));
+            /**where go**/
 
 
         });
@@ -93,7 +89,7 @@ public class CashPayment {
         back.setStyle("-fx-background-color: transparent;");
         back.setFont(new Font(20));
         back.setOnAction(e -> {
-            /***transaction object***/
+            new Checkout(width,height,stage,cart).setScene();
         });
         back.setLayoutX(500);
         back.setLayoutY(1);
@@ -169,6 +165,6 @@ public class CashPayment {
             total = Math.round((total + (Math.round(cash.getValue()*100.0)/100.0)*cash.getQty())*100.0)/100.0;
 
         }
-        this.input.setText("Total Input : "+total);
+        this.input.setText("Total cost : "+total);
     }
 }

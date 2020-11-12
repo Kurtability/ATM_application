@@ -23,20 +23,20 @@ public class CashPane {
         qtymdfier.setLayoutX(13);
         qtymdfier.setLayoutY(90);
 
-        // price
-        Text value = new Text("$ " + cash.getValue());
-        value.setFont(new Font(20));
-        value.setLayoutX(20);
+        // value
+        Text value = new Text();
+        if (cash.getValue() >= 1){
+            value.setText("$ " + (int)cash.getValue());
+        }else{
+            value.setText((int)(cash.getValue()*100)+ "c");
+        }
+        value.setFont(new Font(28));
+        value.setLayoutX(15);
         value.setLayoutY(65);
 
-        ImageView image = new ImageView(cash.getImg());
 
-        image.setFitHeight(85);
-        image.setFitWidth(85);
-        image.setLayoutX(21);
-        image.setLayoutY(4);
 
-        this.pane.getChildren().addAll(value, image, qtymdfier);
+        this.pane.getChildren().addAll(value, qtymdfier);
 
     }
 
