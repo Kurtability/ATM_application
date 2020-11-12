@@ -1,16 +1,10 @@
 package LiteSnacks.UI.ShoppingCart;
 
 import LiteSnacks.backend.Cash;
-import LiteSnacks.UI.Style;
-import LiteSnacks.UI.Cashier.EditCashPane;
-import LiteSnacks.UI.Seller.SellerMainScene;
 import LiteSnacks.backend.CashHandler;
-
 import LiteSnacks.backend.PayCash;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Control;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -28,6 +22,7 @@ public class CashPayment {
     List<CashPane> CashPanes;
     List<Cash> cashes;
     Text input;
+    Text response;
 
     double totalPrice;
 
@@ -50,7 +45,7 @@ public class CashPayment {
 
         // Pane for cashes
         Pane CashPane = new Pane();
-        setXY(CashPane,10,60);
+        setXY(CashPane,10,45);
         setHW(CashPane,304,580);
 
         // label
@@ -59,26 +54,32 @@ public class CashPayment {
         label.setFont(new Font(20));
         label.setFill(Color.rgb(0, 66, 127));
 
+        response = new Text("");
+        setXY(response,10,425);
+        response.setFont(new Font(20));
+        response.setFill(Color.rgb(200, 0, 0));
 
         //total cost
-        Text price = new Text("Total cost : "+totalPrice);
-        setXY(price,10,350);
+        Text price = new Text("Total Cost: $" + totalPrice);
+        setXY(price,10,60);
         price.setFont(new Font(20));
         price.setFill(Color.rgb(0, 66, 127));
 
         //input
-        this.input = new Text("Total Input : ");
-        setXY(input,10,400);
+        this.input = new Text("Total Input: ");
+        setXY(input,10,100);
         input.setFont(new Font(20));
         input.setFill(Color.rgb(0, 66, 127));
 
         // SUBMIT BUTTON
         Button submit1 = createButton("Pay Now", 500, 400, 27, 81);
         submit1.setOnAction(e -> {
-
-            System.out.println(PayCash.submitPayment(cashes,cart.getTotal()));
-            /**where go**/
-
+            boolean pass = false;
+            String text = PayCash.submitPayment(cashes,cart.getTotal());
+            response.setText(text);
+            if(!text.equals("Insufficient Change. Please try another payment method")) {
+                new CashPaySuccess(width, height, stage, text).setScene();
+            }
 
         });
 
@@ -91,8 +92,7 @@ public class CashPayment {
         });
         setXY(back,500,1);
 
-
-        root.getChildren().addAll(CashPane, cashWholePane, label, back,input,price);
+        root.getChildren().addAll(CashPane, cashWholePane, label, back,input,price, response);
         root.getChildren().add(submit1);
         this.scene = new Scene(root, width, height);
     }
@@ -113,7 +113,7 @@ public class CashPayment {
     public Pane getPaneForCashes(List<CashPane> panes) {
         Pane box = new Pane();
         int row = 0;
-        int column = 0;
+        int column = 1;
 
         for (CashPane cashPane : panes) {
             Pane each = cashPane.getPane();
@@ -130,8 +130,6 @@ public class CashPayment {
         return box;
     }
 
-
-
     public void setScene() {
         stage.setScene(scene);
     }
@@ -141,12 +139,9 @@ public class CashPayment {
 
     public void updateInput(){
         double total = 0;
-
         for (Cash cash : this.cashes){
-
             total = Math.round((total + (Math.round(cash.getValue()*100.0)/100.0)*cash.getQty())*100.0)/100.0;
-
         }
-        this.input.setText("Total cost : "+total);
+        this.input.setText("Total Input: $" + total);
     }
 }
