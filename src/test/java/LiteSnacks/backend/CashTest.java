@@ -35,21 +35,6 @@ public class CashTest {
         assertEquals(1, object2.getQty());
 
     }
-    @Test
-    public void TestModifyInput() {
-        Cash object = new Cash(1, 10, "not_picture");
-        // normal
-        assertEquals(0,object.getInput());
-        assertFalse(object.modifyInput(-1));
-        assertTrue(object.modifyInput(1));
 
-        assertEquals(1, object.getInput());
-        assertTrue(object.modifyInput(-1));
-        assertEquals(0, object.getInput());
-        assertFalse(object.modifyInput(-2));
-        assertEquals(0, object.getInput());
-
-
-    }
 
 }

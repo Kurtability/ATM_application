@@ -4,6 +4,7 @@ import LiteSnacks.backend.Cash;
 import LiteSnacks.UI.Cashier.EditCashPane;
 import LiteSnacks.UI.Seller.SellerMainScene;
 import LiteSnacks.backend.CashHandler;
+import LiteSnacks.backend.PayCash;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
@@ -22,16 +23,21 @@ public class CashPayment {
     List<CashPane> CashPanes;
     List<Cash> cashes;
     Text input;
+    double totalPrice;
 
-    public CashPayment(double width, double height, Stage stage) {
+    public CashPayment(double width, double height, Stage stage,Cart cart) {
         Pane root = new Pane();
         this.stage = stage;
+        this.totalPrice = cart.getTotal();
 
         /***
          * retrieve cash from file
          ***/
         CashHandler ch = new CashHandler();
         cashes = ch.getcashes();
+        for (Cash each : cashes){
+            each.setQty(0);
+        }
         this.CashPanes = getCashPanes(cashes);
         Pane cashWholePane = getPaneForCashes(this.CashPanes);
 
@@ -52,14 +58,14 @@ public class CashPayment {
 
 
         //input
-        Text price = new Text("Total price : ");
+        Text price = new Text("Total price : "+totalPrice);
         price.setLayoutX(10);
         price.setLayoutY(350);
         price.setFont(new Font(20));
         price.setFill(Color.rgb(0, 66, 127));
 
         //input
-        this.input = new Text("Total Input : 0");
+        this.input = new Text("Total Input : ");
         input.setLayoutX(10);
         input.setLayoutY(400);
         input.setFont(new Font(20));
@@ -68,7 +74,8 @@ public class CashPayment {
         // SUBMIT BUTTON
         Button submit1 = createButton("Pay Now", 500, 400, 27, 81);
         submit1.setOnAction(e -> {
-            pay();
+            System.out.println(PayCash.submitPayment(cashes,cart.getTotal()));
+
         });
 
         // back
@@ -97,7 +104,10 @@ public class CashPayment {
     }
 
     public void pay() {
+
         /**some backend for that page**/
+
+        //PayCash.submitPayment();
     }
 
     public List<CashPane> getCashPanes(List<Cash> cashes) {
@@ -149,9 +159,9 @@ public class CashPayment {
     public void updateInput(){
         double total = 0;
 
-        for (Cash cash : getCashes()){
+        for (Cash cash : this.cashes){
 
-            total = Math.round((total + (Math.round(cash.getValue()*100.0)/100.0)*cash.getInput())*100.0)/100.0;
+            total = Math.round((total + (Math.round(cash.getValue()*100.0)/100.0)*cash.getQty())*100.0)/100.0;
         }
         this.input.setText("Total Input : "+total);
     }

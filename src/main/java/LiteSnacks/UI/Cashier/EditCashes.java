@@ -49,7 +49,7 @@ public class EditCashes {
         // SUBMIT BUTTON
         Button submit1 = createButton("submit", 500, 360, 27, 81);
         submit1.setOnAction(e -> {
-            submit();
+           CashHandler.Submit(this.cashes);
         });
 
         // back
