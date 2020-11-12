@@ -85,7 +85,17 @@ public class Products {
             new Checkout(width, height, stage, cart).setScene();
         });
 
-        root.getChildren().addAll(checkoutButton, logoutButton, products, cart.getPane());
+        Button cancel = new Button("Cancel");
+        cancel.setLayoutX(290);
+        cancel.setLayoutY(390);
+        cancel.setMinSize(100, 25);
+        cancel.setStyle("-fx-background-color: red");
+        cancel.setTextFill(Color.WHITE);
+        cancel.setOnAction(event -> {
+            new Products(width, height, stage).setScene();
+        });
+
+        root.getChildren().addAll(checkoutButton, logoutButton, products, cart.getPane(), cancel);
         root.getChildren().addAll(buttons);
         scene = new Scene(root, width, height);
 

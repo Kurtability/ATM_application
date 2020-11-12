@@ -43,27 +43,27 @@ public class EditCashesTest {
 
     }
 
-    @Test
-    public void createButtonTest() {
-        try {
-            EditCashes editCashes = new EditCashes(640, 480.0, new Stage());
-            Button button = editCashes.createButton("button", 1, 2, 3, 4);
+//    @Test
+//    public void createButtonTest() {
+//        try {
+//            EditCashes editCashes = new EditCashes(640, 480.0, new Stage());
+//            Button button = editCashes.createButton("button", 1, 2, 3, 4);
+//
+//        } catch (Exception e) {
+//            System.out.println("create buuton failed");
+//        }
+//    }
 
-        } catch (Exception e) {
-            System.out.println("create buuton failed");
-        }
-    }
-
-    @Test
-    public void buttonPropertyTest() {
-        EditCashes editCashes = new EditCashes(640, 480.0, new Stage());
-        Button button = editCashes.createButton("button", 1, 2, 3, 4);
-        assertEquals("button", button.getText());
-        assertEquals(1, button.getLayoutX());
-        assertEquals(2, button.getLayoutY());
-        assertEquals(3, button.getPrefHeight());
-        assertEquals(4, button.getPrefWidth());
-    }
+//    @Test
+//    public void buttonPropertyTest() {
+//        EditCashes editCashes = new EditCashes(640, 480.0, new Stage());
+//        Button button = editCashes.createButton("button", 1, 2, 3, 4);
+//        assertEquals("button", button.getText());
+//        assertEquals(1, button.getLayoutX());
+//        assertEquals(2, button.getLayoutY());
+//        assertEquals(3, button.getPrefHeight());
+//        assertEquals(4, button.getPrefWidth());
+//    }
 
     @Test
     public void getEditCashPanesTest() {

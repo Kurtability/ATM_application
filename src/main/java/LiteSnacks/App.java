@@ -22,8 +22,8 @@ public class App extends Application{
         //LoginScene loginScene = new LoginScene(1200,600,primaryStage);
 
         this.productScene = new Products(640,480,primaryStage);
-        CashierMainScene scene = new CashierMainScene(640,400,primaryStage);
-        scene.setScene();
+//        CashierMainScene scene = new CashierMainScene(640,400,primaryStage);
+        productScene.setScene();
         //loginScene.setScene();
         //********
 
