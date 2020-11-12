@@ -17,7 +17,7 @@ public class EditCashPane {
         this.pane.setPrefHeight(120);
         this.pane.setStyle("-fx-background-color: #d9d9d9;");
 
-        Pane qtymdfier = new QuantityModifier(cash,true).getPane();
+        Pane qtymdfier = new QuantityModifier(cash).getPane();
         qtymdfier.setLayoutX(13);
         qtymdfier.setLayoutY(90);
 
