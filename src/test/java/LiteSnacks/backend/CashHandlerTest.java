@@ -8,53 +8,56 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CashHandlerTest {
     @Test
-    public void CashHandlerConstructTest() {
-        try {
+    public void CashHandlerConstructTest(){
+        try{
             CashHandler handler = new CashHandler();
-        } catch (Exception e) {
+        }catch (Exception e){
             System.out.println("CashHandler construct failed");
         }
     }
-
     @Test
-    public void readFileTest() {
-        try {
+    public void readFileTest(){
+        try{
             CashHandler handler = new CashHandler();
             List<Cash> cashes = handler.readFile();
 
-        } catch (Exception e) {
+        }catch (Exception e){
+
             System.out.println("CashHandler read file failed");
         }
         CashHandler handler = new CashHandler();
         List<Cash> cashes = handler.readFile();
-        // assertNotNull(cashes);
-        assertEquals(10, cashes.size());
+
+        //assertNotNull(cashes);
+        assertEquals(10,cashes.size());
 
     }
-
     @Test
-    public void freshTest() {
+    public void freshTest(){
+
 
         CashHandler handler = new CashHandler();
         handler.fresh();
         assertNotNull(handler.getcashes());
 
-    }
 
+    }
     @Test
-    public void submitTest() {
+    public void submitTest(){
 
         CashHandler handler = new CashHandler();
         List<Cash> cashes = handler.readFile();
-        assertEquals(10, cashes.size());
+        assertEquals(10,cashes.size());
 
-        try {
+        try{
             handler.Submit(cashes);
-        } catch (Exception e) {
+        }catch (Exception e){
             System.out.println("submit failed");
         }
         cashes = handler.readFile();
-        assertEquals(10, cashes.size());
+        assertEquals(10,cashes.size());
+
+
 
     }
 

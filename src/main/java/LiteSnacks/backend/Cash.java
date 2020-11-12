@@ -23,6 +23,7 @@ public class Cash {
     public String getImg() {
         return this.image;
     }
+    public void setQty(int qty){this.qty = qty;}
 
 
     public int getInput() {
@@ -37,14 +38,3 @@ public class Cash {
         }
         return true;
     }
-
-
-    public boolean modifyInput(int gap) {
-        if (input + gap < 0) {
-            return false;
-        } else {
-            this.input = input + (gap);
-        }
-        return true;
-    }
-}

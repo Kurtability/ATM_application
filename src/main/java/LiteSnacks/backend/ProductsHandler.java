@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class ProductsHandler {
-    private File productsFile;
+    private static File productsFile;
 
     // getting the product file from resource handler
     public ProductsHandler() {
