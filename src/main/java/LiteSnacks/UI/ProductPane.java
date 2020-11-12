@@ -27,9 +27,13 @@ public class ProductPane {
         price.setLayoutX(4);
         price.setLayoutY(128);
 
+        Text quantity = new Text("Qty: " + Integer.toString(productDisplayItem.getQuantity()));
+        quantity.setLayoutX(85);
+        quantity.setLayoutY(105);
+
         // product name
         Text name = new Text(productDisplayItem.name);
-        name.setLayoutX(31);
+        name.setLayoutX(4);
         name.setLayoutY(105);
 
         Button addButton = new Button("Add");
@@ -41,7 +45,7 @@ public class ProductPane {
         addButton.setLayoutX(80);
         addButton.setLayoutY(112);
 
-        this.pane.getChildren().addAll(name, price, addButton);
+        this.pane.getChildren().addAll(name, price, addButton, quantity);
     }
 
     public Pane getPane() {
