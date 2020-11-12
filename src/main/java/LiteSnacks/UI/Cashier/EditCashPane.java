@@ -24,7 +24,7 @@ public class EditCashPane {
 
         // value
         Text value = new Text();
-        if (cash.getValue() > 1){
+        if (cash.getValue() >= 1){
             value.setText("$ " + (int)cash.getValue());
         }else{
             value.setText((int)(cash.getValue()*100)+ "c");

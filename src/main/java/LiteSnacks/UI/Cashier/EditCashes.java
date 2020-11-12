@@ -1,6 +1,7 @@
 package LiteSnacks.UI.Cashier;
 
 import LiteSnacks.UI.Seller.SellerMainScene;
+import LiteSnacks.UI.Style;
 import LiteSnacks.backend.Cash;
 import LiteSnacks.backend.CashHandler;
 import javafx.scene.Scene;
@@ -13,6 +14,8 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static LiteSnacks.UI.Style.*;
 
 public class EditCashes {
     Scene scene;
@@ -33,16 +36,13 @@ public class EditCashes {
         Pane cashWholePane = getPaneForCashes(this.editCashPanes);
 
         // Pane for cashes
-        Pane CashPane = new Pane();
-        cashWholePane.setPrefHeight(304);
-        cashWholePane.setPrefWidth(580);
-        cashWholePane.setLayoutX(10);
-        cashWholePane.setLayoutY(45);
+        setXY(cashWholePane,10,45);
+        setHW(cashWholePane,304,580);
+
 
         // label
         Text label = new Text("Edit Cashes");
-        label.setLayoutX(10);
-        label.setLayoutY(20);
+        setXY(label,10,20);
         label.setFont(new Font(20));
         label.setFill(Color.rgb(0, 66, 127));
 
@@ -50,8 +50,8 @@ public class EditCashes {
         Text alldone = new Text("All done!");
         alldone.setVisible(false);
         alldone.setFill(Color.rgb(230,0,0));
-        alldone.setLayoutX(510);
-        alldone.setLayoutY(350);
+        setXY(alldone,510,350);
+
 
         // SUBMIT BUTTON
         Button submit1 = createButton("submit", 500, 360, 27, 81);
@@ -70,20 +70,12 @@ public class EditCashes {
         back.setLayoutX(500);
         back.setLayoutY(1);
 
-        root.getChildren().addAll(CashPane, cashWholePane, label, back,alldone);
+        root.getChildren().addAll( cashWholePane, label, back,alldone);
         root.getChildren().add(submit1);
         this.scene = new Scene(root, width, height);
     }
 
-    public Button createButton(String text, int x, int y, int h, int w) {
-        Button button = new Button(text);
-        this.setXY(button, x, y);
-        this.setHW(button, h, w);
-        button.setStyle("-fx-background-color: #000000;");
-        button.setTextFill(Color.WHITE);
-        return button;
 
-    }
 
     public void submit() {
         System.out.println(1);
@@ -120,15 +112,7 @@ public class EditCashes {
         return box;
     }
 
-    public void setXY(Control node, double x, double y) {
-        node.setLayoutX(x);
-        node.setLayoutY(y);
-    }
 
-    public void setHW(Control node, double h, double w) {
-        node.setPrefHeight(h);
-        node.setPrefWidth(w);
-    }
 
     public void setScene() {
         stage.setScene(scene);

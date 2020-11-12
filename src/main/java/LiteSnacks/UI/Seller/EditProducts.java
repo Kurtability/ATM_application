@@ -1,5 +1,6 @@
 package LiteSnacks.UI.Seller;
 
+import LiteSnacks.UI.Style;
 import LiteSnacks.backend.Item;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +15,8 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static LiteSnacks.UI.Style.*;
 
 public class EditProducts {
     Scene scene;
@@ -43,10 +46,8 @@ public class EditProducts {
 
         // scrollPane for showing products block
         ScrollPane productsPane = new ScrollPane();
-        productsPane.setPrefHeight(280);
-        productsPane.setPrefWidth(580);
-        productsPane.setLayoutX(10);
-        productsPane.setLayoutY(55);
+        setXY(productsPane,10,55);
+        setHW(productsPane,280,580);
         productsPane.setContent(ProductWholePane);
 
         // Text for product(code,name,qty,category)
@@ -100,30 +101,6 @@ public class EditProducts {
                 label, comments);
         root.getChildren().addAll(submit, back);
         scene = new Scene(root, width, height);
-    }
-
-    public Button createButton(String text, int x, int y, int h, int w) {
-        Button button = new Button(text);
-        this.setXY(button, x, y);
-        this.setHW(button, h, w);
-        button.setStyle("-fx-background-color: #000000;");
-        button.setTextFill(Color.WHITE);
-        return button;
-    }
-
-    public void setXY(Control node, double x, double y) {
-        node.setLayoutX(x);
-        node.setLayoutY(y);
-    }
-
-    public void setXY(Text node, double x, double y) {
-        node.setLayoutX(x);
-        node.setLayoutY(y);
-    }
-
-    public void setHW(Control node, double h, double w) {
-        node.setPrefHeight(h);
-        node.setPrefWidth(w);
     }
 
     public List<EditProductPane> getEditsProductsPanes(List<Item> items) {

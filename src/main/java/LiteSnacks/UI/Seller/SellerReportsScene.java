@@ -1,12 +1,18 @@
 package LiteSnacks.UI.Seller;
 
+import LiteSnacks.UI.Cashier.CashierMainScene;
+import LiteSnacks.UI.Style;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import static LiteSnacks.UI.Style.setHW;
+import static LiteSnacks.UI.Style.setXY;
 
 public class SellerReportsScene {
     Scene scene;
@@ -23,23 +29,20 @@ public class SellerReportsScene {
         back.setStyle("-fx-background-color: transparent;");
         back.setFont(new Font(20));
         back.setOnAction(e -> {
-            new SellerMainScene(width, height, stage).setScene();
+            new CashierMainScene(width, height, stage).setScene();
         });
-        back.setLayoutX(500);
-        back.setLayoutY(10);
+        setXY(back,500,10);
+
 
         // lable
-        Label label = new Label("What do you want");
-        label.setLayoutX(21);
-        label.setLayoutY(30);
+        Text label = new Text("What do you want");
+        setXY(label,21,30);
         label.setFont(new Font("Arial", 30));
 
         // Get cashes reports button
         Button cashesReports = new Button("Products Report");
-        cashesReports.setLayoutX(70);
-        cashesReports.setLayoutY(150);
-        cashesReports.setPrefHeight(40);
-        cashesReports.setPrefWidth(150);
+        setXY(cashesReports,70,150);
+        setHW(cashesReports,40,150);
         cashesReports.setStyle("-fx-background-color: #000000");
         cashesReports.setTextFill(Color.WHITE);
         cashesReports.setOnAction(event -> {
@@ -51,10 +54,8 @@ public class SellerReportsScene {
 
         // item summary
         Button itemSummary = new Button("Products Summary");
-        itemSummary.setLayoutX(70);
-        itemSummary.setLayoutY(100);
-        itemSummary.setPrefHeight(40);
-        itemSummary.setPrefWidth(150);
+        setXY(itemSummary,70,100);
+        setHW(itemSummary,40,150);
         itemSummary.setStyle("-fx-background-color: #000000");
         itemSummary.setTextFill(Color.WHITE);
         itemSummary.setOnAction(event -> {
@@ -65,10 +66,8 @@ public class SellerReportsScene {
         });
 
         loginpane.getChildren().addAll(label, itemSummary, cashesReports);
-        loginpane.setLayoutX(156);
-        loginpane.setLayoutY(51);
-        loginpane.setPrefHeight(299);
-        loginpane.setPrefWidth(289);
+        setXY(loginpane,156,51);
+        setHW(loginpane,299,289);
         loginpane.setStyle("-fx-background-color: #d9d9d9");
 
         // back

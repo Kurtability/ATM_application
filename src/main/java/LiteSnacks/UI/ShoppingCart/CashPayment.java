@@ -1,6 +1,7 @@
 package LiteSnacks.UI.ShoppingCart;
 
 import LiteSnacks.backend.Cash;
+import LiteSnacks.UI.Style;
 import LiteSnacks.UI.Cashier.EditCashPane;
 import LiteSnacks.UI.Seller.SellerMainScene;
 import LiteSnacks.backend.CashHandler;
@@ -18,6 +19,8 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static LiteSnacks.UI.Style.*;
 
 public class CashPayment {
     Scene scene;
@@ -47,30 +50,25 @@ public class CashPayment {
 
         // Pane for cashes
         Pane CashPane = new Pane();
-        cashWholePane.setPrefHeight(304);
-        cashWholePane.setPrefWidth(580);
-        cashWholePane.setLayoutX(10);
-        cashWholePane.setLayoutY(60);
+        setXY(CashPane,10,60);
+        setHW(CashPane,304,580);
 
         // label
         Text label = new Text("Please Input Cash");
-        label.setLayoutX(10);
-        label.setLayoutY(20);
+        setXY(label,10,20);
         label.setFont(new Font(20));
         label.setFill(Color.rgb(0, 66, 127));
 
 
         //total cost
         Text price = new Text("Total cost : "+totalPrice);
-        price.setLayoutX(10);
-        price.setLayoutY(350);
+        setXY(price,10,350);
         price.setFont(new Font(20));
         price.setFill(Color.rgb(0, 66, 127));
 
         //input
         this.input = new Text("Total Input : ");
-        input.setLayoutX(10);
-        input.setLayoutY(400);
+        setXY(input,10,400);
         input.setFont(new Font(20));
         input.setFill(Color.rgb(0, 66, 127));
 
@@ -91,23 +89,15 @@ public class CashPayment {
         back.setOnAction(e -> {
             new Checkout(width,height,stage,cart).setScene();
         });
-        back.setLayoutX(500);
-        back.setLayoutY(1);
+        setXY(back,500,1);
+
 
         root.getChildren().addAll(CashPane, cashWholePane, label, back,input,price);
         root.getChildren().add(submit1);
         this.scene = new Scene(root, width, height);
     }
 
-    public Button createButton(String text, int x, int y, int h, int w) {
-        Button button = new Button(text);
-        this.setXY(button, x, y);
-        this.setHW(button, h, w);
-        button.setStyle("-fx-background-color: #000000;");
-        button.setTextFill(Color.WHITE);
-        return button;
 
-    }
 
   
 
@@ -140,15 +130,7 @@ public class CashPayment {
         return box;
     }
 
-    public void setXY(Control node, double x, double y) {
-        node.setLayoutX(x);
-        node.setLayoutY(y);
-    }
 
-    public void setHW(Control node, double h, double w) {
-        node.setPrefHeight(h);
-        node.setPrefWidth(w);
-    }
 
     public void setScene() {
         stage.setScene(scene);
@@ -156,7 +138,7 @@ public class CashPayment {
     public Scene getScene(){
         return this.scene;
     }
-    public List<Cash> getCashes(){return this.cashes;}
+
     public void updateInput(){
         double total = 0;
 

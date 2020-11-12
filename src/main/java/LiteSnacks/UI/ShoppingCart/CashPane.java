@@ -1,5 +1,6 @@
 package LiteSnacks.UI.ShoppingCart;
 
+import LiteSnacks.UI.Style;
 import LiteSnacks.backend.Cash;
 import LiteSnacks.UI.QuantityModifier;
 import javafx.scene.image.ImageView;
@@ -7,6 +8,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+
+import static LiteSnacks.UI.Style.setXY;
 
 public class CashPane {
     Pane pane;
@@ -20,8 +23,7 @@ public class CashPane {
         this.pane.setStyle("-fx-background-color: #d9d9d9;");
 
         Pane qtymdfier = new QuantityModifier(cash,cashPayment).getPane();
-        qtymdfier.setLayoutX(13);
-        qtymdfier.setLayoutY(90);
+        setXY(qtymdfier,13,90);
 
         // value
         Text value = new Text();
@@ -31,8 +33,8 @@ public class CashPane {
             value.setText((int)(cash.getValue()*100)+ "c");
         }
         value.setFont(new Font(28));
-        value.setLayoutX(15);
-        value.setLayoutY(65);
+        setXY(value,15,65);
+
 
 
 
