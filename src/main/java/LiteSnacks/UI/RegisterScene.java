@@ -1,5 +1,6 @@
 package LiteSnacks.UI;
 
+import LiteSnacks.backend.UserLoginHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -49,6 +50,9 @@ public class RegisterScene {
 
         // register button
         Button registerButton = new Button("Register");
+        registerButton.setOnAction(e ->{
+            new UserLoginHandler().addCustomer(username.getText(),password.getText());
+        });
         registerButton.setLayoutX(111);
         registerButton.setLayoutY(222);
         registerButton.setStyle("-fx-background-color: #000000");

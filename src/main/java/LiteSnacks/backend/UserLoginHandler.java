@@ -14,6 +14,7 @@ public class UserLoginHandler {
 
     List<UserAccount> users;
     private UserAccount user;
+    private PrintWriter writer;
 
     public UserLoginHandler() {
         this.userFile = ResourceHandler.getUserFile();
@@ -106,20 +107,21 @@ public class UserLoginHandler {
 
 
 
-    public  boolean checkUser(String username, String password) {
+    public  boolean checkUser(String username, int passwordHash) {
        users = getUsers();
 
         for (int i = 0; i < users.size(); i++) {
             String nme = users.get(i).getUserName();
-            String pass = users.get(i).getPassword();
-            if (nme.equals(username) && pass.equals(password)) {
+            int pass = users.get(i).getPassword().hashCode();
+
+            if (nme.equals(username) && pass == (passwordHash)) {
                 return true;
             }
         }
         for (int i = 0; i < users.size(); i++) {
             String nme = users.get(i).getUserName();
-            String pass = users.get(i).getPassword();
-            if (nme.equals(username) && ! pass.equals(password)) {
+            int pass = users.get(i).getPassword().hashCode();
+            if (nme.equals(username) && !(pass == passwordHash)) {
                 System.out.println("Wrong Password");
                 return false;
             }else if (i == users.size() - 1) {
@@ -133,30 +135,32 @@ public class UserLoginHandler {
 
 
     public void addUser (String name, String pass, String role){
-
         users = getUsers();
         System.out.println(users);
-
+        user = new UserAccount(name,pass,role);
         try{
-            PrintWriter writer= new PrintWriter(this.userFile);
-
-            for(int i=0; i<users.size(); i++){
-
+            writer= new PrintWriter(new FileOutputStream(this.userFile,true));
+            writer.println();
+            boolean flag = false;
+            for(int i=0; i< users.size(); i++){
                 if(users.get(i).getUserName().equals(name)){
-
                     System.out.println("Account already Exists. Please change username");
-                    //return false;
-                }else if(i==users.size()-1){
-                    users.add(new UserAccount(name,pass, role));
-                    writer.println(name+", "+ pass+", "+ role);
+                    flag = true;
                 }
-
             }
+            if (!flag){
+                users.add(user);
+                writer.println(name + ", "+ pass + ", "+ role);
+                System.out.println(users);
+            }
+            writer.close();
         }catch( FileNotFoundException e){
             e.printStackTrace();
-            //return false;
         }
-        //return false;
-
+    }
+    public void addCustomer(String name, String pass){
+        String role = "customer";
+        addUser(name,pass,role);
+        System.out.println("added customer");
     }
 }

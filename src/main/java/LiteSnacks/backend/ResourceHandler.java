@@ -15,7 +15,6 @@ public class ResourceHandler {
     private static File productFile;
     private static File cashFile;
 
-    private static File userFile;
 
     // copy a file from a jar resorce to a file in the project directory
     static void copyfiles(InputStream from, File to) throws FileNotFoundException, IOException {
@@ -87,11 +86,8 @@ public class ResourceHandler {
         return cashFile;
     }
 
-    public static File getUserFile(){
-        if (userFile == null) {
-            userFile = initFile("user.txt");
-        }
-        return userFile;
+    public static File getUserFile() {
+            return initFile("user.txt");
     }
 
     private static int getLineNumber() {
