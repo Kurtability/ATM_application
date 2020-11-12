@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -28,7 +29,7 @@ public class CardScene {
 
         Label price = new Label("Total Price: $" + Double.toString(cart.getTotal()));
         price.setLayoutX(200);
-        price.setLayoutY(335);
+        price.setLayoutY(290);
         price.setFont(new Font("Arial", 18));
 
         Label title = new Label("Payment Method");
@@ -42,19 +43,20 @@ public class CardScene {
         title2.setFont(new Font("Arial", 20));
 
         Label cardLabel = new Label("Enter Card Number:");
-        cardLabel.setLayoutX(75);
-        cardLabel.setLayoutY(225);
+        cardLabel.setLayoutX(100);
+        cardLabel.setLayoutY(227);
         cardLabel.setFont(new Font("Arial", 15));
 
-//        Label details = new Label("Enter Expiry Date:");
-//        details.setLayoutX(75);
-//        details.setLayoutY(275);
-//        details.setFont(new Font("Arial", 15));
-
         Label givenName = new Label("Enter Full Name:");
-        givenName.setLayoutX(150);
-        givenName.setLayoutY(175);
+        givenName.setLayoutX(125);
+        givenName.setLayoutY(177);
         givenName.setFont(new Font("Arial", 15));
+
+        Text fail = new Text("");
+        fail.setLayoutX(75);
+        fail.setLayoutY(150);
+        fail.setFont(new Font("Arial", 20));
+        fail.setFill(Color.rgb(255, 0, 0));
 
         TextField name = new TextField();
         name.setPromptText("Please Enter Full Name");
@@ -63,26 +65,23 @@ public class CardScene {
         
         TextField number = new TextField();
         number.setPromptText("Enter Card Number");
-        number.setLayoutX(220);
+        number.setLayoutX(275);
         number.setLayoutY(225);
 
-//        TextField expDate = new TextField();
-//        expDate.setPromptText("Enter Expiry Date");
-//        expDate.setLayoutX(220);
-//        expDate.setLayoutY(275);
-//
-//        TextField cvv = new TextField();
-//        cvv.setPromptText("Enter Card CVV");
-//        cvv.setLayoutX(375);
-//        cvv.setLayoutY(275);
-
         Button pay = new Button("Pay Now");
-        pay.setLayoutX(350);
+        pay.setLayoutX(240);
         pay.setLayoutY(335);
         pay.setTextFill(Color.WHITE);
         pay.setStyle("-fx-background-color: #000000");
-        pay.setOnAction(event -> {if(CreditCardHandler.checkCard(name.getText(), number.getText())) {
-                                    new Products(width,height,stage).setScene();}});
+        pay.setOnAction(event -> {
+            String result = CreditCardHandler.checkCard(name.getText(), number.getText());
+            if(!result.equals("Credit Card details are not valid")) {
+                new CardSceneSuccess(width, height, stage).setScene();
+            }
+            else {
+                fail.setText(result);
+            }
+        });
 
         Button cancel = new Button("Cancel Transaction");
         cancel.setLayoutX(25);
@@ -91,7 +90,7 @@ public class CardScene {
         cancel.setTextFill(Color.WHITE);
         cancel.setOnAction(event -> {new Products(width,height,stage).setScene();});
 
-        root.getChildren().addAll(name, givenName, cardLabel, cancel, title2, pay, price, title, number);
+        root.getChildren().addAll(name, givenName, cardLabel, cancel, title2, pay, price, title, number, fail);
 
         scene = new Scene(root, width, height);
     }
