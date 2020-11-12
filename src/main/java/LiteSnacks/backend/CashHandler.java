@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CashHandler {
+
     private static File cashesFile;
+
     List<Cash> cashes;
 
     public CashHandler() {

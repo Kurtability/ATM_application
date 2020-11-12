@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 public class CashHandlerTest {
     @Test
     public void CashHandlerConstructTest(){
@@ -21,16 +22,19 @@ public class CashHandlerTest {
             List<Cash> cashes = handler.readFile();
 
         }catch (Exception e){
+
             System.out.println("CashHandler read file failed");
         }
         CashHandler handler = new CashHandler();
         List<Cash> cashes = handler.readFile();
+
         //assertNotNull(cashes);
         assertEquals(10,cashes.size());
 
     }
     @Test
     public void freshTest(){
+
 
         CashHandler handler = new CashHandler();
         handler.fresh();
@@ -52,6 +56,7 @@ public class CashHandlerTest {
         }
         cashes = handler.readFile();
         assertEquals(10,cashes.size());
+
 
 
     }

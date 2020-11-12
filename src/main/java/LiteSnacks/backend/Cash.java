@@ -2,6 +2,7 @@ package LiteSnacks.backend;
 
 public class Cash {
     int qty;
+    int input = 0;
     double value;
     String image;
 
@@ -24,6 +25,11 @@ public class Cash {
     }
     public void setQty(int qty){this.qty = qty;}
 
+
+    public int getInput() {
+        return this.input;
+    }
+
     public boolean modifyqty(int gap) {
         if (qty + gap < 0) {
             return false;
@@ -32,5 +38,3 @@ public class Cash {
         }
         return true;
     }
-
-}

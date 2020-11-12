@@ -87,6 +87,13 @@ public class Checkout {
         cancel.setTextFill(Color.WHITE);
         cancel.setOnAction(event -> {new Products(width,height,stage).setScene();});
 
+        Button cancel = new Button("Cancel");
+        cancel.setLayoutX(27);
+        cancel.setLayoutY(400);
+        cancel.setStyle("-fx-background-color: #DC143C");
+        cancel.setTextFill(Color.WHITE);
+        cancel.setOnAction(event -> {new Products(width,height,stage).setScene();});
+
         Pane specs = new Pane();
         specs.getChildren().addAll(cancel, card, cash, label, label2);
         root.getChildren().add(box);
