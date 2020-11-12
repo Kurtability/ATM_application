@@ -23,7 +23,7 @@ public class App extends Application{
 
         this.productScene = new Products(640,480,primaryStage);
         CashPayment scene = new CashPayment(640,480,primaryStage);
-        scene.setScene();
+        productScene.setScene();
         //loginScene.setScene();
         //********
 
