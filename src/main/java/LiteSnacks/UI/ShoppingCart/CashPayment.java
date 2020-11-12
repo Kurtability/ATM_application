@@ -66,7 +66,7 @@ public class CashPayment {
         price.setFill(Color.rgb(0, 66, 127));
 
         //input
-        this.input = new Text("Total Input: ");
+        this.input = new Text("Total Input: $");
         setXY(input,10,100);
         input.setFont(new Font(20));
         input.setFill(Color.rgb(0, 66, 127));

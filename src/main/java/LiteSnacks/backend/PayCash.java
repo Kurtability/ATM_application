@@ -1,6 +1,7 @@
 package LiteSnacks.backend;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class PayCash {
@@ -38,7 +39,7 @@ public class PayCash {
         else {
             setCashReserves(copy);
         }
-        c.Submit(cashReserves);
+        CashHandler.Submit(cashReserves);
         return change;
     }
 
@@ -56,7 +57,7 @@ public class PayCash {
                 for (int j = 0; j < cashReserves.size(); j++) {
                     vendingMachineCash = cashReserves.get(j);
                     if (vendingMachineCash.getValue() == cash.getValue()) {
-                        vendingMachineCash.modifyqty(cash.getQty());
+                        cashReserves.get(j).modifyqty(cash.getQty());
                         successes++;
                     }
                 }
@@ -85,25 +86,23 @@ public class PayCash {
         int intChange = (int)(change*100);
 
         StringBuilder sb = new StringBuilder();
-        Cash cashObject;
+        Cash vendingMachineCash;
         int i=0;
         while(intChange > 0 && i < cashReserves.size()) {
-            cashObject = cashReserves.get(i);
+            vendingMachineCash = cashReserves.get(i);
 
             // Convert Cash.getValue() from double to integer, again to avoid floating-point errors
-            int cashObjectValue = (int)(100 * cashObject.getValue());
-            if(intChange >= cashObjectValue && cashObject.getQty() > 0) {
+            int cashObjectValue = (int)(100 * vendingMachineCash.getValue());
+            if(intChange >= cashObjectValue && vendingMachineCash.getQty() > 0) {
                 intChange = intChange - cashObjectValue;
-                cashObject.modifyqty(-1);
-                sb.append("$").append(cashObject.getValue());
-                sb.append(" ");
+                vendingMachineCash.modifyqty(-1);
+                sb.append("$").append(vendingMachineCash.getValue()).append(" ");
             }
             else {
                 i++;
             }
         }
         if(intChange != 0) {
-            System.out.println("insufficient change");
             sb = new StringBuilder("Insufficient Change. Please try another payment method");
         }
         else if(change == 0) {
@@ -122,7 +121,6 @@ public class PayCash {
         }
         return copy;
     }
-
 }
 
 
