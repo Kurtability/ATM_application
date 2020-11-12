@@ -79,7 +79,9 @@ public class Products {
         // checkout button
         Button checkoutButton = createButton("Check Out", 150, 390, 25, 100);
         checkoutButton.setOnAction(event -> {
-            new Checkout(width, height, stage, cart).setScene();
+            if(!cart.getItems().isEmpty()) {
+                new Checkout(width, height, stage, cart).setScene();
+            }
         });
 
         root.getChildren().addAll(checkoutButton, logoutButton, products, cart.getPane());

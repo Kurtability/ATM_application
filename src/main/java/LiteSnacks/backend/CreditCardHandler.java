@@ -18,6 +18,12 @@ public class CreditCardHandler {
         if(creditCards.containsKey(creditCardNumber)) {
             verified = creditCards.get(creditCardNumber).equals(name);
         }
+        if(verified) {
+            System.out.println("Success! Enjoy your products");
+        }
+        else{
+            System.out.println("Credit Card details are not valid");
+        }
         return verified;
     }
 

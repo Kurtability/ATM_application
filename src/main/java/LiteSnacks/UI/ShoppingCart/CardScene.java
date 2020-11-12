@@ -36,7 +36,7 @@ public class CardScene {
         title.setLayoutY(30);
         title.setFont(new Font("Arial", 30));
 
-        Label title2 = new Label("Credit or Debit Card");
+        Label title2 = new Label("Credit Card");
         title2.setLayoutX(75);
         title2.setLayoutY(90);
         title2.setFont(new Font("Arial", 20));
@@ -46,10 +46,10 @@ public class CardScene {
         cardLabel.setLayoutY(225);
         cardLabel.setFont(new Font("Arial", 15));
 
-        Label details = new Label("Enter Expiry Date:");
-        details.setLayoutX(75);
-        details.setLayoutY(275);
-        details.setFont(new Font("Arial", 15));
+//        Label details = new Label("Enter Expiry Date:");
+//        details.setLayoutX(75);
+//        details.setLayoutY(275);
+//        details.setFont(new Font("Arial", 15));
 
         Label givenName = new Label("Enter Full Name:");
         givenName.setLayoutX(150);
@@ -66,22 +66,23 @@ public class CardScene {
         number.setLayoutX(220);
         number.setLayoutY(225);
 
-        TextField expDate = new TextField();
-        expDate.setPromptText("Enter Expiry Date");
-        expDate.setLayoutX(220);
-        expDate.setLayoutY(275);
-
-        TextField cvv = new TextField();
-        cvv.setPromptText("Enter Card CVV");
-        cvv.setLayoutX(375);
-        cvv.setLayoutY(275);
+//        TextField expDate = new TextField();
+//        expDate.setPromptText("Enter Expiry Date");
+//        expDate.setLayoutX(220);
+//        expDate.setLayoutY(275);
+//
+//        TextField cvv = new TextField();
+//        cvv.setPromptText("Enter Card CVV");
+//        cvv.setLayoutX(375);
+//        cvv.setLayoutY(275);
 
         Button pay = new Button("Pay Now");
         pay.setLayoutX(350);
         pay.setLayoutY(335);
         pay.setTextFill(Color.WHITE);
         pay.setStyle("-fx-background-color: #000000");
-        //pay.setOnAction(event -> {new CreditCardHandler().checkCard(name.getText(), number.getText());});
+        pay.setOnAction(event -> {if(CreditCardHandler.checkCard(name.getText(), number.getText())) {
+                                    new Products(width,height,stage).setScene();}});
 
         Button cancel = new Button("Cancel Transaction");
         cancel.setLayoutX(25);
@@ -90,7 +91,7 @@ public class CardScene {
         cancel.setTextFill(Color.WHITE);
         cancel.setOnAction(event -> {new Products(width,height,stage).setScene();});
 
-        root.getChildren().addAll(name, givenName, cardLabel, details, cancel, title2, pay, price, title, number, expDate, cvv);
+        root.getChildren().addAll(name, givenName, cardLabel, cancel, title2, pay, price, title, number);
 
         scene = new Scene(root, width, height);
     }
