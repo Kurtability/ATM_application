@@ -15,37 +15,16 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CreditCardHandlerTest {
     @Test
     public void checkCardTest() {
-        assertTrue(CreditCardHandler.checkCard("Charles", "40691"));
-        assertFalse(CreditCardHandler.checkCard("Charles", "42689"));
-        assertFalse(CreditCardHandler.checkCard("", "42689"));
-        assertFalse(CreditCardHandler.checkCard("Charles", ""));
+        String success = CreditCardHandler.getSuccessMessage();
+        String fail = CreditCardHandler.getFailMessage();
+        assertEquals(success, CreditCardHandler.checkCard("Charles", "40691"));
+        assertEquals(fail, CreditCardHandler.checkCard("Charles", "42689"));
+        assertEquals(fail, CreditCardHandler.checkCard("", "42689"));
+        assertEquals(fail, CreditCardHandler.checkCard("Charles", ""));
         String empty = null;
-        assertFalse(CreditCardHandler.checkCard("Charles", empty));
-        assertFalse(CreditCardHandler.checkCard(empty, "42689"));
+        assertEquals(fail, CreditCardHandler.checkCard("Charles", empty));
+        assertEquals(fail, CreditCardHandler.checkCard(empty, "42689"));
     }
-
-    @Test
-    public void addTest() {
-        Object originalFile = jsonContents();
-        assertFalse(CreditCardHandler.checkCard("TestName", "0000"));
-        CreditCardHandler.add("TestName", "0000");
-        assertTrue(CreditCardHandler.checkCard("TestName", "0000"));
-        String empty = null;
-        CreditCardHandler.add(empty, "0001");
-        assertFalse(CreditCardHandler.checkCard(empty, "0001"));
-        CreditCardHandler.add("TestName2", empty);
-        assertFalse(CreditCardHandler.checkCard("TestName2", empty));
-        CreditCardHandler.add("", "0002");
-        assertFalse(CreditCardHandler.checkCard("", "0002"));
-        CreditCardHandler.add("TestName3", "");
-        assertFalse(CreditCardHandler.checkCard("TestName3", ""));
-        CreditCardHandler.add("TestName4", "TestPassword");
-        assertFalse(CreditCardHandler.checkCard("TestName4", "TestPassword"));
-
-        restoreFile(originalFile);
-
-    }
-
 
     private static Object jsonContents() {
         JSONParser jsonParser = new JSONParser();
