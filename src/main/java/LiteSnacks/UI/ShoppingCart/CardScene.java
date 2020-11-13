@@ -15,7 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
 
-import LiteSnacks.backend.*;
+import LiteSnacks.backend.CreditCardHandler;
 import LiteSnacks.UI.Products;
 
 public class CardScene {
@@ -46,14 +46,9 @@ public class CardScene {
         cardLabel.setLayoutY(225);
         cardLabel.setFont(new Font("Arial", 15));
 
-        Label details = new Label("Enter Expiry Date:");
-        details.setLayoutX(75);
-        details.setLayoutY(275);
-        details.setFont(new Font("Arial", 15));
-
         Label givenName = new Label("Enter Full Name:");
-        givenName.setLayoutX(150);
-        givenName.setLayoutY(175);
+        givenName.setLayoutX(75);
+        givenName.setLayoutY(225);
         givenName.setFont(new Font("Arial", 15));
 
         TextField name = new TextField();
@@ -76,12 +71,22 @@ public class CardScene {
         cvv.setLayoutX(375);
         cvv.setLayoutY(275);
 
+        Label message = new Label("");
+        message.setLayoutX(325);
+        message.setLayoutY(350);
+
         Button pay = new Button("Pay Now");
         pay.setLayoutX(350);
         pay.setLayoutY(335);
         pay.setTextFill(Color.WHITE);
         pay.setStyle("-fx-background-color: #000000");
-        //pay.setOnAction(event -> {new CreditCardHandler().checkCard(name.getText(), number.getText());});
+        pay.setOnAction(event -> {
+            if (CreditCardHandler.checkCard(name.getText(), number.getText())) {
+                message.setText("Transaction Successful");
+            } else {
+                message.setText("Transaction Unsuccessful");
+            };
+        });
 
         Button cancel = new Button("Cancel Transaction");
         cancel.setLayoutX(25);
@@ -90,7 +95,7 @@ public class CardScene {
         cancel.setTextFill(Color.WHITE);
         cancel.setOnAction(event -> {new Products(width,height,stage).setScene();});
 
-        root.getChildren().addAll(name, givenName, cardLabel, details, cancel, title2, pay, price, title, number, expDate, cvv);
+        root.getChildren().addAll(message, name, givenName, cardLabel, cancel, title2, pay, price, title, number);
 
         scene = new Scene(root, width, height);
     }
