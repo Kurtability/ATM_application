@@ -5,14 +5,20 @@ package LiteSnacks;
 
 import LiteSnacks.UI.Cashier.CashierMainScene;
 import LiteSnacks.UI.Products;
+<<<<<<< HEAD
 import LiteSnacks.UI.Seller.SellerMainScene;
 import LiteSnacks.UI.ShoppingCart.CashPayment;
+=======
+import LiteSnacks.UI.ShoppingCart.CardScene;
+import LiteSnacks.UI.ShoppingCart.Cart;
+>>>>>>> creditCardHandler
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class App extends Application{
 
     Products productScene;
+//    CardScene cs;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -27,7 +33,11 @@ public class App extends Application{
         //loginScene.setScene();
         //********
 
+//        this.cs = new CardScene(640, 480, primaryStage, new Cart());
+//        cs.setScene();
         primaryStage.show();
+
+
     }
 
     public static void main(String[] args) {

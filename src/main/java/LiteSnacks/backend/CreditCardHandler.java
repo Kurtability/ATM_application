@@ -11,46 +11,26 @@ import java.util.HashMap;
 
 public class CreditCardHandler {
     private static File creditCardFile = ResourceHandler.getCreditCardsFile();
+    private final static String success = "Success! Enjoy your products";
+    private final static String fail = "Credit Card details are not valid";
 
-    public static boolean checkCard(String name, String creditCardNumber) {
-        boolean verified = false;
+    public static String getSuccessMessage() {
+        return success;
+    }
+
+    public static String getFailMessage() {
+        return fail;
+    }
+    public static String checkCard(String name, String creditCardNumber) {
+        String result = null;
         HashMap<String, String> creditCards = getCards();
-        if(creditCards.containsKey(creditCardNumber)) {
-            verified = creditCards.get(creditCardNumber).equals(name);
+        if(creditCards.containsKey(creditCardNumber) && creditCards.get(creditCardNumber).equals(name)) {
+            result = success;
         }
-        return verified;
-    }
-
-    public static void add(String name, String creditCardNumber) {
-        if(isValid(name, creditCardNumber) && !checkCard(name, creditCardNumber)) {
-            Object obj = cardsObject();
-            JSONArray creditCards = (JSONArray) obj;
-            JSONObject newEntry = new JSONObject();
-            newEntry.put("name", name);
-            newEntry.put("number", creditCardNumber);
-            creditCards.add(newEntry);
-            FileWriter writer = null;
-            try {
-                writer = new FileWriter(ResourceHandler.getCreditCardsFile());
-                writer.write(creditCards.toString());
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        else{
+            result = fail;
         }
-        updateFile();
-    }
-
-    private static boolean isValid(String name, String creditCardNumber) {
-        boolean isValid = (name != null && creditCardNumber != null && !name.isEmpty() && !creditCardNumber.isEmpty());
-        if(isValid) {
-            try {
-                Integer.parseInt(creditCardNumber);
-            } catch (Exception NumberFormatException) {
-                isValid = false;
-            }
-        }
-        return isValid;
+        return result;
     }
 
     private static void updateFile() {
