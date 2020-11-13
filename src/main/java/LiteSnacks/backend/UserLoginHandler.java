@@ -21,6 +21,10 @@ public class UserLoginHandler {
         System.out.println(userFile);
     }
 
+    public File getUserFile(){
+        return this.userFile;
+    }
+
 
     public List<String> getUsernames(){
 
