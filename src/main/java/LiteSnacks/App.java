@@ -5,13 +5,8 @@ package LiteSnacks;
 
 import LiteSnacks.UI.Cashier.CashierMainScene;
 import LiteSnacks.UI.Products;
-<<<<<<< HEAD
 import LiteSnacks.UI.Seller.SellerMainScene;
 import LiteSnacks.UI.ShoppingCart.CashPayment;
-=======
-import LiteSnacks.UI.ShoppingCart.CardScene;
-import LiteSnacks.UI.ShoppingCart.Cart;
->>>>>>> creditCardHandler
 import javafx.application.Application;
 import javafx.stage.Stage;
 

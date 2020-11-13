@@ -48,13 +48,8 @@ public class CardScene {
         cardLabel.setFont(new Font("Arial", 15));
 
         Label givenName = new Label("Enter Full Name:");
-<<<<<<< HEAD
         givenName.setLayoutX(75);
         givenName.setLayoutY(225);
-=======
-        givenName.setLayoutX(125);
-        givenName.setLayoutY(177);
->>>>>>> e24d1d85a58238b2a450628a003004f0ad52509a
         givenName.setFont(new Font("Arial", 15));
 
         Text fail = new Text("");
