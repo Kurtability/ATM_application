@@ -1,5 +1,6 @@
 package LiteSnacks.UI.ShoppingCart;
 
+import LiteSnacks.UI.Style;
 import LiteSnacks.backend.Cash;
 import LiteSnacks.UI.QuantityModifier;
 import javafx.scene.image.ImageView;
@@ -7,6 +8,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+
+import static LiteSnacks.UI.Style.setXY;
 
 public class CashPane {
     Pane pane;
@@ -20,23 +23,22 @@ public class CashPane {
         this.pane.setStyle("-fx-background-color: #d9d9d9;");
 
         Pane qtymdfier = new QuantityModifier(cash,cashPayment).getPane();
-        qtymdfier.setLayoutX(13);
-        qtymdfier.setLayoutY(90);
+        setXY(qtymdfier,13,90);
 
-        // price
-        Text value = new Text("$ " + cash.getValue());
-        value.setFont(new Font(20));
-        value.setLayoutX(20);
-        value.setLayoutY(65);
+        // value
+        Text value = new Text();
+        if (cash.getValue() >= 1){
+            value.setText("$ " + (int)cash.getValue());
+        }else{
+            value.setText((int)(cash.getValue()*100)+ "c");
+        }
+        value.setFont(new Font(28));
+        setXY(value,15,65);
 
-        ImageView image = new ImageView(cash.getImg());
 
-        image.setFitHeight(85);
-        image.setFitWidth(85);
-        image.setLayoutX(21);
-        image.setLayoutY(4);
 
-        this.pane.getChildren().addAll(value, image, qtymdfier);
+
+        this.pane.getChildren().addAll(value, qtymdfier);
 
     }
 

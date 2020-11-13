@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CashHandler {
-    private File cashesFile;
+
+    private static File cashesFile;
+
     List<Cash> cashes;
 
     public CashHandler() {
@@ -74,7 +76,7 @@ public class CashHandler {
 
     }
 
-    public void Submit(List<Cash> ls) {
+    public static void Submit(List<Cash> ls) {
         JSONArray array = new JSONArray();
         for (Cash each : ls) {
             JSONObject eachobject = new JSONObject();

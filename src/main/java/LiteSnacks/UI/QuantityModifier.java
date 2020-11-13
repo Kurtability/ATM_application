@@ -93,7 +93,9 @@ public class QuantityModifier {
         addQty.setTextFill(Color.WHITE);
         Button subQty = new Button("-");
         subQty.setTextFill(Color.WHITE);
-        qtylabel.setText(String.valueOf(item.getInput()));
+
+        qtylabel.setText(String.valueOf(item.getQty()));
+
         addQty.setOnAction(event -> {
                 modifyCashInput(cashPayment,item, qtylabel, 1);
         });
@@ -140,8 +142,10 @@ public class QuantityModifier {
 
     public void modifyCashInput(CashPayment cashPayment,Cash item, Text label, int gap) {
 
-        item.modifyInput(gap);
-        label.setText(String.valueOf(item.getInput()));
+
+        item.modifyqty(gap);
+        label.setText(String.valueOf(item.getQty()));
+
         cashPayment.updateInput();
     }
 }

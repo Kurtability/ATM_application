@@ -12,7 +12,6 @@ class ResourceHandlerTest {
 
     @Test void copyFilesWorks() {
         File temp;
-        System.out.println("Hellooooo");
         try {
             // creates an empty temporary file
             temp = File.createTempFile("hellocopy", "tmp");
@@ -77,7 +76,7 @@ class ResourceHandlerTest {
      * @param directoryToBeDeleted
      * @return
      */
-    private boolean deleteDirectory(File directoryToBeDeleted) {
+    static boolean deleteDirectory(File directoryToBeDeleted) {
         File[] allContents = directoryToBeDeleted.listFiles();
         if (allContents != null) {
             for (File file : allContents) {

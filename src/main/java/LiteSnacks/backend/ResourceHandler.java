@@ -73,17 +73,11 @@ public class ResourceHandler {
      * @return The file object for the products.csv file
      */
     public static File getProducts() {
-        if (productFile == null) {
-            productFile = initFile("products.csv");
-        }
-        return productFile;
+        return initFile("products.csv");
     }
 
     public static File getCashFile() {
-        if (cashFile == null) {
-            cashFile = initFile("cashes.json");
-        }
-        return cashFile;
+        return initFile("cashes.json");
     }
 
     public static File getCreditCardsFile() {

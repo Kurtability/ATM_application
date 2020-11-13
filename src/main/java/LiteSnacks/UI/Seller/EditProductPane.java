@@ -1,12 +1,15 @@
 package LiteSnacks.UI.Seller;
 
 import LiteSnacks.UI.QuantityModifier;
+import LiteSnacks.UI.Style;
 import LiteSnacks.backend.Item;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+
+import static LiteSnacks.UI.Style.setXY;
 
 public class EditProductPane {
     Pane pane;
@@ -28,13 +31,12 @@ public class EditProductPane {
         category = new ChoiceBox<String>();
         category.setValue(String.valueOf(item.getCategory()));
         category.getItems().addAll("DRINKS", "CHOCOLATES", "CHIPS", "CANDIES");
-        category.setLayoutX(320);
-        category.setLayoutY(40);
+        setXY(category,320,40);
+
 
         // quantity modifier
         Pane qtymdfier = new QuantityModifier(item).getPane();
-        qtymdfier.setLayoutX(460);
-        qtymdfier.setLayoutY(40);
+        setXY(qtymdfier,460,40);
 
         // code
         code = new TextField(Integer.toString(item.getId()));
@@ -46,8 +48,7 @@ public class EditProductPane {
 
         // price
         Text symbol = new Text("$");
-        symbol.setLayoutX(240);
-        symbol.setLayoutY(60);
+        setXY(symbol,240,60);
         price = new TextField(String.valueOf(item.getUnitPrice()));
         NoramlTextField(price);
         price.setLayoutX(250);

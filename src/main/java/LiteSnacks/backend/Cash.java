@@ -24,6 +24,10 @@ public class Cash {
         return this.image;
     }
 
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
 
     public int getInput() {
         return this.input;
@@ -34,16 +38,6 @@ public class Cash {
             return false;
         } else {
             this.qty = qty + (gap);
-        }
-        return true;
-    }
-
-
-    public boolean modifyInput(int gap) {
-        if (input + gap < 0) {
-            return false;
-        } else {
-            this.input = input + (gap);
         }
         return true;
     }

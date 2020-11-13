@@ -1,6 +1,7 @@
 package LiteSnacks.UI.Cashier;
 
 import LiteSnacks.UI.Seller.SellerMainScene;
+import LiteSnacks.UI.Style;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,6 +9,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+
+import static LiteSnacks.UI.Style.setHW;
+import static LiteSnacks.UI.Style.setXY;
 
 public class CashierReportsScene {
     Scene scene;
@@ -30,16 +34,13 @@ public class CashierReportsScene {
         back.setStyle("-fx-background-color: transparent;");
         back.setFont(new Font(20));
         back.setOnAction(e -> {new SellerMainScene(width,height,stage).setScene();});
-        back.setLayoutX(500);
-        back.setLayoutY(10);
+        setXY(back,500,10);
 
 
         //Get cashes reports button
         Button cashesReports = new Button("Cashes Report");
-        cashesReports.setLayoutX(70);
-        cashesReports.setLayoutY(150);
-        cashesReports.setPrefHeight(40);
-        cashesReports.setPrefWidth(150);
+        setXY(cashesReports,70,150);
+        setHW(cashesReports,40,150);
         cashesReports.setStyle("-fx-background-color: #000000");
         cashesReports.setTextFill(Color.WHITE);
         cashesReports.setOnAction(event -> {
@@ -51,10 +52,8 @@ public class CashierReportsScene {
 
         //item summary
         Button itemSummary = new Button("Transactions Summary");
-        itemSummary.setLayoutX(70);
-        itemSummary.setLayoutY(100);
-        itemSummary.setPrefHeight(40);
-        itemSummary.setPrefWidth(150);
+        setXY(itemSummary,70,100);
+        setHW(itemSummary,40,150);
         itemSummary.setStyle("-fx-background-color: #000000");
         itemSummary.setTextFill(Color.WHITE);
         itemSummary.setOnAction(event -> {
@@ -64,10 +63,8 @@ public class CashierReportsScene {
         });
 
         loginpane.getChildren().addAll(label,itemSummary,cashesReports);
-        loginpane.setLayoutX(156);
-        loginpane.setLayoutY(51);
-        loginpane.setPrefHeight(299);
-        loginpane.setPrefWidth(289);
+        setXY(loginpane,156,51);
+        setHW(loginpane,299,289);
         loginpane.setStyle("-fx-background-color: #d9d9d9");
 
         // back

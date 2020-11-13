@@ -78,6 +78,7 @@ public class Checkout {
         cash.setLayoutY(200);
         cash.setStyle("-fx-background-color: #000000");
         cash.setTextFill(Color.WHITE);
+        cash.setOnAction(event -> {new CashPayment(width,height,stage,cart).setScene();});
 
         Button cancel = new Button("Cancel");
         cancel.setLayoutX(27);
@@ -85,6 +86,7 @@ public class Checkout {
         cancel.setStyle("-fx-background-color: #DC143C");
         cancel.setTextFill(Color.WHITE);
         cancel.setOnAction(event -> {new Products(width,height,stage).setScene();});
+
 
         Pane specs = new Pane();
         specs.getChildren().addAll(cancel, card, cash, label, label2);
@@ -98,4 +100,5 @@ public class Checkout {
     public void setScene() {
         stage.setScene(scene);
     }
+
 }
