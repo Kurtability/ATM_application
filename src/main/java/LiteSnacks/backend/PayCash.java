@@ -25,7 +25,7 @@ public class PayCash {
         String change = "Something went wrong with 'addCash()";
         List<Cash> copy = clone(cashReserves);
 
-        if(addCash(customerCash)) {
+        if(customerCash != null && addCash(customerCash)) {
             int sum = 0;
             for(Cash c : customerCash) {
                 sum += (int)(100 * c.getValue()) * c.getQty();
