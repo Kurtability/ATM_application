@@ -27,10 +27,10 @@ public class Checkout {
         // lable
         Label label = new Label("Total Price: $" + Double.toString(cart.getTotal()));
         label.setLayoutX(400);
-        label.setLayoutY(150);
-        label.setFont(new Font("Arial", 20));
+        label.setLayoutY(330);
+        label.setFont(new Font("Arial", 18));
 
-        Label label2 = new Label("ChEcKouT");
+        Label label2 = new Label("Checkout");
         label2.setLayoutX(400);
         label2.setLayoutY(30);
         label2.setFont(new Font("Arial", 30));
@@ -67,29 +67,35 @@ public class Checkout {
         box.setPadding(new Insets(40, 25, 25, 25));
         ;
 
+        Label method = new Label("Select Payment Method");
+        method.setLayoutX(400);
+        method.setLayoutY(180);
+        method.setFont(new Font("Arial", 16));
+
         Button card = new Button("Card");
         card.setLayoutX(475);
-        card.setLayoutY(200);
+        card.setLayoutY(220);
         card.setStyle("-fx-background-color: #000000");
         card.setTextFill(Color.WHITE);
+        card.setOnAction(event -> {new CardScene(width, height, stage, cart).setScene();});
 
         Button cash = new Button("Cash");
         cash.setLayoutX(400);
-        cash.setLayoutY(200);
+        cash.setLayoutY(220);
         cash.setStyle("-fx-background-color: #000000");
         cash.setTextFill(Color.WHITE);
         cash.setOnAction(event -> {new CashPayment(width,height,stage,cart).setScene();});
 
         Button cancel = new Button("Cancel");
-        cancel.setLayoutX(27);
-        cancel.setLayoutY(400);
+        cancel.setLayoutX(25);
+        cancel.setLayoutY(430);
         cancel.setStyle("-fx-background-color: #DC143C");
         cancel.setTextFill(Color.WHITE);
         cancel.setOnAction(event -> {new Products(width,height,stage).setScene();});
 
 
         Pane specs = new Pane();
-        specs.getChildren().addAll(cancel, card, cash, label, label2);
+        specs.getChildren().addAll(method, cancel, card, cash, label, label2);
         root.getChildren().add(box);
         root.getChildren().add(specs);
         root.setStyle("-fx-background-color: #d9d9d9");

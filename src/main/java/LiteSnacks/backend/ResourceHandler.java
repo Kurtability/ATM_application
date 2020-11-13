@@ -14,6 +14,7 @@ public class ResourceHandler {
 
     private static File productFile;
     private static File cashFile;
+    private static File creditCardFile;
 
     // copy a file from a jar resorce to a file in the project directory
     static void copyfiles(InputStream from, File to) throws FileNotFoundException, IOException {
@@ -77,6 +78,13 @@ public class ResourceHandler {
 
     public static File getCashFile() {
         return initFile("cashes.json");
+    }
+
+    public static File getCreditCardsFile() {
+        if (creditCardFile == null) {
+            creditCardFile = initFile("credit_cards.json");
+        }
+        return creditCardFile;
     }
 
     private static int getLineNumber() {

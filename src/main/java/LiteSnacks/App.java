@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 public class App extends Application{
 
     Products productScene;
+//    CardScene cs;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -22,12 +23,14 @@ public class App extends Application{
         //LoginScene loginScene = new LoginScene(1200,600,primaryStage);
 
         this.productScene = new Products(640,480,primaryStage);
-        CashierMainScene scene = new CashierMainScene(640,480,primaryStage);
-        scene.setScene();
-        //loginScene.setScene();
-        //********
+//        CashierMainScene scene = new CashierMainScene(640,400,primaryStage);
+        productScene.setScene();
 
+//        this.cs = new CardScene(640, 480, primaryStage, new Cart());
+//        cs.setScene();
         primaryStage.show();
+
+
     }
 
     public static void main(String[] args) {
