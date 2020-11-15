@@ -2,6 +2,7 @@ package LiteSnacks.UI.Seller;
 
 import LiteSnacks.UI.Style;
 import LiteSnacks.backend.Item;
+import LiteSnacks.backend.ProductsHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
@@ -36,10 +37,8 @@ public class EditProducts {
          *
          *
          **/
-
-        List<Item> items = new ArrayList<>(
-                Arrays.asList(new Item("coca", "CHIPS", 1, 10, 1.0), new Item("AH", "CHIPS", 2, 20, 1.0),
-                        new Item("pesi", "CHIPS", 3, 0, 1.0), new Item("pesi", "CHIPS", 3, 1, 1.0)));
+        ProductsHandler ph = new ProductsHandler();
+        List<Item> items = ph.listOfItems();
 
         this.editProductPanes = getEditsProductsPanes(items);
         Pane ProductWholePane = getPaneForProducts(this.editProductPanes);
@@ -61,9 +60,9 @@ public class EditProducts {
         setXY(comments, 3, 370);
         label.setFill(Color.rgb(0, 66, 127));
         Text codetext = new Text("Code");
-        setXY(codetext, 150, 50);
+        setXY(codetext, 60, 50);
         Text nametext = new Text("Name");
-        setXY(nametext, 215, 50);
+        setXY(nametext, 130, 50);
         Text pricetext = new Text("Price");
         setXY(pricetext, 280, 50);
         Text categorytext = new Text("Category");

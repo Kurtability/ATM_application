@@ -3,6 +3,7 @@ package LiteSnacks.UI.Seller;
 import LiteSnacks.UI.QuantityModifier;
 import LiteSnacks.UI.Style;
 import LiteSnacks.backend.Item;
+import LiteSnacks.backend.ProductsHandler;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -28,9 +29,10 @@ public class EditProductPane {
         this.pane.setStyle("-fx-background-color: #d9d9d9;");
 
         // category
+        ProductsHandler ph = new ProductsHandler();
         category = new ChoiceBox<String>();
         category.setValue(String.valueOf(item.getCategory()));
-        category.getItems().addAll("DRINKS", "CHOCOLATES", "CHIPS", "CANDIES");
+        category.getItems().addAll(ph.getCategories());
         setXY(category,320,40);
 
 
@@ -41,7 +43,7 @@ public class EditProductPane {
         // code
         code = new TextField(Integer.toString(item.getId()));
         NoramlTextField(code);
-        code.setLayoutX(120);
+        code.setLayoutX(30);
         code.setLayoutY(40);
         code.setPrefWidth(50);
         code.setPrefHeight(20);
@@ -59,9 +61,9 @@ public class EditProductPane {
         // product name
         name = new TextField(item.getName());
         NoramlTextField(name);
-        name.setLayoutX(180);
+        name.setLayoutX(100);
         name.setLayoutY(40);
-        name.setPrefWidth(50);
+        name.setPrefWidth(120);
         name.setPrefHeight(20);
 
         // image

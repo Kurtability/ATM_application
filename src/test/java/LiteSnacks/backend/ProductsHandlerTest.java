@@ -94,7 +94,6 @@ public class ProductsHandlerTest {
             e.printStackTrace();
             fail();
         }
-//        StringBuilder document = new StringBuilder();
         String[] line;
         String name = null;
         String quantity = null;
@@ -108,7 +107,6 @@ public class ProductsHandlerTest {
         assertNotNull(name);
         assertNotNull(quantity);
         assertEquals(Integer.parseInt(quantity), ph.getQuantitiy(name));
-
     }
 
 }
