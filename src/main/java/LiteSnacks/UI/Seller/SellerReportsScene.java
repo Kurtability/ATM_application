@@ -29,7 +29,7 @@ public class SellerReportsScene {
         back.setStyle("-fx-background-color: transparent;");
         back.setFont(new Font(20));
         back.setOnAction(e -> {
-            new CashierMainScene(width, height, stage).setScene();
+            new SellerMainScene(width, height, stage).setScene();
         });
         setXY(back,500,10);
 
@@ -39,17 +39,14 @@ public class SellerReportsScene {
         setXY(label,21,30);
         label.setFont(new Font("Arial", 30));
 
-        // Get cashes reports button
+        // Get product reports button
         Button cashesReports = new Button("Products Report");
         setXY(cashesReports,70,150);
         setHW(cashesReports,40,150);
         cashesReports.setStyle("-fx-background-color: #000000");
         cashesReports.setTextFill(Color.WHITE);
         cashesReports.setOnAction(event -> {
-
-            /***
-             * please add a function to write report in a file
-             ***/
+            new ProductReport(width, height, stage).setScene();
         });
 
         // item summary
