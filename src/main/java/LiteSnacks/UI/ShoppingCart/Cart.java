@@ -47,11 +47,13 @@ public class Cart {
     }
 
     public void addProduct(String product, String category, int id, double cost) {
+        ProductsHandler ph = new ProductsHandler();
         if (this.selectedProducts.containsKey(product)) {
-            this.selectedProducts.get(product).add();
+            if(this.selectedProducts.get(product).getQuantity() < ph.getQuantitiy(product)) {
+                this.selectedProducts.get(product).add();
+            }
         } else {
             CartItem newItem = new CartItem(product, category, id, cost, 1, this);
-
             this.selectedProducts.put(product, newItem);
             this.cartPane.getChildren().add(newItem.cartItemPane);
         }

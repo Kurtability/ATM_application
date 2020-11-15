@@ -114,4 +114,30 @@ public class ProductsHandler {
         }
     }
 
+    public int getQuantitiy(String productName) {
+        Scanner sc = null;
+        try{
+            sc = new Scanner(productsFile);
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+            System.exit(1);
+        }
+        String line;
+        String[] lineSplit;
+        String quantity = "-1";
+        boolean found = false;
+        while(sc.hasNext() && !found) {
+            line = sc.nextLine();
+            if(!line.isEmpty()) {
+                lineSplit = sc.nextLine().split(",");
+                if (lineSplit[0].equals(productName)) {
+                    quantity = lineSplit[1];
+                    found = true;
+                }
+            }
+        }
+        return Integer.parseInt(quantity);
+    }
+
 }
