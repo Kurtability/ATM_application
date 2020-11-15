@@ -1,11 +1,14 @@
 package LiteSnacks.backend;
 
+import LiteSnacks.UI.Products;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Scanner;
 
 public class ProductsHandlerTest {
 
@@ -76,6 +79,36 @@ public class ProductsHandlerTest {
         assertEquals(2, drinkItems.get(2).getQuantity());
 
         removeRoot();
+    }
+
+    @Test
+    public void getQuantityTest() {
+        File file = ResourceHandler.getProducts();
+        ProductsHandler ph = new ProductsHandler();
+
+        // clone file
+        Scanner sc = null;
+        try {
+            sc = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            fail();
+        }
+//        StringBuilder document = new StringBuilder();
+        String[] line;
+        String name = null;
+        String quantity = null;
+        while(sc.hasNextLine()) {
+            line = sc.nextLine().split(",");
+            if(line.length > 1){
+                name = line[0];
+                quantity = line[1];
+            }
+        }
+        assertNotNull(name);
+        assertNotNull(quantity);
+        assertEquals(Integer.parseInt(quantity), ph.getQuantitiy(name));
+
     }
 
 }
