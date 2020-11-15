@@ -2,6 +2,7 @@ package LiteSnacks.UI.ShoppingCart;
 
 import LiteSnacks.UI.Products;
 import LiteSnacks.backend.CreditCardHandler;
+import LiteSnacks.backend.ProductsHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,13 +11,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.util.Map;
+
 public class CardSceneSuccess {
     Scene scene;
     Stage stage;
 
-    public CardSceneSuccess(double width, double height, Stage stage) {
+    public CardSceneSuccess(double width, double height, Stage stage, Cart cart) {
         this.stage = stage;
         Pane root = new Pane();
+
+        cart.updateProductFile();
 
         Label title = new Label(CreditCardHandler.getSuccessMessage());
         title.setLayoutX(100);

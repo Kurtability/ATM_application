@@ -90,7 +90,7 @@ public class CardScene {
         pay.setOnAction(event -> {
             String result = CreditCardHandler.checkCard(name.getText(), number.getText());
             if(!result.equals("Credit Card details are not valid")) {
-                new CardSceneSuccess(width, height, stage).setScene();
+                new CardSceneSuccess(width, height, stage, cart).setScene();
             }
             else {
                 fail.setText(result);

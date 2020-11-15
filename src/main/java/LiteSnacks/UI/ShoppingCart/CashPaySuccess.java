@@ -27,7 +27,7 @@ public class CashPaySuccess {
 
         // update product list
         cart.updateProductFile();
-        
+
         Text welcomeText = new Text("Here's your change. Enjoy your goods!");
         setXY(welcomeText,150,200);
         welcomeText.setFont(new Font(20));
