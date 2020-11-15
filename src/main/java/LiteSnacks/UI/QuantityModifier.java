@@ -100,7 +100,7 @@ public class QuantityModifier {
                 modifyCashInput(cashPayment,item, qtylabel, 1);
         });
         subQty.setOnAction(event -> {
-            modifyCashInput(cashPayment,item, qtylabel, -1);
+                modifyCashInput(cashPayment, item, qtylabel, -1);
         });
 
 
@@ -130,8 +130,11 @@ public class QuantityModifier {
     }
 
     public void modifyQty(Item item, Text label, int gap) {
-        item.modifyQty(gap);
-        label.setText(String.valueOf(item.getQuantity()));
+        int quant = item.getQuantity();
+        if((quant > 1 && gap < 0) || (quant < 15 && gap > 0)) {
+            item.modifyQty(gap);
+            label.setText(String.valueOf(item.getQuantity()));
+        }
     }
 
     public void modifyQty(Cash item, Text label, int gap) {
