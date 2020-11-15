@@ -26,7 +26,7 @@ public class CashPayment {
 
     double totalPrice;
 
-    public CashPayment(double width, double height, Stage stage,Cart cart) {
+    public CashPayment(double width, double height, Stage stage, Cart cart) {
         Pane root = new Pane();
         this.stage = stage;
         this.totalPrice = cart.getTotal();
@@ -78,7 +78,7 @@ public class CashPayment {
             String text = PayCash.submitPayment(cashes,cart.getTotal());
             response.setText(text);
             if(!text.equals("Insufficient Change. Please try another payment method")) {
-                new CashPaySuccess(width, height, stage, text).setScene();
+                new CashPaySuccess(width, height, stage, text, cart).setScene();
             }
 
         });

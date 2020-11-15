@@ -1,6 +1,7 @@
 package LiteSnacks.UI.ShoppingCart;
 
 import LiteSnacks.UI.Products;
+import LiteSnacks.backend.ProductsHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
@@ -8,6 +9,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static LiteSnacks.UI.Style.createButton;
 import static LiteSnacks.UI.Style.setXY;
@@ -17,10 +21,13 @@ public class CashPaySuccess {
     Stage stage;
     Text userChange;
 
-    public CashPaySuccess(double width, double height, Stage stage, String change) {
+    public CashPaySuccess(double width, double height, Stage stage, String change, Cart cart) {
         Pane root = new Pane();
         this.stage = stage;
 
+        // update product list
+        cart.updateProductFile();
+        
         Text welcomeText = new Text("Here's your change. Enjoy your goods!");
         setXY(welcomeText,150,200);
         welcomeText.setFont(new Font(20));
