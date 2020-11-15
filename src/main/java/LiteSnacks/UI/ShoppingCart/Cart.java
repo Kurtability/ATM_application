@@ -3,6 +3,7 @@ package LiteSnacks.UI.ShoppingCart;
 import java.util.HashMap;
 import java.util.Map;
 
+import LiteSnacks.backend.ProductsHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -101,5 +102,17 @@ public class Cart {
     public Map<String, CartItem> getItems() {
         return this.selectedProducts;
     }
+
+    // update product list
+    public void updateProductFile() {
+        Map<String, CartItem> items = getItems();
+        ProductsHandler ph = new ProductsHandler();
+        items.forEach((k, v) ->
+            {
+                ph.editQuantity(k, (-1) * v.getQuantity());
+            }
+        );
+    }
+
 
 }
