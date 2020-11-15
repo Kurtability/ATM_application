@@ -140,4 +140,12 @@ public class ProductsHandler {
         return Integer.parseInt(quantity);
     }
 
+    public List<Item> listOfItems() {
+        List<Item> items = new ArrayList<>();
+        List<String> categories = getCategories();
+        for(String c : categories) {
+            items.addAll(getItemsForCategory(c));
+        }
+        return items;
+    }
 }
