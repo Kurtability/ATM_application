@@ -19,6 +19,7 @@ public class EditProductPane {
     TextField price;
     TextField name;
     ChoiceBox<String> category;
+    QuantityModifier qtymdfier;
 
     public EditProductPane(Item item) {
         this.item = item;
@@ -31,14 +32,15 @@ public class EditProductPane {
         // category
         ProductsHandler ph = new ProductsHandler();
         category = new ChoiceBox<String>();
-        category.setValue(String.valueOf(item.getCategory()));
+        category.setValue(item.getCategory()); // String.valueOf(item.getCategory()));
         category.getItems().addAll(ph.getCategories());
         setXY(category,320,40);
 
 
         // quantity modifier
-        Pane qtymdfier = new QuantityModifier(item).getPane();
-        setXY(qtymdfier,460,40);
+        qtymdfier = new QuantityModifier(item);
+        Pane qtymdfierPane = qtymdfier.getPane();
+        setXY(qtymdfierPane,460,40);
 
         // code
         code = new TextField(Integer.toString(item.getId()));
@@ -74,7 +76,7 @@ public class EditProductPane {
         // image.setLayoutX(21);
         // image.setLayoutY(4);
 
-        this.pane.getChildren().addAll(qtymdfier, symbol, category, code, price, name);
+        this.pane.getChildren().addAll(code, name, symbol,price, category, qtymdfierPane);
     }
 
     public Pane getPane() {
@@ -139,5 +141,25 @@ public class EditProductPane {
         }
         return is_valid;
 
+    }
+
+    public String getName() {
+        return name.getText();
+    }
+
+    public String getCategory() {
+        return category.getValue();
+    }
+
+    public double getPrice() {
+        return Double.parseDouble(price.getText());
+    }
+
+    public int getCode() {
+        return Integer.parseInt(code.getText());
+    }
+
+    public int getQuant() {
+        return qtymdfier.getQuant();
     }
 }

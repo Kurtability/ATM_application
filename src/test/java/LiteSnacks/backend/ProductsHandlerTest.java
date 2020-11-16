@@ -86,7 +86,6 @@ public class ProductsHandlerTest {
         File file = ResourceHandler.getProducts();
         ProductsHandler ph = new ProductsHandler();
 
-        // clone file
         Scanner sc = null;
         try {
             sc = new Scanner(file);
@@ -102,6 +101,7 @@ public class ProductsHandlerTest {
             if(line.length > 1){
                 name = line[0];
                 quantity = line[1];
+                break;
             }
         }
         assertNotNull(name);

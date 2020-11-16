@@ -1,9 +1,6 @@
 package LiteSnacks.backend;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -117,20 +114,21 @@ public class ProductsHandler {
     public int getQuantitiy(String productName) {
         Scanner sc = null;
         try{
-            sc = new Scanner(productsFile);
+            sc = new Scanner(ResourceHandler.getProducts());
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
             System.exit(1);
         }
+
         String line;
         String[] lineSplit;
         String quantity = "-1";
         boolean found = false;
-        while(sc.hasNext() && !found) {
+        while(sc.hasNextLine() && !found) {
             line = sc.nextLine();
             if(!line.isEmpty()) {
-                lineSplit = sc.nextLine().split(",");
+                lineSplit = line.split(",");
                 if (lineSplit[0].equals(productName)) {
                     quantity = lineSplit[1];
                     found = true;
@@ -147,5 +145,26 @@ public class ProductsHandler {
             items.addAll(getItemsForCategory(c));
         }
         return items;
+    }
+
+    public static void writeToFile(List<Item> items) {
+        String[] categories = "Drinks,Chocolates,Chips,Candies".split(",");
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter(ResourceHandler.getProducts());
+            writer.write("_\nLast Five\n");
+            for(String s : categories) {
+                writer.write("_\n" + s + "\n");
+                for(Item i : items) {
+                    if(s.equals(i.getCategory())) {
+                        writer.write(i.write() + "\n");
+                    }
+                }
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 }

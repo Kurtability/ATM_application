@@ -10,10 +10,11 @@ import javafx.scene.text.Text;
 
 public class QuantityModifier {
     Pane pane;
+    Text qtylabel;
 
     public QuantityModifier(Item item) {
         // item is object that store qty refrence
-        Text qtylabel = new Text(String.valueOf(item.getQuantity()));
+        qtylabel = new Text(String.valueOf(item.getQuantity()));
 
         Button addQty = new Button("+");
         addQty.setTextFill(Color.WHITE);
@@ -135,6 +136,10 @@ public class QuantityModifier {
             item.modifyQty(gap);
             label.setText(String.valueOf(item.getQuantity()));
         }
+    }
+
+    public int getQuant() {
+        return Integer.parseInt(qtylabel.getText());
     }
 
     public void modifyQty(Cash item, Text label, int gap) {

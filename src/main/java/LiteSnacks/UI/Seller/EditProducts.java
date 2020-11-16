@@ -13,6 +13,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -83,7 +84,8 @@ public class EditProducts {
         // SUBMIT BUTTON
         Button submit = createButton("submit", 500, 370, 27, 81);
         submit.setOnAction(event -> {
-            sumbit();
+            List<Item> newItems = Item.newItems(editProductPanes);
+            ProductsHandler.writeToFile(newItems);
         });
 
         // invalid text to indicate invalid save
@@ -127,25 +129,6 @@ public class EditProducts {
 
         }
         return box;
-    }
-
-    public void sumbit() {
-        boolean is_valid = true;
-        for (EditProductPane each : this.editProductPanes) {
-            if (each.update() == false) {
-                System.out.println(1);
-                is_valid = false;
-            }
-        }
-
-        if (is_valid == false) {
-            invalid.setVisible(true);
-        } else {
-            invalid.setVisible(false);
-            valid.setVisible(true);
-            System.out.println("suc");
-            // handler to save all item into files
-        }
     }
 
     public void setScene() {
