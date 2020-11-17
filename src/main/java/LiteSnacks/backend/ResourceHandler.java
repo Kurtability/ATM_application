@@ -80,6 +80,8 @@ public class ResourceHandler {
         return initFile("cashes.json");
     }
 
+    public static File getReportFile() {return  initFile("report.txt");}
+
     public static File getCreditCardsFile() {
         if (creditCardFile == null) {
             creditCardFile = initFile("credit_cards.json");

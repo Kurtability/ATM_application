@@ -4,6 +4,7 @@ import LiteSnacks.UI.Seller.SellerMainScene;
 import LiteSnacks.UI.Style;
 import LiteSnacks.backend.Cash;
 import LiteSnacks.backend.CashHandler;
+import LiteSnacks.backend.ReportsHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -46,7 +47,8 @@ public class CashierReportsScene {
         cashesReports.setStyle("-fx-background-color: #000000");
         cashesReports.setTextFill(Color.WHITE);
         cashesReports.setOnAction(event -> {
-            new CashesReport(width,height,stage,false).setScene();
+            ReportsHandler handler = new ReportsHandler();
+            handler.getCashesReport();
 
         });
 

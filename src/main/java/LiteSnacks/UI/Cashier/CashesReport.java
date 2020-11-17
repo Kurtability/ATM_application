@@ -30,7 +30,7 @@ public class CashesReport {
         //pane for report
         ScrollPane pane = new ScrollPane();
         Pane box = new Pane();
-        Text text = new Text(ch.getStringOfCashesReport(ch.readFile()));
+        Text text = new Text(/**ch.getStringOfCashesReport(ch.readFile())**/);
         box.getChildren().add(text);
 
         pane.setContent(box);
