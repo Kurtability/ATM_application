@@ -61,9 +61,9 @@ public class EditProducts {
         setXY(comments, 3, 370);
         label.setFill(Color.rgb(0, 66, 127));
         Text codetext = new Text("Code");
-        setXY(codetext, 150, 50);
+        setXY(codetext, 70, 50);
         Text nametext = new Text("Name");
-        setXY(nametext, 215, 50);
+        setXY(nametext, 150, 50);
         Text pricetext = new Text("Price");
         setXY(pricetext, 280, 50);
         Text categorytext = new Text("Category");
