@@ -54,8 +54,7 @@ public class EditProducts {
         Text label = new Text("Edit Products");
         setXY(label, 10, 20);
         label.setFont(new Font(20));
-        Text comments = new Text("Please make sure each row should not be null ," + "\n"
-                + "    and also price should be integer or double.");
+        Text comments = new Text("");
         comments.setFill(Color.rgb(160, 0, 0));
 
         setXY(comments, 3, 370);
@@ -85,7 +84,12 @@ public class EditProducts {
         Button submit = createButton("submit", 500, 370, 27, 81);
         submit.setOnAction(event -> {
             List<Item> newItems = Item.newItems(editProductPanes);
-            ProductsHandler.writeToFile(newItems);
+            if(ph.checkValid(newItems).equals("Success")) {
+                ProductsHandler.writeToFile(newItems);
+            }
+            else {
+                comments.setText(ph.checkValid(newItems));
+            }
         });
 
         // invalid text to indicate invalid save

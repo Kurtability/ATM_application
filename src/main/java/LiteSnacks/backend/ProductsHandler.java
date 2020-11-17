@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ProductsHandler {
     private static File productsFile;
@@ -202,5 +204,77 @@ public class ProductsHandler {
             }
         }
         return(String.format("The report is stored at: %s", ResourceHandler.getProductReport().toString()));
+    }
+
+    public String checkValid(List<Item> items) {
+        StringBuilder sb = new StringBuilder();
+        String result = "Success";
+        String uniqueNames = checkUniqueNames(items);
+        String uniqueIds = checkUniqueID(items);
+
+        if(!uniqueNames.equals("Success")) {
+            sb.append(uniqueNames);
+        }
+        if(!uniqueIds.equals("Success")) {
+            sb.append(uniqueIds);
+        }
+        if(sb.length() != 0) {
+            result = sb.toString();
+        }
+        return result;
+
+    }
+    private String checkUniqueNames(List<Item> items) {
+        String valid = "Success";
+        StringBuilder sb = new StringBuilder();
+        Map<String, Integer> names = new HashMap<>();
+
+        String name;
+        for(Item i : items) {
+            name = i.getName().toLowerCase();
+            if (!names.containsKey(name)) {
+                names.put(name, 1);
+            } else {
+                names.put(name, names.get(name) + 1);
+            }
+        }
+
+        names.forEach((k,v) -> {
+            if (v != 1) {
+                sb.append(String.format("The name %s is not unique\n", k));
+            }
+        });
+
+        if(sb.length() != 0) {
+            valid = sb.toString();
+        }
+        return valid;
+    }
+
+    private String checkUniqueID(List<Item> items) {
+        String valid = "Success";
+        StringBuilder sb = new StringBuilder();
+        Map<String, Integer> ids = new HashMap<>();
+
+        String key;
+        for(Item i : items) {
+            key = Integer.toString(i.getId());
+            if (!ids.containsKey(key)) {
+                ids.put(key, 1);
+            } else {
+                ids.put(key, ids.get(key) + 1);
+            }
+        }
+
+        ids.forEach((k,v) -> {
+            if (v != 1) {
+                sb.append(String.format("The id %s is not unique", k));
+            }
+        });
+
+        if(sb.length() != 0) {
+            valid = sb.toString();
+        }
+        return valid;
     }
 }
