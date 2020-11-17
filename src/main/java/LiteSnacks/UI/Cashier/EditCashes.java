@@ -1,5 +1,6 @@
 package LiteSnacks.UI.Cashier;
 
+import LiteSnacks.UI.Owner.OwnerEditScene;
 import LiteSnacks.UI.Seller.SellerMainScene;
 import LiteSnacks.UI.Style;
 import LiteSnacks.backend.Cash;
@@ -23,7 +24,7 @@ public class EditCashes {
     List<EditCashPane> editCashPanes;
     List<Cash> cashes;
 
-    public EditCashes(double width, double height, Stage stage) {
+    public EditCashes(double width, double height, Stage stage,boolean isOwner) {
         Pane root = new Pane();
         this.stage = stage;
 
@@ -65,7 +66,12 @@ public class EditCashes {
         back.setStyle("-fx-background-color: transparent;");
         back.setFont(new Font(20));
         back.setOnAction(e -> {
-            new CashierMainScene(width, height, stage).setScene();
+            if(isOwner){
+                new OwnerEditScene(width,height,stage).setScene();
+            }else{
+                new CashierMainScene(width, height, stage).setScene();
+            }
+
         });
         back.setLayoutX(500);
         back.setLayoutY(1);
