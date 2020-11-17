@@ -187,7 +187,20 @@ public class ProductsHandler {
             e.printStackTrace();
             System.exit(1);
         }
+        if(Desktop.isDesktopSupported()) {
+            System.out.println("Desktop is supported!");
+            if(Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
+                System.out.println("Open action is supported!");
+                new Thread(() -> {
+                    try {
+                        Desktop.getDesktop().open(ResourceHandler.getProductReport());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
 
+            }
+        }
         return(String.format("The report is stored at: %s", ResourceHandler.getProductReport().toString()));
     }
 }
