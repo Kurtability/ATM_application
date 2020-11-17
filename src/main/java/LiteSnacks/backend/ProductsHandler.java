@@ -1,5 +1,6 @@
 package LiteSnacks.backend;
 
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -138,8 +139,8 @@ public class ProductsHandler {
         return Integer.parseInt(quantity);
     }
 
-    public List<Item> listOfItems() {
-        List<Item> items = new ArrayList<>();
+    public ArrayList<Item> listOfItems() {
+        ArrayList<Item> items = new ArrayList<>();
         List<String> categories = getCategories();
         for(String c : categories) {
             items.addAll(getItemsForCategory(c));
@@ -147,6 +148,7 @@ public class ProductsHandler {
         return items;
     }
 
+    // overwrites the contents of products.csv
     public static void writeToFile(List<Item> items) {
         String[] categories = "Drinks,Chocolates,Chips,Candies".split(",");
         FileWriter writer = null;
@@ -166,5 +168,26 @@ public class ProductsHandler {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    public String generateReport(List<Item> items) {
+        String[] categories = "Drinks,Chocolates,Chips,Candies".split(",");
+        FileWriter writer = null;
+        String entry;
+        try {
+            writer = new FileWriter(ResourceHandler.getProductReport());
+            for(String s : categories) {
+                for(Item i : items) {
+                    entry = String.format("PID: %s\nProduct: %s\nPrice: %s\nQuantity: %s\nCategory: %s\n\n", i.getId(), i.getName(), i.getUnitPrice(), i.getQuantity(), i.getCategory());
+                    writer.write(entry);
+                }
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        return(String.format("The report is stored at: %s", ResourceHandler.getProductReport().toString()));
     }
 }

@@ -2,6 +2,7 @@ package LiteSnacks.UI.Seller;
 
 import LiteSnacks.UI.Cashier.CashierMainScene;
 import LiteSnacks.UI.Style;
+import LiteSnacks.backend.ProductsHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,6 +40,10 @@ public class SellerReportsScene {
         setXY(label,21,30);
         label.setFont(new Font("Arial", 30));
 
+        //
+        Text pathToReport = new Text("");
+        setXY(pathToReport, 100, 400);
+
         // Get product reports button
         Button cashesReports = new Button("Products Report");
         setXY(cashesReports,70,150);
@@ -46,7 +51,8 @@ public class SellerReportsScene {
         cashesReports.setStyle("-fx-background-color: #000000");
         cashesReports.setTextFill(Color.WHITE);
         cashesReports.setOnAction(event -> {
-            new ProductReport(width, height, stage).setScene();
+            ProductsHandler ph = new ProductsHandler();
+            pathToReport.setText(ph.generateReport(ph.listOfItems()));
         });
 
         // item summary
@@ -69,7 +75,7 @@ public class SellerReportsScene {
 
         // back
 
-        root.getChildren().addAll(loginpane, back);
+        root.getChildren().addAll(loginpane, back, pathToReport);
 
         scene = new Scene(root, width, height);
     }
