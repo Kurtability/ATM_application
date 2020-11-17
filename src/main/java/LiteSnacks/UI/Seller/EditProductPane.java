@@ -10,6 +10,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
+import java.util.List;
+
 import static LiteSnacks.UI.Style.setXY;
 
 public class EditProductPane {
@@ -33,7 +35,9 @@ public class EditProductPane {
         ProductsHandler ph = new ProductsHandler();
         category = new ChoiceBox<String>();
         category.setValue(item.getCategory()); // String.valueOf(item.getCategory()));
-        category.getItems().addAll(ph.getCategories());
+        List<String> categories = ph.getCategories();
+        categories.remove("Last Five");
+        category.getItems().addAll(categories);
         setXY(category,320,40);
 
 
