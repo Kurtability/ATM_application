@@ -22,7 +22,7 @@ public class SellerReportsScene {
         this.stage = stage;
 
         Pane root = new Pane();
-        Pane loginpane = new Pane();
+        Pane pane = new Pane();
 
         // back
         Button back = new Button(">back");
@@ -40,12 +40,12 @@ public class SellerReportsScene {
         label.setFont(new Font("Arial", 30));
 
         // Get cashes reports button
-        Button cashesReports = new Button("Products Report");
-        setXY(cashesReports,70,150);
-        setHW(cashesReports,40,150);
-        cashesReports.setStyle("-fx-background-color: #000000");
-        cashesReports.setTextFill(Color.WHITE);
-        cashesReports.setOnAction(event -> {
+        Button productsReports = new Button("Products Report");
+        setXY(productsReports,70,150);
+        setHW(productsReports,40,150);
+        productsReports.setStyle("-fx-background-color: #000000");
+        productsReports.setTextFill(Color.WHITE);
+        productsReports.setOnAction(event -> {
 
             /***
              * please add a function to write report in a file
@@ -65,14 +65,14 @@ public class SellerReportsScene {
              ***/
         });
 
-        loginpane.getChildren().addAll(label, itemSummary, cashesReports);
-        setXY(loginpane,156,51);
-        setHW(loginpane,299,289);
-        loginpane.setStyle("-fx-background-color: #d9d9d9");
+        pane.getChildren().addAll(label, itemSummary, productsReports);
+        setXY(pane,156,51);
+        setHW(pane,299,289);
+        pane.setStyle("-fx-background-color: #d9d9d9");
 
         // back
 
-        root.getChildren().addAll(loginpane, back);
+        root.getChildren().addAll(pane, back);
 
         scene = new Scene(root, width, height);
     }

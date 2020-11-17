@@ -4,6 +4,7 @@
 package LiteSnacks;
 
 import LiteSnacks.UI.Cashier.CashierMainScene;
+import LiteSnacks.UI.Owner.OwnerMainScene;
 import LiteSnacks.UI.Products;
 import LiteSnacks.UI.Seller.SellerMainScene;
 import LiteSnacks.UI.ShoppingCart.CashPayment;
@@ -24,7 +25,7 @@ public class App extends Application{
 
         this.productScene = new Products(640,480,primaryStage);
        SellerMainScene scene = new SellerMainScene(640,400,primaryStage);
-        scene.setScene();
+        new OwnerMainScene(640,400,primaryStage).setScene();
 
 //        this.cs = new CardScene(640, 480, primaryStage, new Cart());
 //        cs.setScene();
