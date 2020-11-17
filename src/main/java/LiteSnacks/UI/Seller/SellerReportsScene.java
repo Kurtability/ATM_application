@@ -29,7 +29,7 @@ public class SellerReportsScene {
         back.setStyle("-fx-background-color: transparent;");
         back.setFont(new Font(20));
         back.setOnAction(e -> {
-            new CashierMainScene(width, height, stage).setScene();
+            new SellerMainScene(width, height, stage).setScene();
         });
         setXY(back,500,10);
 
