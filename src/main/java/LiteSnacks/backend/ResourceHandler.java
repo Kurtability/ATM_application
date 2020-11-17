@@ -87,6 +87,10 @@ public class ResourceHandler {
         return creditCardFile;
     }
 
+    public static File getProductReport() {
+        return initFile("productReport.txt");
+    }
+
     private static int getLineNumber() {
         return Thread.currentThread().getStackTrace()[2].getLineNumber();
     }
