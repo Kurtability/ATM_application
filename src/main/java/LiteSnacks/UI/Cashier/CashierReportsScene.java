@@ -2,6 +2,8 @@ package LiteSnacks.UI.Cashier;
 
 import LiteSnacks.UI.Seller.SellerMainScene;
 import LiteSnacks.UI.Style;
+import LiteSnacks.backend.Cash;
+import LiteSnacks.backend.CashHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -33,7 +35,7 @@ public class CashierReportsScene {
         Button back = new Button(">back");
         back.setStyle("-fx-background-color: transparent;");
         back.setFont(new Font(20));
-        back.setOnAction(e -> {new SellerMainScene(width,height,stage).setScene();});
+        back.setOnAction(e -> {new CashierMainScene(width,height,stage).setScene();});
         setXY(back,500,10);
 
 
@@ -44,9 +46,8 @@ public class CashierReportsScene {
         cashesReports.setStyle("-fx-background-color: #000000");
         cashesReports.setTextFill(Color.WHITE);
         cashesReports.setOnAction(event -> {
+            new CashesReport(width,height,stage,false).setScene();
 
-            /*** please add a function to write report in a file
-             * ***/
         });
 
 

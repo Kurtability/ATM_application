@@ -94,5 +94,21 @@ public class CashHandler {
         }
 
     }
+    public String getStringOfCashesReport(List<Cash> cashes){
+        String value = "\n These below are cashes available in the Vending machine" + "\n";
+        for (Cash cash : cashes){
+            value += "------------------------- \n\n";
+            if (cash.getValue()>=1){
+                value += "  value : $"+cash.getValue()+"\n";
+            }else {
+                value += "  value : "+cash.getValue()*100+"c\n";
+            }
+
+            value += "  qty : "+cash.getQty()+"\n\n";
+
+        }
+        return value;
+
+    }
 
 }
