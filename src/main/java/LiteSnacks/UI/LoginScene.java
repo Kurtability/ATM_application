@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
+import static LiteSnacks.UI.Style.setXY;
+
 public class LoginScene {
     Scene scene;
     Stage stage;
@@ -49,7 +51,7 @@ public class LoginScene {
 
         // log in button
         Button loginButton = new Button("Login");
-        loginButton.setLayoutX(111);
+        loginButton.setLayoutX(100);
         loginButton.setLayoutY(222);
         loginButton.setStyle("-fx-background-color: #000000");
         loginButton.setTextFill(Color.WHITE);
@@ -92,12 +94,23 @@ public class LoginScene {
         // register button
         Button registerButton = new Button("Register");
         registerButton.setLayoutX(180);
-        registerButton.setLayoutY(35);
+        registerButton.setLayoutY(222);
         registerButton.setStyle("-fx-background-color: #000000");
         registerButton.setTextFill(Color.WHITE);
         registerButton.setOnAction(event -> {
             new RegisterScene(width, height, stage).setScene();
         });
+
+        // back
+        Button back = new Button(">back to products");
+        back.setLayoutY(20);
+        back.setLayoutX(440);
+        back.setStyle("-fx-background-color: #000000");
+        back.setTextFill(Color.WHITE);
+        back.setOnAction(e -> {
+            new Products(width, height, stage).setScene();
+        });
+
 
         loginpane.getChildren().addAll(username, password, loginButton, label, registerButton);
         loginpane.setLayoutX(156);
@@ -106,6 +119,7 @@ public class LoginScene {
         loginpane.setPrefWidth(289);
         loginpane.setStyle("-fx-background-color: #d9d9d9");
 
+        root.getChildren().add(back);
         root.getChildren().add(loginpane);
 
         scene = new Scene(root, width, height);

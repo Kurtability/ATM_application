@@ -41,7 +41,7 @@ public class RegisterScene {
         // log in button
         Button loginButton = new Button("Log In");
         loginButton.setLayoutX(180);
-        loginButton.setLayoutY(35);
+        loginButton.setLayoutY(222);
         loginButton.setStyle("-fx-background-color: #000000");
         loginButton.setTextFill(Color.WHITE);
         loginButton.setOnAction(event -> {
@@ -53,10 +53,20 @@ public class RegisterScene {
         registerButton.setOnAction(e ->{
             new UserLoginHandler().addCustomer(username.getText(),password.getText());
         });
-        registerButton.setLayoutX(111);
+        registerButton.setLayoutX(70);
         registerButton.setLayoutY(222);
         registerButton.setStyle("-fx-background-color: #000000");
         registerButton.setTextFill(Color.WHITE);
+
+        // back
+        Button back = new Button(">back to products");
+        back.setLayoutY(20);
+        back.setLayoutX(440);
+        back.setStyle("-fx-background-color: #000000");
+        back.setTextFill(Color.WHITE);
+        back.setOnAction(e -> {
+            new Products(width, height, stage).setScene();
+        });
 
         loginpane.getChildren().addAll(username, password, registerButton, loginButton, label);
         loginpane.setLayoutX(156);
@@ -66,6 +76,7 @@ public class RegisterScene {
         loginpane.setStyle("-fx-background-color: #d9d9d9");
 
         root.getChildren().add(loginpane);
+        root.getChildren().add(back);
 
         scene = new Scene(root, width, height);
     }
