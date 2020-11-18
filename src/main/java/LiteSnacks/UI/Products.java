@@ -4,6 +4,7 @@ import LiteSnacks.UI.ShoppingCart.Cart;
 import LiteSnacks.UI.ShoppingCart.Checkout;
 import LiteSnacks.backend.Item;
 import LiteSnacks.backend.ProductsHandler;
+import LiteSnacks.UI.Style;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -13,6 +14,8 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static LiteSnacks.UI.Style.createButton;
 
 public class Products {
     Scene scene;
@@ -79,10 +82,22 @@ public class Products {
         // checkout button
         Button checkoutButton = createButton("Check Out", 150, 390, 25, 100);
         checkoutButton.setOnAction(event -> {
-            new Checkout(width, height, stage, cart).setScene();
+            if(!cart.getItems().isEmpty()) {
+                new Checkout(width, height, stage, cart).setScene();
+            }
         });
 
-        root.getChildren().addAll(checkoutButton, logoutButton, products, cart.getPane());
+        Button cancel = new Button("Cancel");
+        cancel.setLayoutX(290);
+        cancel.setLayoutY(390);
+        cancel.setMinSize(100, 25);
+        cancel.setStyle("-fx-background-color: red");
+        cancel.setTextFill(Color.WHITE);
+        cancel.setOnAction(event -> {
+            new Products(width, height, stage).setScene();
+        });
+
+        root.getChildren().addAll(checkoutButton, logoutButton, products, cart.getPane(), cancel);
         root.getChildren().addAll(buttons);
         scene = new Scene(root, width, height);
 
@@ -92,25 +107,7 @@ public class Products {
         stage.setScene(scene);
     }
 
-    public Button createButton(String text, int x, int y, int h, int w) {
-        Button button = new Button(text);
-        this.setXY(button, x, y);
-        this.setHW(button, h, w);
-        button.setStyle("-fx-background-color: #000000;");
-        button.setTextFill(Color.WHITE);
-        return button;
 
-    }
-
-    public void setXY(Control node, double x, double y) {
-        node.setLayoutX(x);
-        node.setLayoutY(y);
-    }
-
-    public void setHW(Control node, double h, double w) {
-        node.setPrefHeight(h);
-        node.setPrefWidth(w);
-    }
 
     public Pane getProductsPane(List<Item> productDisplayItems) {
         Pane box = new Pane();

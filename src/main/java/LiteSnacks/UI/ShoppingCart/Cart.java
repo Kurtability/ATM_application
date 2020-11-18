@@ -3,6 +3,7 @@ package LiteSnacks.UI.ShoppingCart;
 import java.util.HashMap;
 import java.util.Map;
 
+import LiteSnacks.backend.ProductsHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -46,11 +47,13 @@ public class Cart {
     }
 
     public void addProduct(String product, String category, int id, double cost) {
+        ProductsHandler ph = new ProductsHandler();
         if (this.selectedProducts.containsKey(product)) {
-            this.selectedProducts.get(product).add();
+            if(this.selectedProducts.get(product).getQuantity() < ph.getQuantitiy(product)) {
+                this.selectedProducts.get(product).add();
+            }
         } else {
             CartItem newItem = new CartItem(product, category, id, cost, 1, this);
-
             this.selectedProducts.put(product, newItem);
             this.cartPane.getChildren().add(newItem.cartItemPane);
         }
@@ -101,5 +104,17 @@ public class Cart {
     public Map<String, CartItem> getItems() {
         return this.selectedProducts;
     }
+
+    // update product list
+    public void updateProductFile() {
+        Map<String, CartItem> items = getItems();
+        ProductsHandler ph = new ProductsHandler();
+        items.forEach((k, v) ->
+            {
+                ph.editQuantity(k, (-1) * v.getQuantity());
+            }
+        );
+    }
+
 
 }

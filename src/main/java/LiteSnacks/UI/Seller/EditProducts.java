@@ -1,5 +1,7 @@
 package LiteSnacks.UI.Seller;
 
+import LiteSnacks.UI.Owner.OwnerEditScene;
+import LiteSnacks.UI.Style;
 import LiteSnacks.backend.Item;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static LiteSnacks.UI.Style.*;
+
 public class EditProducts {
     Scene scene;
     Stage stage;
@@ -22,7 +26,7 @@ public class EditProducts {
     Text invalid = new Text("Invalid");
     Text valid = new Text("Successfully submitted");
 
-    public EditProducts(double width, double height, Stage stage) {
+    public EditProducts(double width, double height, Stage stage,boolean isOwner) {
 
         this.stage = stage;
         Pane root = new Pane();
@@ -43,10 +47,8 @@ public class EditProducts {
 
         // scrollPane for showing products block
         ScrollPane productsPane = new ScrollPane();
-        productsPane.setPrefHeight(280);
-        productsPane.setPrefWidth(580);
-        productsPane.setLayoutX(10);
-        productsPane.setLayoutY(55);
+        setXY(productsPane,10,55);
+        setHW(productsPane,280,580);
         productsPane.setContent(ProductWholePane);
 
         // Text for product(code,name,qty,category)
@@ -60,9 +62,9 @@ public class EditProducts {
         setXY(comments, 3, 370);
         label.setFill(Color.rgb(0, 66, 127));
         Text codetext = new Text("Code");
-        setXY(codetext, 150, 50);
+        setXY(codetext, 70, 50);
         Text nametext = new Text("Name");
-        setXY(nametext, 215, 50);
+        setXY(nametext, 150, 50);
         Text pricetext = new Text("Price");
         setXY(pricetext, 280, 50);
         Text categorytext = new Text("Category");
@@ -75,7 +77,12 @@ public class EditProducts {
         back.setStyle("-fx-background-color: transparent;");
         back.setFont(new Font(20));
         back.setOnAction(e -> {
-            new SellerMainScene(width, height, stage).setScene();
+            if(isOwner){
+                new OwnerEditScene(width,height,stage).setScene();
+            }else{
+                new SellerMainScene(width, height, stage).setScene();
+            }
+
         });
         back.setLayoutX(500);
         back.setLayoutY(2);
@@ -100,30 +107,6 @@ public class EditProducts {
                 label, comments);
         root.getChildren().addAll(submit, back);
         scene = new Scene(root, width, height);
-    }
-
-    public Button createButton(String text, int x, int y, int h, int w) {
-        Button button = new Button(text);
-        this.setXY(button, x, y);
-        this.setHW(button, h, w);
-        button.setStyle("-fx-background-color: #000000;");
-        button.setTextFill(Color.WHITE);
-        return button;
-    }
-
-    public void setXY(Control node, double x, double y) {
-        node.setLayoutX(x);
-        node.setLayoutY(y);
-    }
-
-    public void setXY(Text node, double x, double y) {
-        node.setLayoutX(x);
-        node.setLayoutY(y);
-    }
-
-    public void setHW(Control node, double h, double w) {
-        node.setPrefHeight(h);
-        node.setPrefWidth(w);
     }
 
     public List<EditProductPane> getEditsProductsPanes(List<Item> items) {

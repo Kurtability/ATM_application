@@ -1,7 +1,8 @@
-package LiteSnacks.UI.Seller;
+package LiteSnacks.UI.Owner;
 
+import LiteSnacks.UI.Cashier.CashierReportsScene;
+import LiteSnacks.UI.Cashier.EditCashes;
 import LiteSnacks.UI.LoginScene;
-import LiteSnacks.UI.Style;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,45 +14,45 @@ import javafx.stage.Stage;
 import static LiteSnacks.UI.Style.setHW;
 import static LiteSnacks.UI.Style.setXY;
 
-public class SellerMainScene {
+public class OwnerMainScene {
     Scene scene;
     Stage stage;
 
-    public SellerMainScene(double width, double height, Stage stage) {
+    public OwnerMainScene(double width, double height, Stage stage) {
         this.stage = stage;
 
         Pane root = new Pane();
         Pane pane = new Pane();
         // lable
-        Label label = new Label("Welcome Seller");
+        Label label = new Label("Welcome Owner");
         label.setLayoutX(41);
         label.setLayoutY(30);
         label.setFont(new Font("Arial", 30));
 
-        //
+        // reports
         Button reportsButton = new Button("Get Reports");
-        setXY(reportsButton,70,150);
-        setHW(reportsButton,40,150);
+        setXY(reportsButton,55,150);
+        setHW(reportsButton,40,180);
         reportsButton.setStyle("-fx-background-color: #000000");
         reportsButton.setTextFill(Color.WHITE);
         reportsButton.setOnAction(event -> {
-            new SellerReportsScene(width, height, stage).setScene();
+            new OwnerReportsScene(width, height, stage).setScene();
         });
 
-        // register button
-        Button editButton = new Button("Edit Products");
-        setXY(editButton,70,100);
-        setHW(editButton,40,150);
+        // edit cashes/products/roles
+        Button editButton = new Button("Edit Cashes/Products/Users");
+        setXY(editButton,55,100);
+        setHW(editButton,40,180);
         editButton.setStyle("-fx-background-color: #000000");
         editButton.setTextFill(Color.WHITE);
         editButton.setOnAction(event -> {
-            new EditProducts(width, height, stage,false).setScene();
+            new OwnerEditScene(width, height, stage).setScene();
         });
 
         // log out button
         Button logoutButton = new Button("Log Out");
-        setXY(logoutButton,70,200);
-        setHW(logoutButton,40,150);
+        setXY(logoutButton,55,200);
+        setHW(logoutButton,40,180);
         logoutButton.setStyle("-fx-background-color: #000000");
         logoutButton.setTextFill(Color.WHITE);
         logoutButton.setOnAction(event -> {
@@ -59,8 +60,8 @@ public class SellerMainScene {
         });
 
         pane.getChildren().addAll(reportsButton, label, editButton, logoutButton);
-        setXY(pane,156,51);
-        setHW(pane,299,289);
+        setXY(pane,156,61);
+        setHW(pane,289,299);
         pane.setStyle("-fx-background-color: #d9d9d9");
 
         root.getChildren().add(pane);
@@ -72,3 +73,4 @@ public class SellerMainScene {
         stage.setScene(scene);
     }
 }
+

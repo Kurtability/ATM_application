@@ -1,7 +1,9 @@
 package LiteSnacks.backend;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,9 +11,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class ProductsHandler {
-    private File productsFile;
+    private static File productsFile;
 
-    // getting the product file from resoruce handler
+    // getting the product file from resource handler
     public ProductsHandler() {
         productsFile = ResourceHandler.getProducts();
     }
@@ -72,6 +74,70 @@ public class ProductsHandler {
         }
 
         return items;
+    }
+
+    /**
+     * Function to edit the quantity of a product in the products file.
+     * 
+     * @param productName The name of the product
+     * @param delta       The change in quantity (+ve if increasing, -ve if
+     *                    decreasing)
+     */
+    public void editQuantity(String productName, int delta) {
+        Scanner sc;
+        PrintWriter pw;
+        try {
+            sc = new Scanner(this.productsFile);
+            File temp;
+            pw = new PrintWriter(temp = File.createTempFile("newproducts", "tmp"));
+            String prevLine = "";
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                if (!line.equals("_") && !prevLine.equals("_")) {
+                    String[] attr = line.split(",");
+                    if (attr[0].equals(productName))
+                        pw.println(attr[0] + ","  + (Integer.parseInt(attr[1]) + delta) + "," + attr[2] + "," + attr[3]);
+                    else
+                        pw.println(line);
+                } else {
+                    pw.println(line);
+                }
+                prevLine = line;
+            }
+            sc.close();
+            pw.flush();
+            pw.close();
+
+            ResourceHandler.copyfiles(new FileInputStream(temp), this.productsFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int getQuantitiy(String productName) {
+        Scanner sc = null;
+        try{
+            sc = new Scanner(productsFile);
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+            System.exit(1);
+        }
+        String line;
+        String[] lineSplit;
+        String quantity = "-1";
+        boolean found = false;
+        while(sc.hasNext() && !found) {
+            line = sc.nextLine();
+            if(!line.isEmpty()) {
+                lineSplit = sc.nextLine().split(",");
+                if (lineSplit[0].equals(productName)) {
+                    quantity = lineSplit[1];
+                    found = true;
+                }
+            }
+        }
+        return Integer.parseInt(quantity);
     }
 
 }
