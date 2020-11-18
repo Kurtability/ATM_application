@@ -1,6 +1,7 @@
 package LiteSnacks.UI;
 
 import LiteSnacks.UI.Cashier.CashierMainScene;
+import LiteSnacks.UI.Owner.OwnerMainScene;
 import LiteSnacks.UI.Seller.SellerMainScene;
 import LiteSnacks.backend.UserAccount.UserAccount;
 import LiteSnacks.backend.UserLoginHandler;
@@ -73,6 +74,10 @@ public class LoginScene {
                     else if (u.getRole().contains("seller") && u.getUserName().equals(username.getText())){
                         new SellerMainScene(width, height, stage).setScene();
                         System.out.println("seller page");
+                    }
+                    else if (u.getRole().contains("owner") && u.getUserName().equals(username.getText())){
+                        new OwnerMainScene(width, height, stage).setScene();
+                        System.out.println("owner page");
                     }
                     else if (u.getRole().contains("customer") && u.getUserName().equals(username.getText())){
                         new Products(width, height, stage).setScene();

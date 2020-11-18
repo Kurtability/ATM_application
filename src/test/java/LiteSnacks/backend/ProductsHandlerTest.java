@@ -47,7 +47,7 @@ public class ProductsHandlerTest {
         assertNotNull(chipItems.get(0));
         assertNotNull(chipItems.get(0).getQuantity());
         assertEquals(7, chipItems.get(0).getQuantity());
-        
+
         String name = chipItems.get(0).getName();
         ph.editQuantity(name, 2);
 
@@ -56,7 +56,7 @@ public class ProductsHandlerTest {
         assertNotNull(chipItems.get(0).getQuantity());
         assertEquals(name, chipItems.get(0).getName());
         assertEquals(9, chipItems.get(0).getQuantity());
-        
+
         removeRoot();
     }
 
@@ -69,7 +69,7 @@ public class ProductsHandlerTest {
         assertNotNull(drinkItems.get(2));
         assertNotNull(drinkItems.get(2).getQuantity());
         assertEquals(7, drinkItems.get(2).getQuantity());
-        
+
         String name = drinkItems.get(2).getName();
         ph.editQuantity(name, -5);
 
