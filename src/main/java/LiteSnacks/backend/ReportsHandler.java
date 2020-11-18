@@ -75,8 +75,8 @@ public class ReportsHandler {
             value += "  Date : "+ each.getTimestamp() + "\n";
             value += "  User : "+ each.getUser()+"\n";
             value += "  Price : "+ each.getAmount() + "\n";
-            value += "  Change : \n"; //each.getChanges();
-            value += "  Pay Method : \n";
+            value += "  Change : "+each.getChange()+"\n";
+            value += "  Pay Method : "+each.getMethod()+"\n";
             value += "  Items : \n";
             int index = 1;
             Map<String,List<Double>> map = each.getProducts();

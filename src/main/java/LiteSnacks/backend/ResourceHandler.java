@@ -91,22 +91,13 @@ public class ResourceHandler {
             return initFile("user.txt");
     }
 
-  
-    public static File getCreditCardsFile() {
-        if (creditCardFile == null) {
-            creditCardFile = initFile("credit_cards.json");
-        }
-        return creditCardFile;
-    }
-
-    public static File getProductReport() {
-        return initFile("productReport.txt");
-    }
     
   
    public static File getCashesReportFile() {return  initFile("cashesReport.txt");}
 
     public static File getTransactionsReportFile() {return  initFile("transactionsReport.txt");}
+
+
 
     public static File getCreditCardsFile() {
         if (creditCardFile == null) {
@@ -118,8 +109,15 @@ public class ResourceHandler {
     public static File getTransactionFile() {
         return initFile("transaction.csv");
     }
+  
+  
+    public static File getProductReport() {
+      return initFile("productReport.txt");
+  }
+  
+  
 
     private static int getLineNumber() {
         return Thread.currentThread().getStackTrace()[2].getLineNumber();
     }
-
+}

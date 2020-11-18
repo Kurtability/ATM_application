@@ -14,15 +14,19 @@ public class Transaction {
 
     String user;
     String change;
+    String method;
     Timestamp ts;
     double amount;
     Map<String, List<Double>> products;
 
-    Transaction(double amount, Map<String, List<Double>> products, Timestamp ts, String user) {
+    Transaction(double amount, Map<String, List<Double>> products, Timestamp ts, String user,String change,String method) {
         this.products = products;
         this.amount = amount;
         this.ts = ts;
         this.user = user;
+        this.change = change;
+        this.method = method;
+
     }
 
     public double getAmount() {
@@ -41,7 +45,10 @@ public class Transaction {
         return user;
     }
 
-    public static void addTransaction(Map<String, List<Double>> transaction, double amount) {
+    public String getChange(){return change;}
+    public String getMethod(){return method;}
+
+    public static void addTransaction(Map<String, List<Double>> transaction, double amount,String change,boolean payBy_card) {
         String user = "anon";
         File out = ResourceHandler.getTransactionFile();
         try {
@@ -51,6 +58,16 @@ public class Transaction {
             pw.println(new Timestamp(System.currentTimeMillis()));
             pw.println(amount);
             pw.println(user);
+            /***
+             for paymethod(Oliver implmented)
+
+             */
+            if(payBy_card){
+                pw.println("Card"); //method
+            }else{
+                pw.println("Cash"); //method
+            }
+            pw.println(change);//change
 
             for (String prod : transaction.keySet())
                 pw.println(prod + "," + transaction.get(prod).get(0) + "," + transaction.get(prod).get(1));
@@ -66,6 +83,10 @@ public class Transaction {
     public static List<Transaction> getAllTransactions() {
         double amount;
         String user;
+        /**oliver implmented**/
+        String payMethod;
+        String change;
+        /***/
         List<Double> temp;
         String item;
         List<Transaction> transactions;
@@ -79,6 +100,12 @@ public class Transaction {
                     amount = Double.parseDouble(sc.nextLine());
                     user = sc.nextLine();
 
+                    /**oliver implmented**/
+                    payMethod = sc.nextLine();
+                    change = sc.nextLine();
+
+
+
                     Map<String, List<Double>> items = new HashMap<>();
 
                     while (!(line = sc.nextLine()).equals("*")) {
@@ -88,7 +115,7 @@ public class Transaction {
                         temp.add(Double.parseDouble(lspl[2]));
                         items.put(lspl[0], temp);
                     }
-                    transactions.add(new Transaction(amount, items, t, user));
+                    transactions.add(new Transaction(amount, items, t, user,change,payMethod));
                 }
             }
 

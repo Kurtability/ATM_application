@@ -86,7 +86,7 @@ public class CashPayment {
 
 
                 }
-                Transaction.addTransaction(map,cart.getTotal());
+                Transaction.addTransaction(map,cart.getTotal(),text,false);
                 new CashPaySuccess(width, height, stage, text, cart).setScene();
             }
 
