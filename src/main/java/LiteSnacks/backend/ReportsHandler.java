@@ -4,6 +4,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.List;
+import java.util.Map;
 
 public class ReportsHandler {
     ResourceHandler handler ;
@@ -52,8 +53,9 @@ public class ReportsHandler {
         String st = "Saved at "+String.valueOf(reportFile);
         try{
             FileWriter writer = new FileWriter(reportFile);
-            CashHandler handler = new CashHandler();
-            String sr = getStringOfTransactionsReport(handler.readFile());
+            List<Transaction> trans = Transaction.getAllTransactions();
+
+            String sr = getStringOfTransactionsReport(trans);
             writer.write(sr);
             writer.close();
             showReport(reportFile);
@@ -64,23 +66,31 @@ public class ReportsHandler {
         return st;
 
     }
-    public String getStringOfTransactionsReport(List<Cash> cashes){
+    public String getStringOfTransactionsReport(List<Transaction> transactions){
         String value = "\n These below are transactions details in the Vending machine" + "\n";
-        /***
-        for (Transaction each : cashes){
+        System.out.println(1);
+        for (Transaction each : transactions){
+
             value += "------------------------- \n\n";
-            value += "  Date : "+ each.getdate() + "\n";
-            value += "  Price : "+ each.getprice() + "\n";
-            value += "  User : "+ each.getdate() + "\n";
-            value += "  Items : \n"
+            value += "  Date : "+ each.getTimestamp() + "\n";
+            value += "  User : "+ each.getUser()+"\n";
+            value += "  Price : "+ each.getAmount() + "\n";
+            value += "  Change : \n"; //each.getChanges();
+            value += "  Pay Method : \n";
+            value += "  Items : \n";
             int index = 1;
-            for (Item item :  items){
-                value += "      ."+index+"    "+item.getName()+ + item.getQty()+"x ""   $ "+item.getunitPrice()
+            Map<String,List<Double>> map = each.getProducts();
+            for(String name: map.keySet()){
+                String key = name;
+                List<Double>price_qty = map.get(key);
+                value +="       "+index+". "+key+" $"+price_qty.get(0)+" x "+price_qty.get(1)+"\n";
                 index+=1;
             }
+            value+="\n";
+            System.out.println(map);
 
 
-        }***/
+        }
         return value;
 
     }

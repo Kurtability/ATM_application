@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class Transaction {
 
     String user;
+    String change;
     Timestamp ts;
     double amount;
     Map<String, List<Double>> products;
