@@ -13,12 +13,16 @@ public class UserLoginHandler {
     private final File userFile;
 
     List<UserAccount> users;
-    private UserAccount user;
+    public static UserAccount user;
     private PrintWriter writer;
 
     public UserLoginHandler() {
         this.userFile = ResourceHandler.getUserFile();
         System.out.println(userFile);
+    }
+
+    public static UserAccount getCurrentUser() {
+        return user;
     }
 
     public File getUserFile(){
@@ -111,7 +115,7 @@ public class UserLoginHandler {
 
 
     // check normal user, not special roles
-    public  boolean checkUser(String username, int passwordHash) {
+    public boolean checkUser(String username, int passwordHash) {
        users = getUsers();
 
         for (int i = 0; i < users.size(); i++) {
@@ -119,6 +123,11 @@ public class UserLoginHandler {
             int pass = users.get(i).getPassword().hashCode();
 
             if (nme.equals(username) && pass == (passwordHash)) {
+                for (UserAccount aUser : users) {
+                    if (aUser.getUserName().equals(username)) {
+                        user = aUser;
+                    }
+                }
                 return true;
             }
         }
@@ -127,9 +136,11 @@ public class UserLoginHandler {
             int pass = users.get(i).getPassword().hashCode();
             if (nme.equals(username) && !(pass == passwordHash)) {
                 System.out.println("Wrong Password");
+                user = null;
                 return false;
             }else if (i == users.size() - 1) {
                 System.out.println("Account does not exist");
+                user = null;
                 return false;
             }
         }

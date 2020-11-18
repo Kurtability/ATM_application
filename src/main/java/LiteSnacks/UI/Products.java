@@ -4,6 +4,7 @@ import LiteSnacks.UI.ShoppingCart.Cart;
 import LiteSnacks.UI.ShoppingCart.Checkout;
 import LiteSnacks.backend.Item;
 import LiteSnacks.backend.ProductsHandler;
+import LiteSnacks.backend.UserLoginHandler;
 import LiteSnacks.UI.Style;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -76,6 +77,7 @@ public class Products {
 
         Button logoutButton = createButton("Log Out", 18, 390, 25, 100);
         logoutButton.setOnAction(event -> {
+            UserLoginHandler.user = null;
             new LoginScene(width, height, stage).setScene();
         });
 
