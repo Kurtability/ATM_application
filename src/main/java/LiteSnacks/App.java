@@ -32,7 +32,7 @@ public class App extends Application{
         this.productScene = new Products(640,480,primaryStage);
        CashierMainScene scene = new CashierMainScene(640,400,primaryStage);
         //new OwnerMainScene(640,400,primaryStage)
-        scene.setScene();
+        productScene.setScene();
 
 //        this.cs = new CardScene(640, 480, primaryStage, new Cart());
 //        cs.setScene();
