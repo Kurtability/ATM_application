@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import static LiteSnacks.UI.Style.setHW;
@@ -36,6 +37,7 @@ public class CashierMainScene {
         reportsButton.setTextFill(Color.WHITE);
         reportsButton.setOnAction(event -> {
             new CashierReportsScene(width, height, stage).setScene();
+
         });
 
         // edit cashes
