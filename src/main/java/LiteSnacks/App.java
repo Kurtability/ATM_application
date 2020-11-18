@@ -29,13 +29,14 @@ public class App extends Application{
         primaryStage.show();
 
         handler = new UserLoginHandler();
-        //System.out.println(handler.getUsers());
+        System.out.println(handler.getUsers());
 
-        //System.out.println(handler.checkUser("Adam","1234231".hashCode()));
+        System.out.println(handler.checkUser("Adam","1234231".hashCode()));
 
         //handler.addUser("KP","1234","KingPin");
-        //System.out.println(handler.getUsers());
-        ///ystem.out.println(handler.getUsers().get());
+        handler.addUser("KPP","678","King");
+        System.out.println(handler.getUsers());
+        System.out.println(handler.getUsers().get(2));
     }
 
     public static void main(String[] args) {
