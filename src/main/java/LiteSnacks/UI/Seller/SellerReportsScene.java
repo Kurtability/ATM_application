@@ -78,6 +78,7 @@ public class SellerReportsScene {
 
         root.getChildren().addAll(pane, back, pathToReport);
 
+
         scene = new Scene(root, width, height);
     }
 
