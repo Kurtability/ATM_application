@@ -3,6 +3,7 @@ package LiteSnacks.UI.Seller;
 import LiteSnacks.UI.Owner.OwnerEditScene;
 import LiteSnacks.UI.Style;
 import LiteSnacks.backend.Item;
+import LiteSnacks.backend.ProductsHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
@@ -13,6 +14,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,10 +39,8 @@ public class EditProducts {
          *
          *
          **/
-
-        List<Item> items = new ArrayList<>(
-                Arrays.asList(new Item("coca", "CHIPS", 1, 10, 1.0), new Item("AH", "CHIPS", 2, 20, 1.0),
-                        new Item("pesi", "CHIPS", 3, 0, 1.0), new Item("pesi", "CHIPS", 3, 1, 1.0)));
+        ProductsHandler ph = new ProductsHandler();
+        List<Item> items = ph.listOfItems();
 
         this.editProductPanes = getEditsProductsPanes(items);
         Pane ProductWholePane = getPaneForProducts(this.editProductPanes);
@@ -55,16 +55,15 @@ public class EditProducts {
         Text label = new Text("Edit Products");
         setXY(label, 10, 20);
         label.setFont(new Font(20));
-        Text comments = new Text("Please make sure each row should not be null ," + "\n"
-                + "    and also price should be integer or double.");
+        Text comments = new Text("");
         comments.setFill(Color.rgb(160, 0, 0));
 
         setXY(comments, 3, 370);
         label.setFill(Color.rgb(0, 66, 127));
         Text codetext = new Text("Code");
-        setXY(codetext, 70, 50);
+        setXY(codetext, 60, 50);
         Text nametext = new Text("Name");
-        setXY(nametext, 150, 50);
+        setXY(nametext, 130, 50);
         Text pricetext = new Text("Price");
         setXY(pricetext, 280, 50);
         Text categorytext = new Text("Category");
@@ -90,7 +89,13 @@ public class EditProducts {
         // SUBMIT BUTTON
         Button submit = createButton("submit", 500, 370, 27, 81);
         submit.setOnAction(event -> {
-            sumbit();
+            List<Item> newItems = Item.newItems(editProductPanes);
+            if(ph.checkValid(newItems).equals("Success")) {
+                ProductsHandler.writeToFile(newItems);
+            }
+            else {
+                comments.setText(ph.checkValid(newItems));
+            }
         });
 
         // invalid text to indicate invalid save
@@ -134,25 +139,6 @@ public class EditProducts {
 
         }
         return box;
-    }
-
-    public void sumbit() {
-        boolean is_valid = true;
-        for (EditProductPane each : this.editProductPanes) {
-            if (each.update() == false) {
-                System.out.println(1);
-                is_valid = false;
-            }
-        }
-
-        if (is_valid == false) {
-            invalid.setVisible(true);
-        } else {
-            invalid.setVisible(false);
-            valid.setVisible(true);
-            System.out.println("suc");
-            // handler to save all item into files
-        }
     }
 
     public void setScene() {

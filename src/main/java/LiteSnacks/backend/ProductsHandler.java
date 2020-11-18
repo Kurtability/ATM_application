@@ -1,14 +1,14 @@
 package LiteSnacks.backend;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ProductsHandler {
     private static File productsFile;
@@ -117,20 +117,21 @@ public class ProductsHandler {
     public int getQuantitiy(String productName) {
         Scanner sc = null;
         try{
-            sc = new Scanner(productsFile);
+            sc = new Scanner(ResourceHandler.getProducts());
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
             System.exit(1);
         }
+
         String line;
         String[] lineSplit;
         String quantity = "-1";
         boolean found = false;
-        while(sc.hasNext() && !found) {
+        while(sc.hasNextLine() && !found) {
             line = sc.nextLine();
             if(!line.isEmpty()) {
-                lineSplit = sc.nextLine().split(",");
+                lineSplit = line.split(",");
                 if (lineSplit[0].equals(productName)) {
                     quantity = lineSplit[1];
                     found = true;
@@ -140,4 +141,140 @@ public class ProductsHandler {
         return Integer.parseInt(quantity);
     }
 
+    public ArrayList<Item> listOfItems() {
+        ArrayList<Item> items = new ArrayList<>();
+        List<String> categories = getCategories();
+        for(String c : categories) {
+            items.addAll(getItemsForCategory(c));
+        }
+        return items;
+    }
+
+    // overwrites the contents of products.csv
+    public static void writeToFile(List<Item> items) {
+        String[] categories = "Drinks,Chocolates,Chips,Candies".split(",");
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter(ResourceHandler.getProducts());
+            writer.write("_\nLast Five\n");
+            for(String s : categories) {
+                writer.write("_\n" + s + "\n");
+                for(Item i : items) {
+                    if(s.equals(i.getCategory())) {
+                        writer.write(i.write() + "\n");
+                    }
+                }
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    public String generateReport(List<Item> items) {
+        String[] categories = "Drinks,Chocolates,Chips,Candies".split(",");
+        FileWriter writer = null;
+        String entry;
+        try {
+            writer = new FileWriter(ResourceHandler.getProductReport());
+            for(String s : categories) {
+                for(Item i : items) {
+                    entry = String.format("PID: %s\nProduct: %s\nPrice: %s\nQuantity: %s\nCategory: %s\n\n", i.getId(), i.getName(), i.getUnitPrice(), i.getQuantity(), i.getCategory());
+                    writer.write(entry);
+                }
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        if(Desktop.isDesktopSupported()) {
+            System.out.println("Desktop is supported!");
+            if(Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
+                System.out.println("Open action is supported!");
+                new Thread(() -> {
+                    try {
+                        Desktop.getDesktop().open(ResourceHandler.getProductReport());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+
+            }
+        }
+        return(String.format("The report is stored at: %s", ResourceHandler.getProductReport().toString()));
+    }
+
+    public String checkValid(List<Item> items) {
+        StringBuilder sb = new StringBuilder();
+        String result = "Success";
+        String uniqueNames = checkUniqueNames(items);
+        String uniqueIds = checkUniqueID(items);
+
+        if(!uniqueNames.equals("Success")) {
+            sb.append(uniqueNames);
+        }
+        if(!uniqueIds.equals("Success")) {
+            sb.append(uniqueIds);
+        }
+        if(sb.length() != 0) {
+            result = sb.toString();
+        }
+        return result;
+
+    }
+    private String checkUniqueNames(List<Item> items) {
+        String valid = "Success";
+        StringBuilder sb = new StringBuilder();
+        Map<String, Integer> names = new HashMap<>();
+
+        String name;
+        for(Item i : items) {
+            name = i.getName().toLowerCase();
+            if (!names.containsKey(name)) {
+                names.put(name, 1);
+            } else {
+                names.put(name, names.get(name) + 1);
+            }
+        }
+
+        names.forEach((k,v) -> {
+            if (v != 1) {
+                sb.append(String.format("The name %s is not unique\n", k));
+            }
+        });
+
+        if(sb.length() != 0) {
+            valid = sb.toString();
+        }
+        return valid;
+    }
+
+    private String checkUniqueID(List<Item> items) {
+        String valid = "Success";
+        StringBuilder sb = new StringBuilder();
+        Map<String, Integer> ids = new HashMap<>();
+
+        String key;
+        for(Item i : items) {
+            key = Integer.toString(i.getId());
+            if (!ids.containsKey(key)) {
+                ids.put(key, 1);
+            } else {
+                ids.put(key, ids.get(key) + 1);
+            }
+        }
+
+        ids.forEach((k,v) -> {
+            if (v != 1) {
+                sb.append(String.format("The id %s is not unique", k));
+            }
+        });
+
+        if(sb.length() != 0) {
+            valid = sb.toString();
+        }
+        return valid;
+    }
 }

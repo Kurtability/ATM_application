@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -86,7 +87,6 @@ public class ProductsHandlerTest {
         File file = ResourceHandler.getProducts();
         ProductsHandler ph = new ProductsHandler();
 
-        // clone file
         Scanner sc = null;
         try {
             sc = new Scanner(file);
@@ -94,7 +94,6 @@ public class ProductsHandlerTest {
             e.printStackTrace();
             fail();
         }
-//        StringBuilder document = new StringBuilder();
         String[] line;
         String name = null;
         String quantity = null;
@@ -103,12 +102,34 @@ public class ProductsHandlerTest {
             if(line.length > 1){
                 name = line[0];
                 quantity = line[1];
+                break;
             }
         }
         assertNotNull(name);
         assertNotNull(quantity);
         assertEquals(Integer.parseInt(quantity), ph.getQuantitiy(name));
-
     }
 
+    @Test
+    public void checkIsValidTest() {
+        Item item1 = new Item("test1", "Drinks", 1, 2, 3);
+        Item item2 = new Item("test2", "Drinks", 2, 2, 3);
+        Item item3 = new Item("test2", "Drinks", 1, 2, 3);
+
+        ProductsHandler ph = new ProductsHandler();
+        List<Item> items = new ArrayList<Item>();
+        items.add(item1);
+        items.add(item2);
+        assertEquals("Success", ph.checkValid(items));
+
+        items = new ArrayList<>();
+        items.add(item2);
+        items.add(item3);
+        assertNotEquals("Success", ph.checkValid(items));
+
+        items = new ArrayList<>();
+        items.add(item1);
+        items.add(item3);
+        assertNotEquals("Success", ph.checkValid(items));
+    }
 }

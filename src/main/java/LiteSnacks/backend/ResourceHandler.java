@@ -1,4 +1,3 @@
-
 package LiteSnacks.backend;
 
 import java.io.File;
@@ -15,7 +14,6 @@ public class ResourceHandler {
 
     private static File productFile;
     private static File cashFile;
-
     private static File creditCardFile;
 
 
@@ -111,9 +109,15 @@ public class ResourceHandler {
     public static File getTransactionFile() {
         return initFile("transaction.csv");
     }
+  
+  
+    public static File getProductReport() {
+      return initFile("productReport.txt");
+  }
+  
+  
 
     private static int getLineNumber() {
         return Thread.currentThread().getStackTrace()[2].getLineNumber();
     }
 }
-

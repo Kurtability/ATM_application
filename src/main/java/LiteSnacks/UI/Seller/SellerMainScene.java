@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import static LiteSnacks.UI.Style.setHW;
 import static LiteSnacks.UI.Style.setXY;
+import LiteSnacks.UI.Products;
 
 public class SellerMainScene {
     Scene scene;
@@ -55,7 +56,7 @@ public class SellerMainScene {
         logoutButton.setStyle("-fx-background-color: #000000");
         logoutButton.setTextFill(Color.WHITE);
         logoutButton.setOnAction(event -> {
-            new LoginScene(width, height, stage).setScene();
+            new Products(width, height, stage).setScene();
         });
 
         pane.getChildren().addAll(reportsButton, label, editButton, logoutButton);

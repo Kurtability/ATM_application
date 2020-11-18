@@ -2,6 +2,7 @@ package LiteSnacks.UI.Seller;
 
 import LiteSnacks.UI.Cashier.CashierMainScene;
 import LiteSnacks.UI.Style;
+import LiteSnacks.backend.ProductsHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,17 +40,19 @@ public class SellerReportsScene {
         setXY(label,21,30);
         label.setFont(new Font("Arial", 30));
 
-        // Get cashes reports button
-        Button productsReports = new Button("Products Report");
-        setXY(productsReports,70,150);
-        setHW(productsReports,40,150);
-        productsReports.setStyle("-fx-background-color: #000000");
-        productsReports.setTextFill(Color.WHITE);
-        productsReports.setOnAction(event -> {
+        //
+        Text pathToReport = new Text("");
+        setXY(pathToReport, 100, 400);
 
-            /***
-             * please add a function to write report in a file
-             ***/
+        // Get product reports button
+        Button cashesReports = new Button("Products Report");
+        setXY(cashesReports,70,150);
+        setHW(cashesReports,40,150);
+        cashesReports.setStyle("-fx-background-color: #000000");
+        cashesReports.setTextFill(Color.WHITE);
+        cashesReports.setOnAction(event -> {
+            ProductsHandler ph = new ProductsHandler();
+            pathToReport.setText(ph.generateReport(ph.listOfItems()));
         });
 
         // item summary
@@ -72,7 +75,8 @@ public class SellerReportsScene {
 
         // back
 
-        root.getChildren().addAll(pane, back);
+
+        root.getChildren().addAll(loginpane, back, pathToReport);
 
         scene = new Scene(root, width, height);
     }

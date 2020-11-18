@@ -3,11 +3,14 @@ package LiteSnacks.UI.Seller;
 import LiteSnacks.UI.QuantityModifier;
 import LiteSnacks.UI.Style;
 import LiteSnacks.backend.Item;
+import LiteSnacks.backend.ProductsHandler;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+
+import java.util.List;
 
 import static LiteSnacks.UI.Style.setXY;
 
@@ -18,6 +21,7 @@ public class EditProductPane {
     TextField price;
     TextField name;
     ChoiceBox<String> category;
+    QuantityModifier qtymdfier;
 
     public EditProductPane(Item item) {
         this.item = item;
@@ -28,20 +32,26 @@ public class EditProductPane {
         this.pane.setStyle("-fx-background-color: #d9d9d9;");
 
         // category
+        ProductsHandler ph = new ProductsHandler();
         category = new ChoiceBox<String>();
-        category.setValue(String.valueOf(item.getCategory()));
-        category.getItems().addAll("DRINKS", "CHOCOLATES", "CHIPS", "CANDIES");
+        category.setValue(item.getCategory()); // String.valueOf(item.getCategory()));
+        List<String> categories = ph.getCategories();
+        categories.remove("Last Five");
+        category.getItems().addAll(categories);
         setXY(category,320,40);
 
 
         // quantity modifier
-        Pane qtymdfier = new QuantityModifier(item).getPane();
-        setXY(qtymdfier,460,40);
+        qtymdfier = new QuantityModifier(item);
+        Pane qtymdfierPane = qtymdfier.getPane();
+        setXY(qtymdfierPane,460,40);
 
         // code
         code = new TextField(Integer.toString(item.getId()));
         NoramlTextField(code);
-        code.setLayoutX(40);
+
+        code.setLayoutX(30);
+
         code.setLayoutY(40);
         code.setPrefWidth(50);
         code.setPrefHeight(20);
@@ -61,7 +71,7 @@ public class EditProductPane {
         NoramlTextField(name);
         name.setLayoutX(100);
         name.setLayoutY(40);
-        name.setPrefWidth(100);
+        name.setPrefWidth(120);
         name.setPrefHeight(20);
 
         // image
@@ -72,7 +82,7 @@ public class EditProductPane {
         // image.setLayoutX(21);
         // image.setLayoutY(4);
 
-        this.pane.getChildren().addAll(qtymdfier, symbol, category, code, price, name);
+        this.pane.getChildren().addAll(code, name, symbol,price, category, qtymdfierPane);
     }
 
     public Pane getPane() {
@@ -137,5 +147,25 @@ public class EditProductPane {
         }
         return is_valid;
 
+    }
+
+    public String getName() {
+        return name.getText();
+    }
+
+    public String getCategory() {
+        return category.getValue();
+    }
+
+    public double getPrice() {
+        return Double.parseDouble(price.getText());
+    }
+
+    public int getCode() {
+        return Integer.parseInt(code.getText());
+    }
+
+    public int getQuant() {
+        return qtymdfier.getQuant();
     }
 }
