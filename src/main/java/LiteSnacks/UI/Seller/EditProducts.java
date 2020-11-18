@@ -1,5 +1,6 @@
 package LiteSnacks.UI.Seller;
 
+import LiteSnacks.UI.Owner.OwnerEditScene;
 import LiteSnacks.UI.Style;
 import LiteSnacks.backend.Item;
 import LiteSnacks.backend.ProductsHandler;
@@ -27,7 +28,7 @@ public class EditProducts {
     Text invalid = new Text("Invalid");
     Text valid = new Text("Successfully submitted");
 
-    public EditProducts(double width, double height, Stage stage) {
+    public EditProducts(double width, double height, Stage stage,boolean isOwner) {
 
         this.stage = stage;
         Pane root = new Pane();
@@ -75,7 +76,12 @@ public class EditProducts {
         back.setStyle("-fx-background-color: transparent;");
         back.setFont(new Font(20));
         back.setOnAction(e -> {
-            new SellerMainScene(width, height, stage).setScene();
+            if(isOwner){
+                new OwnerEditScene(width,height,stage).setScene();
+            }else{
+                new SellerMainScene(width, height, stage).setScene();
+            }
+
         });
         back.setLayoutX(500);
         back.setLayoutY(2);

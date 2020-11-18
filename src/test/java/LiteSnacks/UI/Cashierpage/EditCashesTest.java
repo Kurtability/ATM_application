@@ -19,7 +19,7 @@ public class EditCashesTest {
 
         try {
 
-            EditCashes editCashes = new EditCashes(640, 480.0, new Stage());
+            EditCashes editCashes = new EditCashes(640, 480.0, new Stage(),false);
             assertNotNull(editCashes.getScene());
 
         } catch (Exception e) {
@@ -33,7 +33,7 @@ public class EditCashesTest {
 
         try {
             Stage stage = new Stage();
-            EditCashes editCashes = new EditCashes(640, 480.0, stage);
+            EditCashes editCashes = new EditCashes(640, 480.0, stage,false);
             assertNotNull(editCashes.getScene());
             editCashes.setScene();
 
@@ -67,7 +67,7 @@ public class EditCashesTest {
 
     @Test
     public void getEditCashPanesTest() {
-        EditCashes editCashes = new EditCashes(640, 480.0, new Stage());
+        EditCashes editCashes = new EditCashes(640, 480.0, new Stage(),false);
         List<Cash> cashes = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Cash cash = new Cash(i + 1, 10, "no");
@@ -84,7 +84,7 @@ public class EditCashesTest {
 
     @Test
     public void getPaneForCashesTest() {
-        EditCashes editCashes = new EditCashes(640, 480.0, new Stage());
+        EditCashes editCashes = new EditCashes(640, 480.0, new Stage(),false);
         List<Cash> cashes = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Cash cash = new Cash(i + 1, 10, "no");
@@ -99,7 +99,7 @@ public class EditCashesTest {
     @Test
     public void submitTest() {
         try {
-            EditCashes editCashes = new EditCashes(640, 480.0, new Stage());
+            EditCashes editCashes = new EditCashes(640, 480.0, new Stage(),false);
             editCashes.submit();
         } catch (Exception e) {
             System.out.println("can not submitt");

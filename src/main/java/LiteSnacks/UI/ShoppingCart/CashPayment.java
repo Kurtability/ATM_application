@@ -1,8 +1,6 @@
 package LiteSnacks.UI.ShoppingCart;
 
-import LiteSnacks.backend.Cash;
-import LiteSnacks.backend.CashHandler;
-import LiteSnacks.backend.PayCash;
+import LiteSnacks.backend.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
@@ -11,8 +9,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static LiteSnacks.UI.Style.*;
 
@@ -78,6 +75,18 @@ public class CashPayment {
             String text = PayCash.submitPayment(cashes,cart.getTotal());
             response.setText(text);
             if(!text.equals("Insufficient Change. Please try another payment method")) {
+
+                Map<String,List<Double>> map = new HashMap<>();
+                for (String name : cart.getItems().keySet()) {
+
+                    String key = name;
+                    Item item = cart.getItems().get(key);
+                    List<Double> li = new ArrayList<Double>(Arrays.asList(Double.valueOf(item.getUnitPrice()),Double.valueOf(item.getQuantity())));
+                    map.put(item.getName(),li);
+
+
+                }
+                Transaction.addTransaction(map,cart.getTotal());
                 new CashPaySuccess(width, height, stage, text, cart).setScene();
             }
 

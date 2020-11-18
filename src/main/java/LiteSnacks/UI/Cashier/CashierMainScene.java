@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import static LiteSnacks.UI.Style.setHW;
@@ -28,7 +29,7 @@ public class CashierMainScene {
         label.setLayoutY(30);
         label.setFont(new Font("Arial", 30));
 
-        //
+        // reports
         Button reportsButton = new Button("Get Reports");
         setXY(reportsButton,70,150);
         setHW(reportsButton,40,150);
@@ -36,16 +37,17 @@ public class CashierMainScene {
         reportsButton.setTextFill(Color.WHITE);
         reportsButton.setOnAction(event -> {
             new CashierReportsScene(width, height, stage).setScene();
+
         });
 
-        // register button
+        // edit cashes
         Button editButton = new Button("Edit Cashes");
         setXY(editButton,70,100);
         setHW(editButton,40,150);
         editButton.setStyle("-fx-background-color: #000000");
         editButton.setTextFill(Color.WHITE);
         editButton.setOnAction(event -> {
-            new EditCashes(width, height, stage).setScene();
+            new EditCashes(width, height, stage,false).setScene();
         });
 
         // log out button

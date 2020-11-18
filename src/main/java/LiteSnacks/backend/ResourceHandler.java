@@ -16,6 +16,7 @@ public class ResourceHandler {
     private static File cashFile;
     private static File creditCardFile;
 
+
     // copy a file from a jar resorce to a file in the project directory
     static void copyfiles(InputStream from, File to) throws FileNotFoundException, IOException {
 
@@ -73,13 +74,24 @@ public class ResourceHandler {
      * @return The file object for the products.csv file
      */
     public static File getProducts() {
-        return initFile("products.csv");
+        if (productFile == null) {
+            productFile = initFile("products.csv");
+        }
+        return productFile;
     }
 
     public static File getCashFile() {
-        return initFile("cashes.json");
+        if (cashFile == null) {
+            cashFile = initFile("cashes.json");
+        }
+        return cashFile;
     }
 
+    public static File getUserFile() {
+            return initFile("user.txt");
+    }
+
+  
     public static File getCreditCardsFile() {
         if (creditCardFile == null) {
             creditCardFile = initFile("credit_cards.json");
@@ -90,9 +102,24 @@ public class ResourceHandler {
     public static File getProductReport() {
         return initFile("productReport.txt");
     }
+    
+  
+   public static File getCashesReportFile() {return  initFile("cashesReport.txt");}
+
+    public static File getTransactionsReportFile() {return  initFile("transactionsReport.txt");}
+
+    public static File getCreditCardsFile() {
+        if (creditCardFile == null) {
+            creditCardFile = initFile("credit_cards.json");
+        }
+        return creditCardFile;
+    }
+
+    public static File getTransactionFile() {
+        return initFile("transaction.csv");
+    }
 
     private static int getLineNumber() {
         return Thread.currentThread().getStackTrace()[2].getLineNumber();
     }
 
-}

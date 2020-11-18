@@ -49,7 +49,9 @@ public class EditProductPane {
         // code
         code = new TextField(Integer.toString(item.getId()));
         NoramlTextField(code);
+
         code.setLayoutX(30);
+
         code.setLayoutY(40);
         code.setPrefWidth(50);
         code.setPrefHeight(20);
