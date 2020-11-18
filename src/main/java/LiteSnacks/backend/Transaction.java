@@ -1,8 +1,7 @@
 package LiteSnacks.backend;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
+import java.awt.*;
+import java.io.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -142,4 +141,68 @@ public class Transaction {
         return "\n--------------------\n" + this.ts + " " + this.user + this.amount + "\n" + this.products.toString();
     }
 
+
+
+    public static String generateReport() {
+        Map<String, Integer> entries = getTransactions();
+
+        FileWriter writer = null;
+        String entry;
+        try {
+            writer = new FileWriter(ResourceHandler.getSellersSummary());
+            for (String key : entries.keySet()) {
+                entry = String.format("%s Quantity: %d\n", key, entries.get(key));
+                writer.write(entry);
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        if (Desktop.isDesktopSupported()) {
+            if (Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
+                new Thread(() -> {
+                    try {
+                        Desktop.getDesktop().open(ResourceHandler.getSellersSummary());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+
+            }
+        }
+        return (String.format("The report is stored at: %s", ResourceHandler.getSellersSummary().toString()));
+    }
+
+    private static Map<String, Integer> getTransactions() {
+        Map<String, Integer> entries = new HashMap<>();
+        Scanner reader = null;
+        try {
+            reader = new Scanner(ResourceHandler.getTransactionFile());
+        } catch(Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        String[] line;
+        String key;
+        Double quantity;
+        while(reader.hasNextLine()) {
+            line = reader.nextLine().split(",");
+
+            if(line.length > 1) {
+                key = String.format("Name: %s Price: %s", line[0], line[1]);
+                if(entries.containsKey(key)) {
+                    quantity = Double.parseDouble(line[2]);
+                    entries.put(key, entries.get(key) + quantity.intValue());
+                }
+                else {
+                    quantity = Double.parseDouble(line[2]);
+                    entries.put(key, quantity.intValue());
+                }
+            }
+        }
+        reader.close();
+        return entries;
+    }
 }

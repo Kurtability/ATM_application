@@ -3,6 +3,7 @@ package LiteSnacks.UI.Seller;
 import LiteSnacks.UI.Cashier.CashierMainScene;
 import LiteSnacks.UI.Style;
 import LiteSnacks.backend.ProductsHandler;
+import LiteSnacks.backend.Transaction;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -62,10 +63,7 @@ public class SellerReportsScene {
         itemSummary.setStyle("-fx-background-color: #000000");
         itemSummary.setTextFill(Color.WHITE);
         itemSummary.setOnAction(event -> {
-
-            /***
-             * please add a function to write report in a file
-             ***/
+            pathToReport.setText(Transaction.generateReport());
         });
 
         pane.getChildren().addAll(label, itemSummary, productsReports);

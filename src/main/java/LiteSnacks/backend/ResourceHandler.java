@@ -88,7 +88,7 @@ public class ResourceHandler {
     public static File getCashesReportFile() {return  initFile("cashesReport.txt");}
 
     public static File getTransactionsReportFile() {return  initFile("transactionsReport.txt");}
-    
+
     public static File getCreditCardsFile() {
         return initFile("credit_cards.json");
     }
@@ -96,13 +96,12 @@ public class ResourceHandler {
     public static File getTransactionFile() {
         return initFile("transaction.csv");
     }
-  
-  
+
     public static File getProductReport() {
       return initFile("productReport.txt");
   }
 
-    public static File sellersSummary() {
+    public static File getSellersSummary() {
         return initFile("saleSummary.txt");
     }
 
