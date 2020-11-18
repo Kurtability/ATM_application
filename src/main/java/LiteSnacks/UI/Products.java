@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -75,7 +76,11 @@ public class Products {
         }
         menu.get(0).setStyle("-fx-background-color: red");
 
-        Button logoutButton = createButton("Log Out", 18, 390, 25, 100);
+        Text logout = new Text("Log Out");
+        if(UserLoginHandler.getCurrentUser() == null) {
+            logout.setText("Login");
+        }
+        Button logoutButton = createButton(logout.getText(), 18, 390, 25, 100);
         logoutButton.setOnAction(event -> {
             UserLoginHandler.user = null;
             new LoginScene(width, height, stage).setScene();

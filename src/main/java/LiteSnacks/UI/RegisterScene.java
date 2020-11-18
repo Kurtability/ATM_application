@@ -58,7 +58,7 @@ public class RegisterScene {
         registerButton.setStyle("-fx-background-color: #000000");
         registerButton.setTextFill(Color.WHITE);
 
-        loginpane.getChildren().addAll(loginButton, password, username, label, registerButton);
+        loginpane.getChildren().addAll(username, password, registerButton, loginButton, label);
         loginpane.setLayoutX(156);
         loginpane.setLayoutY(51);
         loginpane.setPrefHeight(299);

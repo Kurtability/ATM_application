@@ -99,7 +99,7 @@ public class LoginScene {
             new RegisterScene(width, height, stage).setScene();
         });
 
-        loginpane.getChildren().addAll(loginButton, password, username, label, registerButton);
+        loginpane.getChildren().addAll(username, password, loginButton, label, registerButton);
         loginpane.setLayoutX(156);
         loginpane.setLayoutY(51);
         loginpane.setPrefHeight(299);
