@@ -80,9 +80,12 @@ public class ResourceHandler {
         return initFile("cashes.json");
     }
 
+
+
     public static File getCashesReportFile() {return  initFile("cashesReport.txt");}
 
     public static File getTransactionsReportFile() {return  initFile("transactionsReport.txt");}
+
 
 
     public static File getCreditCardsFile() {
@@ -90,6 +93,10 @@ public class ResourceHandler {
             creditCardFile = initFile("credit_cards.json");
         }
         return creditCardFile;
+    }
+
+    public static File getTransactionFile() {
+        return initFile("transaction.csv");
     }
 
     private static int getLineNumber() {
