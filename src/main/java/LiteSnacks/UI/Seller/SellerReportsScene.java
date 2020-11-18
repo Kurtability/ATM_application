@@ -45,12 +45,12 @@ public class SellerReportsScene {
         setXY(pathToReport, 100, 400);
 
         // Get product reports button
-        Button cashesReports = new Button("Products Report");
-        setXY(cashesReports,70,150);
-        setHW(cashesReports,40,150);
-        cashesReports.setStyle("-fx-background-color: #000000");
-        cashesReports.setTextFill(Color.WHITE);
-        cashesReports.setOnAction(event -> {
+        Button productsReports = new Button("Products Report");
+        setXY(productsReports,70,150);
+        setHW(productsReports,40,150);
+        productsReports.setStyle("-fx-background-color: #000000");
+        productsReports.setTextFill(Color.WHITE);
+        productsReports.setOnAction(event -> {
             ProductsHandler ph = new ProductsHandler();
             pathToReport.setText(ph.generateReport(ph.listOfItems()));
         });
@@ -76,7 +76,7 @@ public class SellerReportsScene {
         // back
 
 
-        root.getChildren().addAll(loginpane, back, pathToReport);
+        root.getChildren().addAll(pane, back, pathToReport);
 
         scene = new Scene(root, width, height);
     }

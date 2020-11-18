@@ -55,7 +55,8 @@ public class EditProducts {
         Text label = new Text("Edit Products");
         setXY(label, 10, 20);
         label.setFont(new Font(20));
-        Text comments = new Text("");
+        Text comments = new Text("Please make sure each row should not be null ,\n"  +
+                                "and also price should be integer or double.");
         comments.setFill(Color.rgb(160, 0, 0));
 
         setXY(comments, 3, 370);
@@ -89,13 +90,16 @@ public class EditProducts {
         // SUBMIT BUTTON
         Button submit = createButton("submit", 500, 370, 27, 81);
         submit.setOnAction(event -> {
-            List<Item> newItems = Item.newItems(editProductPanes);
-            if(ph.checkValid(newItems).equals("Success")) {
-                ProductsHandler.writeToFile(newItems);
+            if (submit()){
+                List<Item> newItems = Item.newItems(editProductPanes);
+                if(ph.checkValid(newItems).equals("Success")) {
+                    ProductsHandler.writeToFile(newItems);
+                }
+                else {
+                    comments.setText(ph.checkValid(newItems));
+                }
             }
-            else {
-                comments.setText(ph.checkValid(newItems));
-            }
+
         });
 
         // invalid text to indicate invalid save
@@ -139,6 +143,25 @@ public class EditProducts {
 
         }
         return box;
+    }
+    public boolean submit() {
+        boolean is_valid = true;
+        for (EditProductPane each : this.editProductPanes) {
+            if (each.update() == false) {
+                System.out.println(1);
+                is_valid = false;
+            }
+        }
+
+        if (is_valid == false) {
+            invalid.setVisible(true);
+        } else {
+            invalid.setVisible(false);
+            valid.setVisible(true);
+            System.out.println("suc");
+            // handler to save all item into files
+        }
+        return is_valid;
     }
 
     public void setScene() {
