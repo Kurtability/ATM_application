@@ -23,7 +23,7 @@ public class SellerReportsScene {
         this.stage = stage;
 
         Pane root = new Pane();
-        Pane pane = new Pane();
+        Pane loginpane = new Pane();
 
         // back
         Button back = new Button(">back");
@@ -68,13 +68,12 @@ public class SellerReportsScene {
              ***/
         });
 
-        pane.getChildren().addAll(label, itemSummary, productsReports);
-        setXY(pane,156,51);
-        setHW(pane,299,289);
-        pane.setStyle("-fx-background-color: #d9d9d9");
+        loginpane.getChildren().addAll(label, itemSummary, cashesReports);
+        setXY(loginpane,156,51);
+        setHW(loginpane,299,289);
+        loginpane.setStyle("-fx-background-color: #d9d9d9");
 
         // back
-
 
         root.getChildren().addAll(loginpane, back, pathToReport);
 
