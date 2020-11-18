@@ -1,5 +1,8 @@
 package LiteSnacks.UI;
 
+import LiteSnacks.UI.Cashier.CashierMainScene;
+import LiteSnacks.UI.Seller.SellerMainScene;
+import LiteSnacks.backend.UserAccount.UserAccount;
 import LiteSnacks.backend.UserLoginHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,9 +13,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.util.List;
+
 public class LoginScene {
     Scene scene;
     Stage stage;
+
+    UserLoginHandler handler;
+    List<UserAccount> users;
 
     public LoginScene(double width, double height, Stage stage) {
         this.stage = stage;
@@ -44,11 +52,34 @@ public class LoginScene {
         loginButton.setLayoutY(222);
         loginButton.setStyle("-fx-background-color: #000000");
         loginButton.setTextFill(Color.WHITE);
+
+
+        handler = new UserLoginHandler();
+        users = handler.getUsers();
         loginButton.setOnAction(event -> {
-            if (new UserLoginHandler().checkUser(username.getText(),password.getText().hashCode())){
-                new Products(width, height, stage).setScene();
+            if (handler.checkUser(username.getText(),password.getText().hashCode())){
+                for (UserAccount u: users){
+                    //System.out.println(u.getRole());
+
+//                    if (u.getRole().equals("customer")){
+//                        new Products(width, height, stage).setScene();
+//                        System.out.println("whyyy");
+//                    }
+
+                    if (u.getRole().contains("cashier") && u.getUserName().equals(username.getText())) {
+                        new CashierMainScene(width, height, stage).setScene();
+                        System.out.println("cashier page");
+                    }
+                    else if (u.getRole().contains("seller") && u.getUserName().equals(username.getText())){
+                        new SellerMainScene(width, height, stage).setScene();
+                        System.out.println("seller page");
+                    }
+                    else if (u.getRole().contains("customer") && u.getUserName().equals(username.getText())){
+                        new Products(width, height, stage).setScene();
+                    }
+                }
             }
-            else{
+            else {
                 System.out.println("Login Failed :(");
             }
         });

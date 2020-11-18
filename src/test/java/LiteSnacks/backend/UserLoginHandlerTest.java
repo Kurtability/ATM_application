@@ -20,7 +20,7 @@ public class UserLoginHandlerTest {
 
     @Test
     public void getRoleTest(){
-        assertEquals("customer", user.getRoles().get(0));
+        assertEquals("cashier", user.getRoles().get(0));
         assertEquals("seller", user.getRoles().get(1));
     }
 

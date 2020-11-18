@@ -110,7 +110,7 @@ public class UserLoginHandler {
     }
 
 
-
+    // check normal user, not special roles
     public  boolean checkUser(String username, int passwordHash) {
        users = getUsers();
 

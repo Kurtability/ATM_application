@@ -4,6 +4,7 @@
 package LiteSnacks;
 
 import LiteSnacks.UI.Products;
+import LiteSnacks.backend.UserAccount.UserAccount;
 import LiteSnacks.backend.UserLoginHandler;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -29,14 +30,13 @@ public class App extends Application{
         primaryStage.show();
 
         handler = new UserLoginHandler();
-        System.out.println(handler.getUsers());
-
-        System.out.println(handler.checkUser("Adam","1234231".hashCode()));
+       // System.out.println(handler.getUsers());
+        //System.out.println(handler.checkUser("Adam","1234231".hashCode()));
 
         //handler.addUser("KP","1234","KingPin");
-        handler.addUser("KPP","678","King");
-        System.out.println(handler.getUsers());
-        System.out.println(handler.getUsers().get(2));
+        //handler.addUser("KPP","678","King");
+        //System.out.println(handler.getUsers());
+        //System.out.println(handler.getUsers().get(2));
     }
 
     public static void main(String[] args) {
