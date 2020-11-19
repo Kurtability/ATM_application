@@ -2,12 +2,14 @@ package LiteSnacks.UI.Owner;
 
 import LiteSnacks.UI.Cashier.CashesReport;
 import LiteSnacks.UI.Cashier.CashierMainScene;
+import LiteSnacks.backend.ReportsHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import static LiteSnacks.UI.Style.setHW;
@@ -16,12 +18,16 @@ import static LiteSnacks.UI.Style.setXY;
 public class OwnerReportsScene {
     Scene scene;
     Stage stage;
+    Text path = new Text();
 
     public OwnerReportsScene(double width, double height, Stage stage){
         this.stage = stage;
 
         Pane root = new Pane();
         Pane pane = new Pane();
+
+        path.setVisible(false);
+        setXY(path,10,290);
 
         //lable
         Label label = new Label("What do you want");
@@ -36,7 +42,7 @@ public class OwnerReportsScene {
         back.setOnAction(e -> {new OwnerMainScene(width,height,stage).setScene();});
         setXY(back,500,10);
 
-
+        ReportsHandler handler = new ReportsHandler();
         //Get cashes reports button
         Button cashesReports = new Button("Cashes Report");
         setXY(cashesReports,10,150);
@@ -44,7 +50,8 @@ public class OwnerReportsScene {
         cashesReports.setStyle("-fx-background-color: #000000");
         cashesReports.setTextFill(Color.WHITE);
         cashesReports.setOnAction(event -> {
-            new CashesReport(width,height,stage,true).setScene();
+            path.setText(handler.getCashesReport());
+            path.setVisible(true);
 
         });
 
@@ -56,9 +63,8 @@ public class OwnerReportsScene {
         transactionsSummary.setStyle("-fx-background-color: #000000");
         transactionsSummary.setTextFill(Color.WHITE);
         transactionsSummary.setOnAction(event -> {
-
-            /*** please add a function to write report in a file
-             * ***/
+            path.setText(handler.getTransactionsReport());
+            path.setVisible(true);
         });
 
 
