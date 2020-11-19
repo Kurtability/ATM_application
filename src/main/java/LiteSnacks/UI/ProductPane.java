@@ -10,7 +10,7 @@ import javafx.scene.text.Text;
 public class ProductPane {
     private Pane pane;
 
-    ProductPane(Item productDisplayItem, Cart cart) {
+    ProductPane(Item productDisplayItem, Cart cart,Timer timer) {
         this.pane = new Pane();
         this.pane.setPrefWidth(127);
         this.pane.setPrefHeight(143);
@@ -40,6 +40,7 @@ public class ProductPane {
         addButton.setOnAction(e -> {
             cart.addProduct(productDisplayItem.getName(), productDisplayItem.getCategory(), productDisplayItem.getId(),
                     productDisplayItem.getUnitPrice());
+            timer.restart();
         });
 
         addButton.setLayoutX(80);

@@ -3,6 +3,7 @@ package LiteSnacks.UI.ShoppingCart;
 import java.util.HashMap;
 import java.util.Map;
 
+import LiteSnacks.UI.Timer;
 import LiteSnacks.backend.ProductsHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -18,8 +19,11 @@ public class Cart {
     private Map<String, CartItem> selectedProducts;// <coke, maps-to the cart-item>
     private Label total;
     private double total_cost;
+    private Timer timer;
 
-    public Cart() {
+    public Cart(Timer timer) {
+        this.timer = timer;
+
         Label shoppingCart = new Label("Shopping Cart \n");
         shoppingCart.setFont(new Font(20));
         shoppingCart.setAlignment(Pos.CENTER);
@@ -53,7 +57,7 @@ public class Cart {
                 this.selectedProducts.get(product).add();
             }
         } else {
-            CartItem newItem = new CartItem(product, category, id, cost, 1, this);
+            CartItem newItem = new CartItem(product, category, id, cost, 1, this,timer);
             this.selectedProducts.put(product, newItem);
             this.cartPane.getChildren().add(newItem.cartItemPane);
         }
