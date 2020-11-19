@@ -114,10 +114,7 @@ public class OwnerReportsScene {
         cancelTransactions.setStyle("-fx-background-color: #000000");
         cancelTransactions.setTextFill(Color.WHITE);
         cancelTransactions.setOnAction(event -> {
-
-            /***
-             * please add a function to write report in a file
-             ***/
+            Transaction.getCancelledTransactions();
         });
 
 

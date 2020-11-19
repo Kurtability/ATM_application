@@ -227,7 +227,7 @@ public class Transaction {
         }
     }
 
-    public String getCancelledTransactions() {
+    public static String getCancelledTransactions() {
         File cancelledTransactions = ResourceHandler.getCancelledTransactions();
         if (Desktop.isDesktopSupported()) {
             if (Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
