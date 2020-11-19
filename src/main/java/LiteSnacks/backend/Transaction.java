@@ -1,5 +1,7 @@
 package LiteSnacks.backend;
 
+import LiteSnacks.backend.UserAccount.UserAccount;
+
 import java.awt.*;
 import java.io.*;
 import java.sql.Timestamp;
@@ -202,5 +204,42 @@ public class Transaction {
         }
         reader.close();
         return entries;
+    }
+
+    public static void cancelTransaction(String event) {
+        File cancelledTransactions = ResourceHandler.getCancelledTransactions();
+        UserAccount user = UserLoginHandler.getCurrentUser();
+        String username;
+        if(user == null) {
+            username = "Anonymous";
+        }
+        else {
+            username = user.getUserName();
+        }
+        String dateTime = (new Timestamp(System.currentTimeMillis())).toString();
+        String entry = String.format("------------------------\nDate and Time: %s\nUsername: %s\nReason: %s\n", dateTime, username, event);
+        try {
+            FileWriter writer = new FileWriter(cancelledTransactions, true);
+            writer.write(entry);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getCancelledTransactions() {
+        File cancelledTransactions = ResourceHandler.getCancelledTransactions();
+        if (Desktop.isDesktopSupported()) {
+            if (Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
+                new Thread(() -> {
+                    try {
+                        Desktop.getDesktop().open(cancelledTransactions);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+            }
+        }
+        return (String.format("The report is stored at: %s", cancelledTransactions.toString()));
     }
 }

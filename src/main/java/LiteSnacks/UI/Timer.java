@@ -1,6 +1,7 @@
 package LiteSnacks.UI;
 
 import LiteSnacks.UI.ShoppingCart.Cart;
+import LiteSnacks.backend.Transaction;
 import LiteSnacks.backend.UserLoginHandler;
 import javafx.animation.AnimationTimer;
 import javafx.scene.text.Text;
@@ -41,6 +42,7 @@ public class Timer {
                 if (seconds - s == 0) {
                     if (minutes - m == 0) {
                         stop();
+                        Transaction.cancelTransaction("Timeout");
                         UserLoginHandler.setCurrentUser(null);
                         new Products(width, height, stage).setScene();
                     } else {

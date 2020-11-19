@@ -117,7 +117,10 @@ public class CardScene {
         cancel.setLayoutY(430);
         cancel.setStyle("-fx-background-color: #DC143C");
         cancel.setTextFill(Color.WHITE);
-        cancel.setOnAction(event -> {new Products(width,height,stage).setScene();});
+        cancel.setOnAction(event -> {
+            Transaction.cancelTransaction("User cancelled");
+            new Products(width,height,stage).setScene();
+        });
 
         root.getChildren().addAll(name, givenName, cardLabel, cancel, title2, pay, price, title, number, fail, back);
 

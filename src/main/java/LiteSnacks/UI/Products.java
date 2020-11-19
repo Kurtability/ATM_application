@@ -4,6 +4,7 @@ import LiteSnacks.UI.ShoppingCart.Cart;
 import LiteSnacks.UI.ShoppingCart.Checkout;
 import LiteSnacks.backend.Item;
 import LiteSnacks.backend.ProductsHandler;
+import LiteSnacks.backend.Transaction;
 import LiteSnacks.backend.UserLoginHandler;
 import LiteSnacks.UI.Style;
 import javafx.scene.Scene;
@@ -113,6 +114,7 @@ public class Products {
         cancel.setTextFill(Color.WHITE);
         cancel.setOnAction(event -> {
             timer.stop();
+            Transaction.cancelTransaction("User cancelled");
             new Products(width, height, stage).setScene();
         });
 

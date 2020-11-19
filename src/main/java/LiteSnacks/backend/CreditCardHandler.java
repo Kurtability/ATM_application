@@ -21,6 +21,7 @@ public class CreditCardHandler {
     public static String getFailMessage() {
         return fail;
     }
+
     public static String checkCard(String name, String creditCardNumber) {
         String result = null;
         HashMap<String, String> creditCards = getCards();
