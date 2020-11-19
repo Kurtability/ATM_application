@@ -1,3 +1,4 @@
 Adam, 1234, cashier
 Jones, 5678, seller
-KP, 123, owner
+KP, 123, customer
+admin, 123, owner
