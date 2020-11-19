@@ -36,5 +36,11 @@ public class TransactionTest {
         assertEquals(t.get(0).getProducts().get("moop").get(0)*t.get(0).getProducts().get("moop").get(1),
                         t.get(0).getAmount());
         assertEquals("Card", t.get(0).getMethod());
+        try {
+            assertNotNull(Transaction.generateReport());
+        } catch(Exception e) {
+            e.printStackTrace();
+            fail();
+        }
     }
 }
