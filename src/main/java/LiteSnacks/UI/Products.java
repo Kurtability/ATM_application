@@ -100,11 +100,13 @@ public class Products {
         logoutButton.setOnAction(event -> {
             UserLoginHandler.user = null;
             new LoginScene(width, height, stage).setScene();
+            timer.stop();
         });
 
         // checkout button
         Button checkoutButton = createButton("Check Out", 150, 390, 25, 100);
         checkoutButton.setOnAction(event -> {
+            timer.stop();
             if(!cart.getItems().isEmpty()) {
                 new Checkout(width, height, stage, cart).setScene();
             }
@@ -117,6 +119,7 @@ public class Products {
         cancel.setStyle("-fx-background-color: red");
         cancel.setTextFill(Color.WHITE);
         cancel.setOnAction(event -> {
+            timer.stop();
             new Products(width, height, stage).setScene();
         });
 
