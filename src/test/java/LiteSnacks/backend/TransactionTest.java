@@ -25,7 +25,6 @@ public class TransactionTest {
         purchasedProducts.put("moop", temp);
         Transaction.addTransaction(purchasedProducts, 6.0, "NA", true);
 
-        ResourceHandlerTest.deleteDirectory(new File(ResourceHandler.root));
         t = Transaction.getAllTransactions();
         assertNotNull(t);
         assertEquals(1, t.size());
