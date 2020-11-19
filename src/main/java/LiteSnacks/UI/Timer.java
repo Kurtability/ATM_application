@@ -18,7 +18,7 @@ public class Timer {
     Products productsPage;
     long start;
 
-    public Timer(Text timer, double width, double height, Stage stage,  Products products){
+    public Timer(Text timer, double width, double height, Stage stage, Products products) {
         timeText = timer;
         this.width = width;
         this.height = height;
@@ -30,52 +30,51 @@ public class Timer {
 
             @Override
             public void handle(long now) {
-                int pass = (int) (System.currentTimeMillis()-start);
-                pass /=1000;
-                int s = pass%60;
-                pass /=60;
-                int m = pass%60;
-                timeText.setText(String.format("Timer : %02d:%02d",minutes-m,seconds-s));
-                System.out.println(String.format("%02d:%02d",minutes-m,seconds-s));
-                if (seconds-s==0){
-                    if(minutes-m==0){
+                int pass = (int) (System.currentTimeMillis() - start);
+                pass /= 1000;
+                int s = pass % 60;
+                pass /= 60;
+                int m = pass % 60;
+                timeText.setText(String.format("Timer : %02d:%02d", minutes - m, seconds - s));
+                // System.out.println(String.format("%02d:%02d", minutes - m, seconds - s));
+                if (seconds - s == 0) {
+                    if (minutes - m == 0) {
                         stop();
 
-                        new Products(width,height,stage).setScene();
-                    }else{
-                        minutes-=1;
+                        new Products(width, height, stage).setScene();
+                    } else {
+                        minutes -= 1;
                         seconds = 59;
                     }
 
                     /***
-                     if(minutes-m==0){
-
-                     System.out.println(time);
-
-
-                     }else{
-                     System.out.println(time);
-                     minutes -=1;
-                     seconds = 59;
-                     }***/
+                     * if(minutes-m==0){
+                     * 
+                     * System.out.println(time);
+                     * 
+                     * 
+                     * }else{ System.out.println(time); minutes -=1; seconds = 59; }
+                     ***/
                 }
-
-
 
             }
         };
         this.timer.start();
     }
-    public void setCart(Cart cart){
+
+    public void setCart(Cart cart) {
         this.cart = cart;
     }
-    public void restart(){
+
+    public void restart() {
         this.start = System.currentTimeMillis();
     }
-    public void stop(){
+
+    public void stop() {
         this.timer.stop();
     }
-    public void cancel(){
+
+    public void cancel() {
         timer.stop();
 
         System.out.println("cancel");

@@ -1,6 +1,5 @@
 package LiteSnacks.UI.ShoppingCart;
 
-
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +16,13 @@ import javafx.scene.layout.*;
 import javafx.geometry.*;
 
 import LiteSnacks.backend.CreditCardHandler;
+import LiteSnacks.backend.Transaction;
+
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import LiteSnacks.UI.Products;
 
 public class CardScene {
@@ -90,6 +96,15 @@ public class CardScene {
         pay.setOnAction(event -> {
             String result = CreditCardHandler.checkCard(name.getText(), number.getText());
             if(!result.equals("Credit Card details are not valid")) {
+                Map<String, List<Double>> purchasedProducts = new HashMap<>();
+                Map<String, CartItem> cartstuff = cart.getItems();
+                for (String item: cartstuff.keySet()) {
+                    List<Double> temp = new ArrayList<>();
+                    temp.add(cartstuff.get(item).getUnitPrice());
+                    temp.add((double)cartstuff.get(item).getQuantity());
+                    purchasedProducts.put(item, temp);
+                }
+                Transaction.addTransaction(purchasedProducts, cart.getTotal(), "0", true);
                 new CardSceneSuccess(width, height, stage, cart).setScene();
             }
             else {

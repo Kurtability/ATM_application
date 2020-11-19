@@ -56,37 +56,25 @@ public class LoginScene {
         loginButton.setStyle("-fx-background-color: #000000");
         loginButton.setTextFill(Color.WHITE);
 
-
         handler = new UserLoginHandler();
         users = handler.getUsers();
         loginButton.setOnAction(event -> {
-            if (handler.checkUser(username.getText(),password.getText().hashCode())){
-                for (UserAccount u: users){
-                    //System.out.println(u.getRole());
-
-//                    if (u.getRole().equals("customer")){
-//                        new Products(width, height, stage).setScene();
-//                        System.out.println("whyyy");
-//                    }
-
+            if (handler.checkUser(username.getText(), password.getText().hashCode())) {
+                for (UserAccount u : users) {
                     if (u.getRole().contains("cashier") && u.getUserName().equals(username.getText())) {
                         new CashierMainScene(width, height, stage).setScene();
                         System.out.println("cashier page");
-                    }
-                    else if (u.getRole().contains("seller") && u.getUserName().equals(username.getText())){
+                    } else if (u.getRole().contains("seller") && u.getUserName().equals(username.getText())) {
                         new SellerMainScene(width, height, stage).setScene();
                         System.out.println("seller page");
-                    }
-                    else if (u.getRole().contains("owner") && u.getUserName().equals(username.getText())){
+                    } else if (u.getRole().contains("owner") && u.getUserName().equals(username.getText())) {
                         new OwnerMainScene(width, height, stage).setScene();
                         System.out.println("owner page");
-                    }
-                    else if (u.getRole().contains("customer") && u.getUserName().equals(username.getText())){
+                    } else if (u.getRole().contains("customer") && u.getUserName().equals(username.getText())) {
                         new Products(width, height, stage).setScene();
                     }
                 }
-            }
-            else {
+            } else {
                 System.out.println("Login Failed :(");
             }
         });
@@ -110,7 +98,6 @@ public class LoginScene {
         back.setOnAction(e -> {
             new Products(width, height, stage).setScene();
         });
-
 
         loginpane.getChildren().addAll(username, password, loginButton, label, registerButton);
         loginpane.setLayoutX(156);

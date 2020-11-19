@@ -18,7 +18,8 @@ public class Transaction {
     double amount;
     Map<String, List<Double>> products;
 
-    Transaction(double amount, Map<String, List<Double>> products, Timestamp ts, String user,String change,String method) {
+    Transaction(double amount, Map<String, List<Double>> products, Timestamp ts, String user, String change,
+            String method) {
         this.products = products;
         this.amount = amount;
         this.ts = ts;
@@ -44,11 +45,18 @@ public class Transaction {
         return user;
     }
 
-    public String getChange(){return change;}
-    public String getMethod(){return method;}
+    public String getChange() {
+        return change;
+    }
 
-    public static void addTransaction(Map<String, List<Double>> transaction, double amount,String change,boolean payBy_card) {
-        String user = "anon";
+    public String getMethod() {
+        return method;
+    }
+
+    public static void addTransaction(Map<String, List<Double>> transaction, double amount, String change,
+            boolean payBy_card) {
+        String user = (UserLoginHandler.getCurrentUser() == null) ? "anon"
+                : UserLoginHandler.getCurrentUser().getUserName();
         File out = ResourceHandler.getTransactionFile();
         try {
             PrintWriter pw = new PrintWriter(new FileOutputStream(out, true));
@@ -58,15 +66,15 @@ public class Transaction {
             pw.println(amount);
             pw.println(user);
             /***
-             for paymethod(Oliver implmented)
-
+             * for paymethod(Oliver implmented)
+             * 
              */
-            if(payBy_card){
-                pw.println("Card"); //method
-            }else{
-                pw.println("Cash"); //method
+            if (payBy_card) {
+                pw.println("Card"); // method
+            } else {
+                pw.println("Cash"); // method
             }
-            pw.println(change);//change
+            pw.println(change);// change
 
             for (String prod : transaction.keySet())
                 pw.println(prod + "," + transaction.get(prod).get(0) + "," + transaction.get(prod).get(1));
@@ -82,7 +90,7 @@ public class Transaction {
     public static List<Transaction> getAllTransactions() {
         double amount;
         String user;
-        /**oliver implmented**/
+        /** oliver implmented **/
         String payMethod;
         String change;
         /***/
@@ -99,11 +107,9 @@ public class Transaction {
                     amount = Double.parseDouble(sc.nextLine());
                     user = sc.nextLine();
 
-                    /**oliver implmented**/
+                    /** oliver implmented **/
                     payMethod = sc.nextLine();
                     change = sc.nextLine();
-
-
 
                     Map<String, List<Double>> items = new HashMap<>();
 
@@ -114,7 +120,7 @@ public class Transaction {
                         temp.add(Double.parseDouble(lspl[2]));
                         items.put(lspl[0], temp);
                     }
-                    transactions.add(new Transaction(amount, items, t, user,change,payMethod));
+                    transactions.add(new Transaction(amount, items, t, user, change, payMethod));
                 }
             }
 
@@ -126,22 +132,15 @@ public class Transaction {
     }
 
     /*
-    public static void main(String[] args) {
-        HashMap<String, List<Double>> hm = new HashMap<>();
-        List<Double> l = new ArrayList<>();
-        l.add(2.0);
-        l.add(4.5);
-        hm.put("tweaky", l);
-        addTransaction(hm, 9.0);
-        System.out.println(getAllTransactions());
-    }
-    */
+     * public static void main(String[] args) { HashMap<String, List<Double>> hm =
+     * new HashMap<>(); List<Double> l = new ArrayList<>(); l.add(2.0); l.add(4.5);
+     * hm.put("tweaky", l); addTransaction(hm, 9.0);
+     * System.out.println(getAllTransactions()); }
+     */
 
     public String toString() {
         return "\n--------------------\n" + this.ts + " " + this.user + this.amount + "\n" + this.products.toString();
     }
-
-
 
     public static String generateReport() {
         Map<String, Integer> entries = getTransactions();
@@ -179,7 +178,7 @@ public class Transaction {
         Scanner reader = null;
         try {
             reader = new Scanner(ResourceHandler.getTransactionFile());
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
         }
@@ -187,16 +186,15 @@ public class Transaction {
         String[] line;
         String key;
         Double quantity;
-        while(reader.hasNextLine()) {
+        while (reader.hasNextLine()) {
             line = reader.nextLine().split(",");
 
-            if(line.length > 1) {
+            if (line.length > 1) {
                 key = String.format("Name: %s Price: %s", line[0], line[1]);
-                if(entries.containsKey(key)) {
+                if (entries.containsKey(key)) {
                     quantity = Double.parseDouble(line[2]);
                     entries.put(key, entries.get(key) + quantity.intValue());
-                }
-                else {
+                } else {
                     quantity = Double.parseDouble(line[2]);
                     entries.put(key, quantity.intValue());
                 }
