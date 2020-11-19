@@ -1,16 +1,12 @@
 package LiteSnacks.UI.ShoppingCart;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.geometry.*;
@@ -69,7 +65,7 @@ public class CardScene {
         name.setLayoutX(275);
         name.setLayoutY(175);
         
-        TextField number = new TextField();
+        PasswordField number = new PasswordField();
         number.setPromptText("Enter Card Number");
         number.setLayoutX(275);
         number.setLayoutY(225);
