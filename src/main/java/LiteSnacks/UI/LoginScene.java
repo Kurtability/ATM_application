@@ -38,7 +38,8 @@ public class LoginScene {
         label.setFont(new Font("Arial", 30));
 
         // username and password
-        TextField username = new TextField("username");
+        TextField username = new TextField("");
+        username.setPromptText("username");
         username.setLayoutX(41);
         username.setLayoutY(101);
         username.setPrefHeight(38);
