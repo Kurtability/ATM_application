@@ -1,5 +1,6 @@
 package LiteSnacks.UI.ShoppingCart;
 
+import LiteSnacks.UI.Timer;
 import LiteSnacks.backend.Item;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,10 +14,12 @@ public class CartItem extends Item {
     Pane cartItemPane;
 
     private Cart cart;
+    private Timer timer;
 
-    CartItem(String name, String category, int id, double unitPrice, int quantity, Cart cart) {
+    CartItem(String name, String category, int id, double unitPrice, int quantity, Cart cart,Timer timer) {
         super(name, category, id, quantity, unitPrice);
         this.cart = cart;
+        this.timer = timer;
         makePane();
     }
 
@@ -39,6 +42,7 @@ public class CartItem extends Item {
         Button remove = new Button("Remove");
         remove.setOnAction(e -> {
             this.cart.removeProduct(this.name);
+            timer.restart();
         });
 
         GridPane.setConstraints(remove, 3, 1);
@@ -52,6 +56,8 @@ public class CartItem extends Item {
         this.qty = new Label(Integer.toString(this.quantity));
         GridPane.setConstraints(qty, 3, 0);
         this.cartItemPane.getChildren().set(index, this.qty);
+
+
     }
 
     void decrease() {
@@ -60,5 +66,6 @@ public class CartItem extends Item {
         this.qty = new Label(Integer.toString(this.quantity));
         GridPane.setConstraints(qty, 3, 0);
         this.cartItemPane.getChildren().set(index, this.qty);
+
     }
 }

@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 import static LiteSnacks.UI.Style.createButton;
+import static LiteSnacks.UI.Style.setXY;
 
 public class Products {
     Scene scene;
@@ -27,13 +28,28 @@ public class Products {
     List<Pane> menuPane;
     List<String> stringForButton;
     private Cart cart;
+    Text time = new Text();
+    Timer timer ;
+    double width;
+    double height;
 
     public Products(double width, double height, Stage stage) {
         this.stage = stage;
+        this.width = width;
+        this.height = height;
         Pane root = new Pane();
 
-        cart = new Cart();
+
+
+        //timer
+        setXY(time,10,70);
+        timer = new Timer(time,width,height,stage,this);
+        timer.restart();
+
+        cart = new Cart(timer);
         stringForButton = new ArrayList<>();
+
+        timer.setCart(cart);
 
         // products pane (scroll)
         // Item item = new Item(0);
@@ -48,7 +64,7 @@ public class Products {
         menu = new ArrayList<>();
         productsHandler.getCategories().forEach(cat -> {
             stringForButton.add(cat);
-            productPanes.add(getProductsPane(items.get(cat)));
+            productPanes.add(getProductsPane(items.get(cat),timer));
         });
         menuPane = productPanes;
 
@@ -104,7 +120,7 @@ public class Products {
             new Products(width, height, stage).setScene();
         });
 
-        root.getChildren().addAll(checkoutButton, logoutButton, products, cart.getPane(), cancel);
+        root.getChildren().addAll(checkoutButton, logoutButton, products, cart.getPane(), cancel,time);
         root.getChildren().addAll(buttons);
         scene = new Scene(root, width, height);
 
@@ -116,13 +132,13 @@ public class Products {
 
 
 
-    public Pane getProductsPane(List<Item> productDisplayItems) {
+    public Pane getProductsPane(List<Item> productDisplayItems,Timer timer) {
         Pane box = new Pane();
         int row = 0;
         int column = 0;
 
         for (Item productDisplayItem : productDisplayItems) {
-            Pane each = new ProductPane(productDisplayItem, cart).getPane();
+            Pane each = new ProductPane(productDisplayItem, cart,timer).getPane();
             each.setLayoutX(135 * row);
             each.setLayoutY(150 * column);
             box.getChildren().add(each);
@@ -145,6 +161,9 @@ public class Products {
         }
         productsPane.setContent(menuPane.get(index));
         this.menu.get(index).setStyle("-fx-background-color: red;");
+    }
+    public void renew(){
+        new Products(width,height,stage).setScene();
     }
 
 }
