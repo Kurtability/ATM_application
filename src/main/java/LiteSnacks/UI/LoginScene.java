@@ -8,6 +8,7 @@ import LiteSnacks.backend.UserLoginHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -43,7 +44,7 @@ public class LoginScene {
         username.setPrefHeight(38);
         username.setPrefWidth(207);
 
-        TextField password = new TextField("password");
+        PasswordField password = new PasswordField();
         password.setLayoutX(41);
         password.setLayoutY(156);
         password.setPrefHeight(38);
