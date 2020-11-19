@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class Timer {
     AnimationTimer timer;
     int minutes = 1;
-    int seconds = 0;
+    int seconds = 1;
     String time = "";
     Text timeText;
     Cart cart;
