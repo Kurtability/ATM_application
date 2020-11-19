@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,10 +29,10 @@ public class CreditCardHandlerTest {
 
     private static Object jsonContents() {
         JSONParser jsonParser = new JSONParser();
-        FileReader reader;
+        InputStreamReader reader;
         Object obj = null;
         try{
-            reader = new FileReader(ResourceHandler.getCreditCardsFile());
+            reader = new InputStreamReader(CreditCardHandler.class.getResourceAsStream("/credit_cards.json"));
             obj = jsonParser.parse(reader);
             reader.close();
         } catch(IOException e) {

@@ -2,7 +2,8 @@ package LiteSnacks.backend;
 
 import org.json.simple.JSONArray;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -10,7 +11,6 @@ import org.json.simple.parser.ParseException;
 import java.util.HashMap;
 
 public class CreditCardHandler {
-    private static File creditCardFile = ResourceHandler.getCreditCardsFile();
     private final static String success = "Success! Enjoy your products";
     private final static String fail = "Credit Card details are not valid";
 
@@ -31,10 +31,6 @@ public class CreditCardHandler {
             result = fail;
         }
         return result;
-    }
-
-    private static void updateFile() {
-        creditCardFile = ResourceHandler.getCreditCardsFile();
     }
 
     private static HashMap<String, String> getCards() {
@@ -61,10 +57,10 @@ public class CreditCardHandler {
 
     private static Object cardsObject() {
         JSONParser jsonParser = new JSONParser();
-        FileReader reader;
+        InputStreamReader reader;
         Object obj = null;
         try{
-            reader = new FileReader(creditCardFile);
+            reader = new InputStreamReader(CreditCardHandler.class.getResourceAsStream("/credit_cards.json"));
             obj = jsonParser.parse(reader);
             reader.close();
         } catch(IOException e) {
