@@ -87,7 +87,12 @@ public class Checkout {
 
             handler = new UserLoginHandler();
             UserAccount currentUser = handler.getCurrentUser();
-            String userName = currentUser.getUserName();
+            String userName;
+            if (currentUser == null) {
+                userName = "anon";
+            } else {
+                userName = currentUser.getUserName();
+            }
             System.out.println("Current logged in user is : "+ userName);
             user = currentUser;
 
