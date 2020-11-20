@@ -12,26 +12,16 @@ public class UserAccount {
 
     }
 
-    public UserAccount(String userName, String password, String role) {
+    public UserAccount(String userName, String password, String role ) {
         this.userName = userName;
         this.password = password;
         this.role = role;
-
-
     }
 
     public String toString(){
         return "Username: " + userName + ", " + "Password: " + password + ", " + "Role: " + role;
     }
 
-
-//    public boolean getLoggedInStatus(){
-//        return isLoggedIn;
-//    }
-//
-//    public void setLoggedInStatus(boolean set){
-//        isLoggedIn = set;
-//    }
 
     public String getUserName() {
         return userName;
