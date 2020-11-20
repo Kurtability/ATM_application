@@ -6,6 +6,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.naming.spi.ResolveResult;
+
 import java.awt.*;
 
 public class UserLoginHandler {
@@ -150,6 +153,49 @@ public class UserLoginHandler {
         return false;
     }
 
+    public boolean removeUser(String name) {
+        // remove the account from list
+        users = getUsers();
+        int kill = -1;
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUserName().equals(name)) {
+                kill = i;
+                System.out.println("removing");
+            }
+        }
+
+        if (kill >= 0) {
+            this.users.remove(kill);
+        } else {
+            return false;
+        }
+
+        // remove the account from the database file
+        try {
+            File tempFile = new File("myTempFile.txt");
+
+            writer = new PrintWriter(tempFile);
+            Scanner reader = new Scanner(this.userFile);
+
+            while (reader.hasNextLine()) {
+                String curr = reader.nextLine();
+                if (curr.split(",")[0].equals(name)) {
+                    System.out.println("removed this account: " + name);
+                } else {
+                    writer.write(curr + "\n");
+                }
+            }
+            writer.close();
+            reader.close();
+            System.out.println(tempFile.renameTo(this.userFile));
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        System.out.println(getUsers());
+        return true;
+    }
+
     public void addUser(String name, String pass, String role) {
         users = getUsers();
         System.out.println(users);
@@ -157,12 +203,13 @@ public class UserLoginHandler {
         try {
             writer = new PrintWriter(new FileOutputStream(this.userFile, true));
             boolean flag = false;
-            for (int i = 0; i < users.size(); i++) {
-                if (users.get(i).getUserName().equals(name)) {
+            for (UserAccount account : users) {
+                if (account.getUserName().equals(name)) {
                     System.out.println("Account already Exists. Please change username");
                     flag = true;
                 }
             }
+
             if (!flag) {
                 users.add(user);
                 writer.println();
