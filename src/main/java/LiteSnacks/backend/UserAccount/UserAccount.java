@@ -24,6 +24,7 @@ public class UserAccount {
         return "Username: " + userName + ", " + "Password: " + password + ", " + "Role: " + role;
     }
 
+
 //    public boolean getLoggedInStatus(){
 //        return isLoggedIn;
 //    }
@@ -52,7 +53,7 @@ public class UserAccount {
         return role;
     }
 
-    public void setRole(String role) {
-        this.role = this.role;
+    public void setRole(String new_role) {
+        this.role = new_role;
     }
 }

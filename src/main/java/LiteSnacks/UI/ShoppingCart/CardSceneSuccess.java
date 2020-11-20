@@ -3,6 +3,7 @@ package LiteSnacks.UI.ShoppingCart;
 import LiteSnacks.UI.Products;
 import LiteSnacks.backend.CreditCardHandler;
 import LiteSnacks.backend.ProductsHandler;
+import LiteSnacks.backend.UserLoginHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -34,7 +35,8 @@ public class CardSceneSuccess {
         finish.setTextFill(Color.WHITE);
         finish.setStyle("-fx-background-color: #000000");
         finish.setOnAction(event -> {
-                new Products(width,height,stage).setScene();
+            UserLoginHandler.setCurrentUser(null);
+            new Products(width,height,stage).setScene();
         });
 
         root.getChildren().addAll(title, finish);

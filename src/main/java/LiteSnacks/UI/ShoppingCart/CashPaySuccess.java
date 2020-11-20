@@ -2,6 +2,7 @@ package LiteSnacks.UI.ShoppingCart;
 
 import LiteSnacks.UI.Products;
 import LiteSnacks.backend.ProductsHandler;
+import LiteSnacks.backend.UserLoginHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
@@ -40,6 +41,7 @@ public class CashPaySuccess {
 
         Button submit1 = createButton("Finish", 500, 400, 27, 81);
         submit1.setOnAction(e -> {
+            UserLoginHandler.setCurrentUser(null);
             new Products(width, height, stage).setScene();
         });
 

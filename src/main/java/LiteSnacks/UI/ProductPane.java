@@ -17,11 +17,6 @@ public class ProductPane {
 
         this.pane.setStyle("-fx-background-color: #d9d9d9;");
 
-        // quantity modifier
-        // Pane qtymdfier = new QuantityModifier(productDisplayItem).getPane();
-        // qtymdfier.setLayoutX(52);
-        // qtymdfier.setLayoutY(110);
-
         // price
         Text price = new Text("$ " + String.valueOf(productDisplayItem.getUnitPrice()));
         price.setLayoutX(4);

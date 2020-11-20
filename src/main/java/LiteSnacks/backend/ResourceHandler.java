@@ -105,9 +105,14 @@ public class ResourceHandler {
         return initFile("saleSummary.txt");
     }
 
+    public static File getCancelledTransactions() {
+        return initFile("cancelledTransactions.txt");
+    }
+
     private static int getLineNumber() {
         return Thread.currentThread().getStackTrace()[2].getLineNumber();
     }
+
 
 
 }

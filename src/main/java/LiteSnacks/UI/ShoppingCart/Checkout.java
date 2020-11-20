@@ -2,6 +2,7 @@ package LiteSnacks.UI.ShoppingCart;
 
 import LiteSnacks.backend.UserAccount.UserAccount;
 import LiteSnacks.backend.UserLoginHandler;
+import LiteSnacks.backend.Transaction;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -104,7 +105,10 @@ public class Checkout {
         cancel.setLayoutY(430);
         cancel.setStyle("-fx-background-color: #DC143C");
         cancel.setTextFill(Color.WHITE);
-        cancel.setOnAction(event -> {new Products(width,height,stage).setScene();
+
+        cancel.setOnAction(event -> {
+            Transaction.cancelTransaction("User cancelled");
+            new Products(width,height,stage).setScene();
         });
 
 

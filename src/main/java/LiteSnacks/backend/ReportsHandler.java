@@ -37,7 +37,7 @@ public class ReportsHandler {
                 int m = (int) cash.getValue();
                 value += "  value : $"+m+"\n";
             }else {
-                int m = (int) cash.getValue()*100;
+                int m = (int) (cash.getValue()*100);
                 value += "  value : "+m+"c\n";
             }
 
