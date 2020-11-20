@@ -111,37 +111,39 @@ public class CardScene {
                     purchasedProducts.put(item, temp);
                 }
 
-                try
-                {
-                    File file = resourceHandler.getUserFile();
-                    BufferedReader reader = new BufferedReader(new FileReader(file));
-                    String line = "", oldtext = "";
-                    while((line = reader.readLine()) != null)
+                if (checkoutRef.user != null) {
+                    try
                     {
-                        oldtext += line + "\r\n";
+                        File file = resourceHandler.getUserFile();
+                        BufferedReader reader = new BufferedReader(new FileReader(file));
+                        String line = "", oldtext = "";
+                        while((line = reader.readLine()) != null)
+                        {
+                            oldtext += line + System.lineSeparator();
+                        }
+                        reader.close();
+                        // replace a word in a file
+                        //String newtext = oldtext.replaceAll("drink", "Love");
+
+                        //To replace a line in a file
+                        String currentUserName = checkoutRef.user.getUserName();
+                        String currentUserPassword = checkoutRef.user.getPassword();
+                        String currentUserRole = checkoutRef.user.getRole();
+
+                        String n = name.getText();
+                        String num = number.getText();
+                        //System.out.println(currentUserName);
+
+                        String newtext = oldtext.replaceAll(currentUserName +", "+currentUserPassword +", "+ currentUserRole,
+                                currentUserName +", "+currentUserPassword +", "+ currentUserRole +", "+ n +", "+num);
+                        newtext= newtext.strip();
+                        FileWriter writer = new FileWriter(file);
+                        writer.write(newtext);writer.close();
                     }
-                    reader.close();
-                    // replace a word in a file
-                    //String newtext = oldtext.replaceAll("drink", "Love");
-
-                    //To replace a line in a file
-                    String currentUserName = checkoutRef.user.getUserName();
-                    String currentUserPassword = checkoutRef.user.getPassword();
-                    String currentUserRole = checkoutRef.user.getRole();
-
-                    String n = name.getText();
-                    String num = number.getText();
-                    //System.out.println(currentUserName);
-
-                    String newtext = oldtext.replaceAll(currentUserName +", "+currentUserPassword +", "+ currentUserRole,
-                            currentUserName +", "+currentUserPassword +", "+ currentUserRole +", "+ n +", "+num);
-                    newtext= newtext.strip();
-                    FileWriter writer = new FileWriter(file);
-                    writer.write(newtext);writer.close();
-                }
-                catch (IOException ioe)
-                {
-                    ioe.printStackTrace();
+                    catch (IOException ioe)
+                    {
+                        ioe.printStackTrace();
+                    }
                 }
 
                 Transaction.addTransaction(purchasedProducts, cart.getTotal(), "0", true);

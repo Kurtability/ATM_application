@@ -11,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import LiteSnacks.backend.UserAccount.UserAccount;
 
 import static LiteSnacks.UI.Style.setHW;
 import static LiteSnacks.UI.Style.setXY;
@@ -67,10 +68,6 @@ public class OwnerReportsScene {
             path.setVisible(true);
         });
 
-
-
-        
-
         // item summary
         Text pathToReport = new Text("");
         setXY(pathToReport, 100, 400);
@@ -102,8 +99,9 @@ public class OwnerReportsScene {
         userReports.setStyle("-fx-background-color: #000000");
         userReports.setTextFill(Color.WHITE);
         userReports.setOnAction(event -> {
-            UserLoginHandler userClass = new UserLoginHandler();
-            System.out.println(userClass.getUsers());
+            ReportsHandler.writeUsers();
+            ReportsHandler.getUsers();
+            
             // fix this so that passwords arent show + output is written to a file
         });
 

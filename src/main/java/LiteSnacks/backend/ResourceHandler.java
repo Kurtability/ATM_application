@@ -84,6 +84,10 @@ public class ResourceHandler {
     public static File getUserFile() {
             return initFile("user.txt");
     }
+
+    public static File getUserInfoFile() {
+        return initFile("userInformation.txt");
+    }
   
     public static File getCashesReportFile() {return  initFile("cashesReport.txt");}
 
