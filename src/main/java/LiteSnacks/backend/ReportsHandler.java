@@ -1,10 +1,15 @@
 package LiteSnacks.backend;
 
-import java.awt.*;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import LiteSnacks.backend.UserAccount.UserAccount;
 
 public class ReportsHandler {
     ResourceHandler handler ;
@@ -102,5 +107,40 @@ public class ReportsHandler {
         }catch (Exception e){
 
         }
+    }
+
+    public static void writeUsers() {
+        File file = ResourceHandler.getUserInfoFile();
+        UserLoginHandler userClass = new UserLoginHandler();
+        ArrayList<String> allUsers = new ArrayList<String>();
+        for (UserAccount account : userClass.getUsers()) {
+            allUsers.add("Username: " + account.getUserName() + ", Role: " + account.getRole());
+        }
+
+        try {
+            FileWriter writer = new FileWriter(file);
+            for (String info : allUsers) {
+                writer.write(info+'\n');
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String getUsers() {
+        File file = ResourceHandler.getUserInfoFile();
+        if (Desktop.isDesktopSupported()) {
+            if (Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
+                new Thread(() -> {
+                    try {
+                        Desktop.getDesktop().open(file);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }).start();
+            }
+        }
+        return (String.format("The report is stored at: %s", file.toString()));
     }
 }

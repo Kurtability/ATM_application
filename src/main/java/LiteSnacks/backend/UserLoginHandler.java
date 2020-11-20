@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.awt.*;
 
 public class UserLoginHandler {
 
@@ -178,5 +179,5 @@ public class UserLoginHandler {
         String role = "customer";
         addUser(name, pass, role);
         System.out.println("added customer");
-    }
+    }  
 }
