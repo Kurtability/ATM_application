@@ -2,6 +2,7 @@ package LiteSnacks.UI.Seller;
 
 import LiteSnacks.UI.LoginScene;
 import LiteSnacks.UI.Style;
+import LiteSnacks.backend.UserLoginHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -56,6 +57,7 @@ public class SellerMainScene {
         logoutButton.setStyle("-fx-background-color: #000000");
         logoutButton.setTextFill(Color.WHITE);
         logoutButton.setOnAction(event -> {
+            UserLoginHandler.setCurrentUser(null);
             new Products(width, height, stage).setScene();
         });
 

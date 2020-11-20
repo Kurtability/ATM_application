@@ -12,7 +12,7 @@ public class UserLoginHandler {
     private final File userFile;
 
     List<UserAccount> users;
-    public static UserAccount user;
+    private static UserAccount currentUser;
     private PrintWriter writer;
 
     public UserLoginHandler() {
@@ -21,7 +21,11 @@ public class UserLoginHandler {
     }
 
     public static UserAccount getCurrentUser() {
-        return user;
+        return currentUser;
+    }
+
+    public static void setCurrentUser(UserAccount givenUser) {
+        currentUser = givenUser;
     }
 
     public File getUserFile() {
@@ -63,6 +67,10 @@ public class UserLoginHandler {
         while (sc.hasNextLine()) {
             String password = null;
             String line = sc.nextLine();
+            if (line.equals("")){
+                continue;
+            }
+
             String[] details;
             details = line.split(",");
 
@@ -99,6 +107,7 @@ public class UserLoginHandler {
     public List<UserAccount> getUsers() {
         users = new ArrayList<>();
         int i = 0;
+        UserAccount user;
         while (i < getUsernames().size() && i < getPasswords().size() && i < getRoles().size()) {
             user = new UserAccount(getUsernames().get(i), getPasswords().get(i), getRoles().get(i));
             users.add(user);
@@ -118,7 +127,7 @@ public class UserLoginHandler {
             if (nme.equals(username) && pass == (passwordHash)) {
                 for (UserAccount aUser : users) {
                     if (aUser.getUserName().equals(username)) {
-                        user = aUser;
+                        currentUser = aUser;
                     }
                 }
                 return true;
@@ -129,11 +138,11 @@ public class UserLoginHandler {
             int pass = users.get(i).getPassword().hashCode();
             if (nme.equals(username) && !(pass == passwordHash)) {
                 System.out.println("Wrong Password");
-                user = null;
+                currentUser = null;
                 return false;
             } else if (i == users.size() - 1) {
                 System.out.println("Account does not exist");
-                user = null;
+                currentUser = null;
                 return false;
             }
         }
@@ -143,7 +152,7 @@ public class UserLoginHandler {
     public void addUser(String name, String pass, String role) {
         users = getUsers();
         System.out.println(users);
-        user = new UserAccount(name, pass, role);
+        UserAccount user = new UserAccount(name, pass, role);
         try {
             writer = new PrintWriter(new FileOutputStream(this.userFile, true));
             boolean flag = false;

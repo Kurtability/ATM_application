@@ -29,7 +29,7 @@ public class Products {
     List<String> stringForButton;
     private Cart cart;
     Text time = new Text();
-    Timer timer ;
+    Timer timer;
     double width;
     double height;
 
@@ -39,23 +39,15 @@ public class Products {
         this.height = height;
         Pane root = new Pane();
 
-
-
-        //timer
-        setXY(time,10,70);
-        timer = new Timer(time,width,height,stage,this);
+        // timer
+        setXY(time, 10, 70);
+        timer = new Timer(time, width, height, stage, this);
         timer.restart();
 
         cart = new Cart(timer);
         stringForButton = new ArrayList<>();
 
         timer.setCart(cart);
-
-        // products pane (scroll)
-        // Item item = new Item(0);
-        // for test itegrate area
-        // List<Item> lastfive = new ArrayList<Item>(Arrays.asList(new Item("generic
-        // puhtaytoe chips", 4, 1.25), new Item("cheet toes", 1, 2.0)));
 
         ProductsHandler productsHandler = new ProductsHandler();
         Map<String, List<Item>> items = productsHandler.getAllItems();
@@ -64,7 +56,7 @@ public class Products {
         menu = new ArrayList<>();
         productsHandler.getCategories().forEach(cat -> {
             stringForButton.add(cat);
-            productPanes.add(getProductsPane(items.get(cat),timer));
+            productPanes.add(getProductsPane(items.get(cat), timer));
         });
         menuPane = productPanes;
 
@@ -92,13 +84,14 @@ public class Products {
         }
         menu.get(0).setStyle("-fx-background-color: red");
 
-        Text logout = new Text("Log Out");
-        if(UserLoginHandler.getCurrentUser() == null) {
-            logout.setText("Login");
+        Text logout = new Text("Login");
+        if (UserLoginHandler.getCurrentUser() != null) {
+            logout.setText("Log Out");
         }
         Button logoutButton = createButton(logout.getText(), 18, 390, 25, 100);
         logoutButton.setOnAction(event -> {
-            UserLoginHandler.user = null;
+            System.out.println(UserLoginHandler.getCurrentUser());
+            UserLoginHandler.setCurrentUser(null);
             new LoginScene(width, height, stage).setScene();
             timer.stop();
         });
@@ -107,7 +100,7 @@ public class Products {
         Button checkoutButton = createButton("Check Out", 150, 390, 25, 100);
         checkoutButton.setOnAction(event -> {
             timer.stop();
-            if(!cart.getItems().isEmpty()) {
+            if (!cart.getItems().isEmpty()) {
                 new Checkout(width, height, stage, cart).setScene();
             }
         });
@@ -123,7 +116,7 @@ public class Products {
             new Products(width, height, stage).setScene();
         });
 
-        root.getChildren().addAll(checkoutButton, logoutButton, products, cart.getPane(), cancel,time);
+        root.getChildren().addAll(checkoutButton, logoutButton, products, cart.getPane(), cancel, time);
         root.getChildren().addAll(buttons);
         scene = new Scene(root, width, height);
 
@@ -133,15 +126,13 @@ public class Products {
         stage.setScene(scene);
     }
 
-
-
-    public Pane getProductsPane(List<Item> productDisplayItems,Timer timer) {
+    public Pane getProductsPane(List<Item> productDisplayItems, Timer timer) {
         Pane box = new Pane();
         int row = 0;
         int column = 0;
 
         for (Item productDisplayItem : productDisplayItems) {
-            Pane each = new ProductPane(productDisplayItem, cart,timer).getPane();
+            Pane each = new ProductPane(productDisplayItem, cart, timer).getPane();
             each.setLayoutX(135 * row);
             each.setLayoutY(150 * column);
             box.getChildren().add(each);
@@ -165,8 +156,9 @@ public class Products {
         productsPane.setContent(menuPane.get(index));
         this.menu.get(index).setStyle("-fx-background-color: red;");
     }
-    public void renew(){
-        new Products(width,height,stage).setScene();
+
+    public void renew() {
+        new Products(width, height, stage).setScene();
     }
 
 }
