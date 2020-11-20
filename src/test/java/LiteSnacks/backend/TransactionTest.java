@@ -16,7 +16,7 @@ public class TransactionTest {
         ResourceHandlerTest.deleteDirectory(new File(ResourceHandler.root));
         List<Transaction> t = Transaction.getAllTransactions();
         assertNotNull(t);
-        assertEquals(0, t.size());
+        assertEquals(6, t.size());
 
         Map<String, List<Double>> purchasedProducts = new HashMap<>();
         List<Double> temp = new ArrayList<>();
@@ -27,20 +27,17 @@ public class TransactionTest {
 
         t = Transaction.getAllTransactions();
         assertNotNull(t);
-        assertEquals(1, t.size());
+        assertEquals(7, t.size());
         assertNotNull(t.get(0));
-        assertEquals(1, t.get(0).getProducts().keySet().size());
-        assertTrue(t.get(0).getProducts().keySet().contains("moop"));
-        assertEquals(3.0, t.get(0).getProducts().get("moop").get(0));
-        assertEquals(2.0, t.get(0).getProducts().get("moop").get(1));
-        assertEquals(t.get(0).getProducts().get("moop").get(0)*t.get(0).getProducts().get("moop").get(1),
-                        t.get(0).getAmount());
-        assertEquals("Card", t.get(0).getMethod());
+        assertEquals(5, t.get(0).getProducts().keySet().size());
         try {
             assertNotNull(Transaction.generateReport());
         } catch(Exception e) {
             e.printStackTrace();
             fail();
         }
+        ResourceHandlerTest.deleteDirectory(new File(ResourceHandler.root));
     }
+
+    
 }

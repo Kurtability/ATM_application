@@ -63,8 +63,8 @@ public class ResourceHandler {
 
         }
         return curFile;
-
     }
+
 
     /**
      * This is the getter for the File object for the products.csv file. It creates

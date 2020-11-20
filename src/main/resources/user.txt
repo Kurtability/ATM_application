@@ -1,4 +1,5 @@
 Adam, 1234, cashier
 Jones, 5678, seller
 KP, 123, customer
+stupid, stupid, customer
 admin, 123, owner

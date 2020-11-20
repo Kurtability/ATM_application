@@ -67,6 +67,10 @@ public class UserLoginHandler {
         while (sc.hasNextLine()) {
             String password = null;
             String line = sc.nextLine();
+            if (line.equals("")){
+                continue;
+            }
+
             String[] details;
             details = line.split(",");
 

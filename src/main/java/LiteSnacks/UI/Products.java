@@ -2,11 +2,9 @@ package LiteSnacks.UI;
 
 import LiteSnacks.UI.ShoppingCart.Cart;
 import LiteSnacks.UI.ShoppingCart.Checkout;
-import LiteSnacks.backend.Item;
-import LiteSnacks.backend.ProductsHandler;
-import LiteSnacks.backend.Transaction;
-import LiteSnacks.backend.UserLoginHandler;
+import LiteSnacks.backend.*;
 import LiteSnacks.UI.Style;
+import LiteSnacks.backend.UserAccount.UserAccount;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -57,6 +55,18 @@ public class Products {
         menu = new ArrayList<>();
         productsHandler.getCategories().forEach(cat -> {
             stringForButton.add(cat);
+            if(cat.equals("Last Five")) {
+                String username;
+                UserAccount user = UserLoginHandler.getCurrentUser();
+                if(user == null) {
+                    username = "anon";
+                }
+                else {
+                    username = user.getUserName();
+                }
+                List<String> lastFive = LastFive.getLastFive(username);
+                items.put("Last Five", LastFive.convertNamesToItems(lastFive));
+            }
             productPanes.add(getProductsPane(items.get(cat), timer));
         });
         menuPane = productPanes;
