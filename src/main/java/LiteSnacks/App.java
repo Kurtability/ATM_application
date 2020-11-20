@@ -8,6 +8,8 @@ import LiteSnacks.UI.Owner.OwnerMainScene;
 import LiteSnacks.UI.Products;
 import LiteSnacks.backend.UserAccount.UserAccount;
 import LiteSnacks.backend.UserLoginHandler;
+import java.util.*;
+import java.io.*;
 
 import LiteSnacks.UI.Seller.SellerMainScene;
 import LiteSnacks.UI.ShoppingCart.CashPayment;
@@ -39,17 +41,22 @@ public class App extends Application {
         primaryStage.show();
 
         handler = new UserLoginHandler();
+
+
         // System.out.println(handler.getUsers());
         // System.out.println(handler.checkUser("Adam","1234231".hashCode()));
 
-        // handler.addUser("KP","1234","KingPin");
+        //handler.addUser("KP","1234","KingPin");
+        //handler.addUser("KpppP","1234","KingPin");
         // handler.addUser("KPP","678","King");
         // System.out.println(handler.getUsers());
         // System.out.println(handler.getUsers().get(2));
+        System.out.println(handler.getUserFile());
 
     }
 
     public static void main(String[] args) {
         launch(args);
+
     }
 }
