@@ -1,5 +1,8 @@
 package LiteSnacks.UI.ShoppingCart;
 
+import LiteSnacks.backend.ResourceHandler;
+import LiteSnacks.backend.UserAccount.UserAccount;
+import LiteSnacks.backend.UserLoginHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
@@ -14,6 +17,7 @@ import javafx.geometry.*;
 import LiteSnacks.backend.CreditCardHandler;
 import LiteSnacks.backend.Transaction;
 
+import java.io.*;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +28,8 @@ import LiteSnacks.UI.Products;
 public class CardScene {
     Scene scene;
     Stage stage;
+    Checkout checkoutRef;
+    ResourceHandler resourceHandler;
 
     public CardScene(double width, double height, Stage stage, Cart cart) {
         this.stage = stage;
@@ -100,6 +106,40 @@ public class CardScene {
                     temp.add((double)cartstuff.get(item).getQuantity());
                     purchasedProducts.put(item, temp);
                 }
+
+                try
+                {
+                    File file = resourceHandler.getUserFile();
+                    BufferedReader reader = new BufferedReader(new FileReader(file));
+                    String line = "", oldtext = "";
+                    while((line = reader.readLine()) != null)
+                    {
+                        oldtext += line + "\r\n";
+                    }
+                    reader.close();
+                    // replace a word in a file
+                    //String newtext = oldtext.replaceAll("drink", "Love");
+
+                    //To replace a line in a file
+                    String currentUserName = checkoutRef.user.getUserName();
+                    String currentUserPassword = checkoutRef.user.getPassword();
+                    String currentUserRole = checkoutRef.user.getRole();
+
+                    String n = name.getText();
+                    String num = number.getText();
+                    //System.out.println(currentUserName);
+
+                    String newtext = oldtext.replaceAll(currentUserName +", "+currentUserPassword +", "+ currentUserRole,
+                            currentUserName +", "+currentUserPassword +", "+ currentUserRole +", "+ n +", "+num);
+                    newtext= newtext.strip();
+                    FileWriter writer = new FileWriter(file);
+                    writer.write(newtext);writer.close();
+                }
+                catch (IOException ioe)
+                {
+                    ioe.printStackTrace();
+                }
+
                 Transaction.addTransaction(purchasedProducts, cart.getTotal(), "0", true);
                 new CardSceneSuccess(width, height, stage, cart).setScene();
             }

@@ -45,6 +45,7 @@ public class LoginScene {
         username.setPrefHeight(38);
         username.setPrefWidth(207);
 
+
         PasswordField password = new PasswordField();
         password.setPromptText("password");
         password.setLayoutX(41);

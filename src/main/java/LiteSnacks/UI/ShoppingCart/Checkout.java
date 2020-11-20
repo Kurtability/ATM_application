@@ -1,5 +1,7 @@
 package LiteSnacks.UI.ShoppingCart;
 
+import LiteSnacks.backend.UserAccount.UserAccount;
+import LiteSnacks.backend.UserLoginHandler;
 import LiteSnacks.backend.Transaction;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,6 +22,9 @@ import LiteSnacks.UI.Products;
 public class Checkout {
     Scene scene;
     Stage stage;
+
+    UserLoginHandler handler;
+    public static UserAccount user;
 
     public Checkout(double width, double height, Stage stage, Cart cart) {
         this.stage = stage;
@@ -78,7 +83,15 @@ public class Checkout {
         card.setLayoutY(220);
         card.setStyle("-fx-background-color: #000000");
         card.setTextFill(Color.WHITE);
-        card.setOnAction(event -> {new CardScene(width, height, stage, cart).setScene();});
+        card.setOnAction(event -> {new CardScene(width, height, stage, cart).setScene();
+
+            handler = new UserLoginHandler();
+            UserAccount currentUser = handler.getCurrentUser();
+            String userName = currentUser.getUserName();
+            System.out.println("Current logged in user is : "+ userName);
+            user = currentUser;
+
+        });
 
         Button cash = new Button("Cash");
         cash.setLayoutX(400);
@@ -92,6 +105,7 @@ public class Checkout {
         cancel.setLayoutY(430);
         cancel.setStyle("-fx-background-color: #DC143C");
         cancel.setTextFill(Color.WHITE);
+
         cancel.setOnAction(event -> {
             Transaction.cancelTransaction("User cancelled");
             new Products(width,height,stage).setScene();
