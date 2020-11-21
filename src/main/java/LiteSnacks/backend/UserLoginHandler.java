@@ -211,7 +211,7 @@ public class UserLoginHandler {
 
             if (!flag) {
                 users.add(user);
-                writer.print(name + ", " + pass + ", " + role);
+                writer.print("\n" + name + ", " + pass + ", " + role);
                 System.out.println(users);
             }
             writer.close();
