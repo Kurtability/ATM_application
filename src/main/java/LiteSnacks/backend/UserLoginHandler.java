@@ -9,8 +9,6 @@ import java.util.Scanner;
 
 import javax.naming.spi.ResolveResult;
 
-import java.awt.*;
-
 public class UserLoginHandler {
 
     private final File userFile;
@@ -172,10 +170,11 @@ public class UserLoginHandler {
 
         // remove the account from the database file
         try {
-            File tempFile = new File("myTempFile.txt");
-
-            writer = new PrintWriter(tempFile);
             Scanner reader = new Scanner(this.userFile);
+            File temp;
+
+            temp = File.createTempFile("user", "tmp");
+            writer = new PrintWriter(temp);
 
             while (reader.hasNextLine()) {
                 String curr = reader.nextLine();
@@ -187,9 +186,9 @@ public class UserLoginHandler {
             }
             writer.close();
             reader.close();
-            System.out.println(tempFile.renameTo(this.userFile));
 
-        } catch (FileNotFoundException e) {
+            ResourceHandler.copyfiles(new FileInputStream(temp), ResourceHandler.getUserFile());
+        } catch (Exception e) {
             e.printStackTrace();
         }
         System.out.println(getUsers());

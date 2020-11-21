@@ -70,7 +70,7 @@ public class OwnerEditUsers {
         add.setOnAction(e ->{
             if (username.getText().equals("") || pass.getText().equals("") || role.getText().equals("")) {
                 message.setText("Error Please input valid credentials");
-            } else if (!role.getText().equals("owner") && !role.getText().equals("seller") && !role.getText().equals("owner")) {
+            } else if (!role.getText().equals("owner") && !role.getText().equals("seller") && !role.getText().equals("cashier")) {
                 message.setText("Error Please input a valid role");
             } else {
                 message.setText("New User Added!");

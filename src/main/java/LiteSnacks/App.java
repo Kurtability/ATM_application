@@ -4,15 +4,8 @@
 package LiteSnacks;
 
 import LiteSnacks.UI.Cashier.CashierMainScene;
-import LiteSnacks.UI.Owner.OwnerMainScene;
 import LiteSnacks.UI.Products;
-import LiteSnacks.backend.UserAccount.UserAccount;
 import LiteSnacks.backend.UserLoginHandler;
-import java.util.*;
-import java.io.*;
-
-import LiteSnacks.UI.Seller.SellerMainScene;
-import LiteSnacks.UI.ShoppingCart.CashPayment;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
