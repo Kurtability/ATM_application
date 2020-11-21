@@ -44,14 +44,14 @@ public class OwnerEditScene {
 
 
         //edit cashes button
-        /*Button cashes = new Button("Edit Cashes");
+        Button cashes = new Button("Edit Cashes");
         setXY(cashes,70,150);
         setHW(cashes,40,150);
         cashes.setStyle("-fx-background-color: #000000");
         cashes.setTextFill(Color.WHITE);
         cashes.setOnAction(event -> {
                 new EditCashes(width,height,stage,true).setScene();
-        });*/
+        });
 
 
         //edit products
@@ -74,7 +74,7 @@ public class OwnerEditScene {
             new OwnerEditUsers(width,height,stage).setScene();
         });
 
-        pane.getChildren().addAll(label,products,user);
+        pane.getChildren().addAll(label,products, cashes,user);
         setXY(pane,156,51);
         setHW(pane,299,289);
         pane.setStyle("-fx-background-color: #d9d9d9");
