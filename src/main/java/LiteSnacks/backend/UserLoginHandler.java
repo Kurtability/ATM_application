@@ -153,69 +153,46 @@ public class UserLoginHandler {
 
     public boolean removeUser(String name) {
         // remove the account from list
-        users = getUsers();
-        int kill = -1;
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getUserName().equals(name)) {
-                kill = i;
-                System.out.println("removing");
-            }
-        }
-
-        if (kill >= 0) {
-            this.users.remove(kill);
-        } else {
-            return false;
-        }
-
-        // remove the account from the database file
+        List<UserAccount> listOfUsers = getUsers();
+        FileWriter w;
         try {
-            Scanner reader = new Scanner(this.userFile);
-            File temp;
-
-            temp = File.createTempFile("user", "tmp");
-            writer = new PrintWriter(temp);
-
-            while (reader.hasNextLine()) {
-                String curr = reader.nextLine();
-                if (curr.split(",")[0].equals(name)) {
-                    System.out.println("removed this account: " + name);
-                } else {
-                    writer.write(curr + "\n");
+            w = new FileWriter(ResourceHandler.getUserFile());
+            UserAccount u;
+            for(int i=0; i<listOfUsers.size(); i++) {
+                u = listOfUsers.get(i);
+                if(!u.getUserName().equals(name)) {
+                    if(i < listOfUsers.size() - 1) {
+                        w.write(String.format("%s, %s, %s%n", u.getUserName(), u.getPassword(), u.getRole()));
+                    }
+                    else {
+                        w.write(String.format("%s, %s, %s", u.getUserName(), u.getPassword(), u.getRole()));
+                    }
                 }
             }
-            writer.close();
-            reader.close();
-
-            ResourceHandler.copyfiles(new FileInputStream(temp), ResourceHandler.getUserFile());
+            w.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(getUsers());
         return true;
     }
 
     public void addUser(String name, String pass, String role) {
-        users = getUsers();
-        System.out.println(users);
-        UserAccount user = new UserAccount(name, pass, role);
+        List<UserAccount> listOfUsers = getUsers();
+        FileWriter w;
         try {
-            writer = new PrintWriter(new FileOutputStream(this.userFile, true));
-            boolean flag = false;
-            for (UserAccount account : users) {
-                if (account.getUserName().equals(name)) {
-                    System.out.println("Account already Exists. Please change username");
-                    flag = true;
+            w = new FileWriter(ResourceHandler.getUserFile());
+            listOfUsers.add(new UserAccount(name, pass, role));
+            UserAccount u;
+            for (int i = 0; i < listOfUsers.size(); i++) {
+                u = listOfUsers.get(i);
+                if (i < listOfUsers.size() - 1) {
+                    w.write(String.format("%s, %s, %s%n", u.getUserName(), u.getPassword(), u.getRole()));
+                } else {
+                    w.write(String.format("%s, %s, %s", u.getUserName(), u.getPassword(), u.getRole()));
                 }
             }
-
-            if (!flag) {
-                users.add(user);
-                writer.print("\n" + name + ", " + pass + ", " + role);
-                System.out.println(users);
-            }
-            writer.close();
-        } catch (FileNotFoundException e) {
+            w.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
