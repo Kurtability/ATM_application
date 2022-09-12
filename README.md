@@ -1,6 +1,4 @@
-# Assignment2_r12group3
-
-## ⚡LiteSnacks⚡
+# ⚡LiteSnacks⚡
 
 Requires a JDK or JRE version 1.8+ installation to run.
 
