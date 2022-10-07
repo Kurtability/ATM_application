@@ -1,4 +1,4 @@
-# ⚡LiteSnacks⚡
+# ⚡ATM⚡
 
 Requires a JDK or JRE version 1.8+ installation to run.
 
